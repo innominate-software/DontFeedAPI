@@ -1,0 +1,110 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet id="1" author="Christian">
+        <sql>
+            CREATE TABLE users (
+            id BIGINT NOT NULL AUTO_INCREMENT,
+            username VARCHAR(255) NOT NULL,
+            password VARCHAR(255) NOT NULL,
+            firstName VARCHAR(255) NOT NULL,
+            lastName VARCHAR(255) NOT NULL,
+            emailAddress VARCHAR(255) NOT NULL,
+            birthDate DATETIME NOT NULL,
+            dateJoined DATETIME NOT NULL,
+            CONSTRAINT PK_id PRIMARY KEY (id)
+            );
+        </sql>
+        <rollback>
+            DROP TABLE users;
+        </rollback>
+    </changeSet>
+    <changeSet id="2" author="Christian">
+        <sql>
+            CREATE TABLE leagues (
+            id BIGINT NOT NULL AUTO_INCREMENT,
+            name VARCHAR(255) NOT NULL,
+            game BIGINT NOT NULL,
+            maxTeams INT NOT NULL,
+            duration BIGINT NOT NULL,
+            dateCreated DATETIME NOT NULL,
+            description VARCHAR(15000),
+            endDate DATETIME NOT NULL,
+            leagueFormat VARCHAR(255) NOT NULL,
+            logo VARCHAR(255) NOT NULL,
+            matchFrequency VARCHAR(255) NOT NULL,
+            CONSTRAINT PK_id PRIMARY KEY (id)
+            );
+        </sql>
+        <rollback>
+            DROP TABLE leagues;
+        </rollback>
+    </changeSet>
+    <changeSet id="3" author="Christian">
+        <sql>
+            CREATE TABLE games (
+            id BIGINT NOT NULL AUTO_INCREMENT,
+            game_title VARCHAR(255) NOT NULL,
+            CONSTRAINT PK_id PRIMARY KEY (id)
+            );
+        </sql>
+        <rollback>
+            DROP TABLE games;
+        </rollback>
+    </changeSet>
+    <changeSet id="4" author="Christian">
+        <sql>
+            CREATE TABLE teams (
+            id BIGINT NOT NULL AUTO_INCREMENT,
+            name VARCHAR(255) NOT NULL,
+            motto VARCHAR(255),
+            logo VARCHAR(255),
+            dateCreated DATETIME NOT NULL,
+            CONSTRAINT PK_id PRIMARY KEY (id)
+            );
+        </sql>
+        <rollback>
+            DROP TABLE teams;
+        </rollback>
+    </changeSet>
+    <changeSet id="5" author="Christian">
+        <sql>
+            CREATE TABLE matches (
+            id BIGINT NOT NULL AUTO_INCREMENT,
+            gameID INT NOT NULL,
+            league BIGINT NOT NULL,
+            teamA BIGINT NOT NULL,
+            teamB BIGINT NOT NULL,
+            victor BIGINT NOT NULL,
+            duration INT,
+            matchDate DATETIME NOT NULL,
+            matchId BIGINT,
+            score VARCHAR(255) NOT NULL,
+            tournament BIGINT,
+            CONSTRAINT PK_id PRIMARY KEY (id)
+            );
+        </sql>
+        <rollback>
+            DROP TABLE matches;
+        </rollback>
+    </changeSet>
+    <changeSet id="6" author="Christian">
+        <sql>
+            CREATE TABLE tournaments (
+            id BIGINT NOT NULL AUTO_INCREMENT,
+            bracket VARCHAR(255) NOT NULL,
+            endDate DATETIME NOT NULL,
+            tournamentFormat VARCHAR(255) NOT NULL,
+            gameID INT NOT NULL,
+            logo VARCHAR(255),
+            name VARCHAR(255) NOT NULL,
+            startDate DATETIME NOT NULL,
+            leagueID BIGINT NOT NULL,
+            dateCreated DATETIME NOT NULL,
+            CONSTRAINT PK_id PRIMARY KEY (id)
+            );
+        </sql>
+        <rollback>
+            DROP TABLE tournaments
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
