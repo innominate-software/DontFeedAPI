@@ -1,18 +1,44 @@
 package com.dontfeed.Dont.Feed.service;
 
 import com.dontfeed.Dont.Feed.model.Match;
+import com.dontfeed.Dont.Feed.repository.MatchRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface MatchService {
+@AllArgsConstructor
+@Service
+public class MatchService {
 
-    Match saveMatch(Match match);
+    private final MatchRepository matchRepository;
+    
+    public Match saveMatch(final Match match) {
+        matchRepository.save(match);
+        return match;
+    }
+    
+    public Match updateMatch(Match match) {
+        return matchRepository.save(match);
+    }
+    
+    public void deleteMatch(Long matchId) {
+        matchRepository.deleteById(matchId);
+    }
+    
+    public Long numberOfMatches() {
+        return matchRepository.count();
+    }
 
-    Match updateMatch(Match match);
+    public List<Match> findAllMatches() {
+        return matchRepository.findAll();
+    }
 
-    void deleteMatch(Long matchId);
+    public Match findMatchById(Long id) {
+        return matchRepository.findById(id).orElse(null);
+    }
 
-    Long numberOfMatches();
-
-    List<Match> findAllMatches();
+    public Match findMatchByMatchId(Long id) {
+        return matchRepository.findByMatchId(id).orElse(null);
+    }
 }

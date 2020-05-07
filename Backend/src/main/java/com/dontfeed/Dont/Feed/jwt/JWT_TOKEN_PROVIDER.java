@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class JwtTokenProvider {
+public class JWT_TOKEN_PROVIDER {
 
     @Value("${app.jwt.secret}")
     private String jwtSecret;

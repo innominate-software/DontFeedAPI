@@ -9,8 +9,8 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
 @Table(name = "matches")
 public class Match {
 
@@ -20,34 +20,25 @@ public class Match {
     @Column(name = "id", updatable = false, nullable = false)
     private long id;
 
-    @Column(name = "duration")
     private int duration;
 
-    @Column(name = "gameID")
+    @Column(name = "game")
     private int gameID;
 
-    @Column(name = "match_date")
     private LocalDate matchDate;
 
-    @Column(name = "match_id")
     private long matchId;
 
-    @Column(name = "score")
     private String score;
 
-    @Column(name = "team_A")
     private long team_A;
 
-    @Column(name = "league_id")
     private long leagueId;
 
-    @Column(name = "team_B")
     private long team_B;
 
-    @Column(name = "tournament_id")
     private long tournament;
 
-    @Column(name = "victor_id")
     private long victor;
 
     @Override

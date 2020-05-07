@@ -1,11 +1,14 @@
 package com.dontfeed.Dont.Feed.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name="Games")
+@NoArgsConstructor
 public class Game {
 
     @Id

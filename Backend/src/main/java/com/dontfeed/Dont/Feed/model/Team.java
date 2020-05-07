@@ -9,8 +9,8 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
 @Table(name = "teams")
 public class Team {
 
@@ -20,16 +20,12 @@ public class Team {
     @Column(name = "id", updatable = false, nullable = false)
     private long id;
 
-    @Column(name = "date_created")
     private LocalDate dateCreated;
 
-    @Column(name = "logo")
     private String logo;
 
-    @Column(name = "motto")
     private String motto;
 
-    @Column(name = "name")
     private String name;
 
     @Override

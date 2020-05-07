@@ -1,18 +1,46 @@
 package com.dontfeed.Dont.Feed.service;
 
-import java.util.List;
 import com.dontfeed.Dont.Feed.model.User;
-public interface UserService {
+import com.dontfeed.Dont.Feed.repository.UserRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
-    User saveUser(User user);
+import java.util.List;
 
-    User updateUser(User user);
+@Service
+@AllArgsConstructor
+public class UserService {
 
-    void deleteUser(Long userId);
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    User findByUsername(String username);
+    public User saveUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
+    }
+    
+    public User updateUser(final User user) {
+        return userRepository.save(user);
+    }
 
-    List<User> findAllUsers();
+    public void deleteUser(final Long userId) {
+        userRepository.deleteById(userId);
+    }
 
-    Long numberOfUsers();
+    public User findByUsername(final String username) {
+        return userRepository.findByUsername(username).orElse(null);
+    }
+
+    public User findById(final long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public Long numberOfUsers() {
+        return userRepository.count();
+    }
 }

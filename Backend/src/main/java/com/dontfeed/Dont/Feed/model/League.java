@@ -10,8 +10,8 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
 @Table(name = "leagues")
 public class League {
 
@@ -21,35 +21,26 @@ public class League {
     @Column(name = "id", updatable = false, nullable = false)
     private long id;
 
-    @Column(name = "date_created")
     private LocalDate dateCreated;
 
-    @Column(name = "duration")
     private int duration;
 
-    @Column(name = "end_date")
     private LocalDate endDate;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "format")
     private LeagueFormat format;
 
     @Column(name = "game")
     private long gameID;
 
-    @Column(name = "logo")
     private String logo;
 
-    @Column(name = "match_frequency")
     private String matchFrequency;
 
-    @Column(name = "max_teams")
     private int maxTeams;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
     private String description;
 
     @Override

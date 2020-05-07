@@ -13,10 +13,10 @@ import java.io.IOException;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
-    private JwtTokenProvider jwtTokenProvider;
+    private JWT_TOKEN_PROVIDER jwtTokenProvider;
 
     public JWTAuthorizationFilter(AuthenticationManager authenticationManager,
-                                  JwtTokenProvider tokenProvider) {
+                                  JWT_TOKEN_PROVIDER tokenProvider) {
         super(authenticationManager);
         jwtTokenProvider = tokenProvider;
     }
