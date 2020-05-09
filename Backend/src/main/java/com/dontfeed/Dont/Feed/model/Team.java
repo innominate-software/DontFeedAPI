@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -27,6 +28,19 @@ public class Team {
     private String motto;
 
     private String name;
+
+    //Relationships
+    @ManyToMany
+    private List<League> leagues;
+
+    @ManyToMany
+    private List<Match> matches;
+
+    @ManyToMany
+    private List<Tournament> tournaments;
+
+    @ManyToMany
+    private List<User> players;
 
     @Override
     public String toString() {

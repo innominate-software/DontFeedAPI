@@ -8,9 +8,6 @@ import javax.annotation.PostConstruct;
 import java.util.TimeZone;
 
 @SpringBootApplication
-@EntityScan(basePackageClasses = {
-		DontFeedApplication.class,
-})
 public class DontFeedApplication {
 
 	@PostConstruct

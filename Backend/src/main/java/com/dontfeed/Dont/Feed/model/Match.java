@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -22,37 +23,40 @@ public class Match {
 
     private int duration;
 
-    @Column(name = "game")
-    private int gameID;
-
     private LocalDate matchDate;
 
     private long matchId;
 
     private String score;
 
-    private long team_A;
-
     private long leagueId;
-
-    private long team_B;
-
-    private long tournament;
 
     private long victor;
 
+    // Relationships
+    @ManyToOne
+    private Game game;
+
+    @ManyToOne
+    private League league;
+
+    @ManyToOne
+    private Team team_a;
+
+    @ManyToOne
+    private Team team_b;
+
+    @ManyToOne
+    private Tournament tournament;
+
     @Override
     public String toString() {
-        return "DotaMatch{" +
+        return "Match{" +
                 "id=" + id +
                 ", duration=" + duration +
                 ", matchDate=" + matchDate +
                 ", matchId=" + matchId +
                 ", score='" + score + '\'' +
-                ", team A=" + team_A +
-                ", leagueId=" + leagueId +
-                ", team B=" + team_B +
-                ", tournament=" + tournament +
                 ", victor=" + victor +
                 '}';
     }

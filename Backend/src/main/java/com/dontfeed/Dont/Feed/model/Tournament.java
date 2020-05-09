@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Data
@@ -28,9 +29,6 @@ public class Tournament {
     @Enumerated(EnumType.STRING)
     private TournamentFormat format;
 
-    @Column(name = "game")
-    private long gameID;
-
     private String logo;
 
     @Column(unique = true)
@@ -38,9 +36,20 @@ public class Tournament {
 
     private LocalDate startDate;
 
-    private long leagueId;
-
     private LocalDate dateCreated;
+
+    // Relationship
+    @OneToOne
+    private League league;
+
+    @ManyToOne
+    private Game game;
+
+    @ManyToMany
+    private List<Match> matches;
+
+    @ManyToMany
+    private List<Team> teams;
 
     @Override
     public String toString() {
@@ -49,11 +58,9 @@ public class Tournament {
                 ", bracket='" + bracket + '\'' +
                 ", endDate=" + endDate +
                 ", format=" + format +
-                ", game=" + gameID +
                 ", logo='" + logo + '\'' +
                 ", name='" + name + '\'' +
                 ", startDate=" + startDate +
-                ", leagueId=" + leagueId +
                 '}';
     }
 }

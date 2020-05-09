@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name="Games")
+@Table(name="games")
 @NoArgsConstructor
 public class Game {
 
@@ -15,7 +15,13 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="Game Title")
     private String game_title;
 
+    @Override
+    public String toString() {
+        return "Game{" +
+                "id=" + id +
+                ", game_title='" + game_title + '\'' +
+                '}';
+    }
 }

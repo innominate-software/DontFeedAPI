@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -34,6 +35,20 @@ public class User {
     private String password;
 
     private String username;
+
+    // Relationships
+
+    @ManyToMany
+    private List<League> leagues;
+
+    @ManyToMany
+    private List<Match> matches;
+
+    @ManyToMany
+    private List<Team> teams;
+
+    @ManyToMany
+    private List<Tournament> tournaments;
 
     @Transient
     private String token;
