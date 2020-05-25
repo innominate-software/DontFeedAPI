@@ -18,7 +18,7 @@ public class User {
 
     @Id
     @NotNull
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private LocalDate birthDate;
@@ -38,18 +38,16 @@ public class User {
 
     // Relationships
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<League> leagues;
 
-    @ManyToMany
-    private List<Match> matches;
-
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Team> teams;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Tournament> tournaments;
 
+    // token for authentication
     @Transient
     private String token;
     

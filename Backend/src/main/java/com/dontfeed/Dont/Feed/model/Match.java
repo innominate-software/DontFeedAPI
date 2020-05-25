@@ -17,11 +17,11 @@ public class Match {
 
     @Id
     @NotNull
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
     private long id;
 
-    private int duration;
+    private float duration;
 
     private LocalDate matchDate;
 
@@ -29,24 +29,23 @@ public class Match {
 
     private String score;
 
-    private long leagueId;
-
-    private long victor;
-
     // Relationships
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Game game;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private League league;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Team team_a;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Team team_b;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Team victor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Tournament tournament;
 
     @Override

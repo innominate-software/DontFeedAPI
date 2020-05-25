@@ -18,7 +18,7 @@ public class League {
 
     @Id
     @NotNull
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
     private long id;
 
@@ -44,21 +44,20 @@ public class League {
 
     private LocalDate startDate;
 
+    private String passcode;
+
     // Relationships
-    @ManyToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Game game;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Tournament tournament;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Match> matches;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "leagues", fetch = FetchType.LAZY)
     private List<Team> teams;
-
-    @ManyToMany
-    private List<User> players;
 
     @Override
     public String toString() {

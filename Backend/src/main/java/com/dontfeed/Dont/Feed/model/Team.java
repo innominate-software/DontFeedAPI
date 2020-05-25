@@ -17,7 +17,7 @@ public class Team {
 
     @Id
     @NotNull
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
     private long id;
 
@@ -29,17 +29,19 @@ public class Team {
 
     private String name;
 
+    private String passcode;
+
     //Relationships
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<League> leagues;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Match> matches;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Tournament> tournaments;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "teams", fetch = FetchType.LAZY)
     private List<User> players;
 
     @Override
