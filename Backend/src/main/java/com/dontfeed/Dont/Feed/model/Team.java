@@ -1,5 +1,7 @@
 package com.dontfeed.Dont.Feed.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -32,15 +34,19 @@ public class Team {
     private String passcode;
 
     //Relationships
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     private List<League> leagues;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Match> matches;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Tournament> tournaments;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "teams", fetch = FetchType.LAZY)
     private List<User> players;
 

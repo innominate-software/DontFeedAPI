@@ -1,6 +1,9 @@
 package com.dontfeed.Dont.Feed.model;
 
 import com.dontfeed.Dont.Feed.model.enumerator.LeagueFormat;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -47,15 +50,19 @@ public class League {
     private String passcode;
 
     // Relationships
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     private Game game;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     private Tournament tournament;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY)
     private List<Match> matches;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "leagues", fetch = FetchType.LAZY)
     private List<Team> teams;
 
