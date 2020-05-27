@@ -19,6 +19,7 @@ public class LeagueController {
 
 	@GetMapping
 	public ResponseEntity<?> getLeagues() {
+		System.out.println("Test");
 		if (leagueService.findAllLeagues() == null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)

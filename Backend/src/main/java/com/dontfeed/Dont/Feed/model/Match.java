@@ -1,5 +1,8 @@
 package com.dontfeed.Dont.Feed.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -30,21 +33,27 @@ public class Match {
     private String score;
 
     // Relationships
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Game game;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private League league;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Team team_a;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Team team_b;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Team victor;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Tournament tournament;
 
