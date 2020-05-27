@@ -22,7 +22,7 @@ public class UserController {
     private final UserService userService;
 
     // full path is "/api/users"
-    @GetMapping("s")
+    @GetMapping("/getAll")
     public ResponseEntity<?> getAllUsers() {
         List<User> users = userService.findAllUsers();
         if (users == null) {
