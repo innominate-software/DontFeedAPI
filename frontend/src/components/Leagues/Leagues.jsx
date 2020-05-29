@@ -3,8 +3,8 @@ import React from 'react';
 class Leagues extends React.Component{
 
     render() {
-        return super.render(
-
+        return (
+            <h1>Leagues Page</h1>
         );
     }
 }

@@ -3,8 +3,8 @@ import React from 'react';
 class HomePage extends React.Component{
 
     render() {
-        return super.render(
-
+        return (
+            <h1>Home Page</h1>
         );
     }
 }

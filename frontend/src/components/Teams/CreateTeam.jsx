@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-class CreateTeam extends React.Component{
+class CreateTeam extends Component{
 
     render() {
-        return super.render(
-
+        return (
+            <h1>Create Team</h1>
         );
     }
 }

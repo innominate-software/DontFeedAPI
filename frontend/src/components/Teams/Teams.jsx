@@ -3,8 +3,8 @@ import React from 'react';
 class Teams extends React.Component{
 
     render() {
-        return super.render(
-
+        return (
+            <h1>Teams</h1>
         );
     }
 }
