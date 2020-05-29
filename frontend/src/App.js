@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import { HomePage } from "./components/home/HomePage";
+import { HomePage } from "./components/Home/HomePage";
 import { CreateLeague } from "./components/Leagues/CreateLeague";
 import { Leagues } from "./components/Leagues/Leagues";
 import { Match } from "./components/Matches/Match";
