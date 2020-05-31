@@ -38,13 +38,13 @@ public class User {
 
     // Relationships
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     private List<League> leagues;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     private List<Team> teams;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     private List<Tournament> tournaments;
 
     // token for authentication

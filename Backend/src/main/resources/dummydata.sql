@@ -31,7 +31,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `leagues` WRITE;
 /*!40000 ALTER TABLE `leagues` DISABLE KEYS */;
-INSERT INTO `leagues` VALUES (1,'2020-05-16','Test League generated using info on Liquipedia',4,'2020-05-06','PREDETERMINED',NULL,NULL,16,'WePlay! Pushka League Season 1: Division 1','2020-04-23',1,1,NULL);
+INSERT INTO `leagues` VALUES (1,'2020-05-16','Test League generated using info on Liquipedia',4,'2020-05-06','PREDETERMINED',NULL,NULL,16,'WePlay! Pushka League Season 1: Division 1','2020-04-23',1,1,1);
 /*!40000 ALTER TABLE `leagues` ENABLE KEYS */;
 UNLOCK TABLES;
 

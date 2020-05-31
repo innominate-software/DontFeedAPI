@@ -2,6 +2,7 @@ package com.dontfeed.Dont.Feed.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Table(name = "teams")
+@JsonIgnoreProperties(value={ "teamMatches", "teamPlayers" }, allowSetters= true)
 public class Team {
 
     @Id
@@ -34,20 +36,20 @@ public class Team {
     private String passcode;
 
     //Relationships
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     private List<League> leagues;
 
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY)
+    @JsonProperty(value = "teamMatches")
+    @ManyToMany
     private List<Match> matches;
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     private List<Tournament> tournaments;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "teams", fetch = FetchType.LAZY)
+    @JsonProperty(value = "teamPlayers")
+    @ManyToMany(mappedBy = "teams")
     private List<User> players;
 
     @Override

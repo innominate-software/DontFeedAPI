@@ -4,6 +4,7 @@ import com.dontfeed.Dont.Feed.model.enumerator.LeagueFormat;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +18,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Table(name = "leagues")
+@JsonIgnoreProperties(value={ "leagueMatches", "leagueTeams" }, allowSetters= true)
 public class League {
 
     @Id
@@ -50,20 +52,20 @@ public class League {
     private String passcode;
 
     // Relationships
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     private Game game;
 
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     private Tournament tournament;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY)
+    @JsonProperty(value = "leagueMatches")
+    @OneToMany
     private List<Match> matches;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "leagues", fetch = FetchType.LAZY)
+    @JsonProperty(value = "leagueTeams")
+    @ManyToMany(mappedBy = "leagues")
     private List<Team> teams;
 
     @Override
