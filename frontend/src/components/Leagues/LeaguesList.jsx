@@ -2,7 +2,7 @@ import React from 'react';
 import LeagueService from "../../services/league.service";
 import {League} from "../../models/League";
 
-class Leagues extends React.Component{
+class LeaguesList extends React.Component{
 
 
     constructor(props) {
@@ -65,4 +65,4 @@ class Leagues extends React.Component{
     }
 }
 
-export {Leagues};
+export {LeaguesList};

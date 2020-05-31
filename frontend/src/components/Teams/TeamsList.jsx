@@ -2,7 +2,7 @@ import React from 'react';
 import TeamService from "../../services/team.service";
 import {Team} from "../../models/Team";
 
-class Teams extends React.Component{
+class TeamsList extends React.Component{
 
     getAllTeams(){
         TeamService.getAllTeams().then(data =>{
@@ -35,4 +35,4 @@ class Teams extends React.Component{
     }
 }
 
-export {Teams};
+export {TeamsList};
