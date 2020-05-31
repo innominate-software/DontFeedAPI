@@ -35,4 +35,4 @@ class league extends Component {
 
 }
 
-export {league}
+export {league};
