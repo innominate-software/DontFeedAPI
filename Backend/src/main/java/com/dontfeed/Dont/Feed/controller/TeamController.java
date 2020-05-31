@@ -68,7 +68,7 @@ public class TeamController {
 				.body(count);
 	}
 
-	@PostMapping
+	@RequestMapping("/createTeam")
 	public ResponseEntity<?> createNewTeam(@RequestBody Team team) {
 		String name = team.getName();
 		if (teamService.findTeamByName(name) != null) {
@@ -94,7 +94,7 @@ public class TeamController {
 				.body(returnedTeam);
 	}
 
-	@DeleteMapping("/{id}")
+	@RequestMapping("/{id}")
 	public ResponseEntity<?> deleteTeam(@PathVariable Long id) {
 		if (teamService.findTeamById(id) == null) {
 			return ResponseEntity

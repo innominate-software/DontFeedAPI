@@ -1,20 +1,50 @@
 import React from 'react';
 import LeagueService from "../../services/league.service";
-// import League from ""
+import {League} from "../../models/League";
 
 class Leagues extends React.Component{
+
 
     constructor(props) {
         super(props);
         this.handleLoad = this.handleLoad.bind(this);
+
+        this.state = {
+            newLeague: new League(),
+            league: new League('2020-05-15', 4, '2020-05-15', 'PREDETERMINED', null, null,
+                16, 'First Created', 'Test', '2020-05-15', '2020-05-15', 1, 'null',
+                'asdf', 'asdf')
+        };
+    }
+
+    getAllLeagues(){
+        LeagueService.getAllLeagues().then(data =>{
+        })
+    }
+
+    updateLeague(){
+        LeagueService.updateLeague(League).then(data => {
+
+        })
+    }
+
+    createLeague(){
+        LeagueService.createLeague(this.state.league).then(data =>{
+        })
+    }
+
+    deleteLeague(){
+        LeagueService.deleteLeague(this.state.league.id).then(data => {
+        })
     }
 
     componentDidMount() {
         window.addEventListener('load', this.handleLoad);
         console.log("DIDMOUNT");
-        LeagueService.getAllLeagues().then(data =>{
-            console.log("Data: ", data.data);
-        })
+        this.getAllLeagues();
+        this.updateLeague(this.state.league);
+        // this.createLeague();
+        // this.deleteLeague();
     }
 
 

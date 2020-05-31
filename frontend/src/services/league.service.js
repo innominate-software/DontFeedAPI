@@ -16,7 +16,19 @@ class LeagueService {
         });
     }
 
+    createLeague(League) {
+        return axios.post(API_URL + "/createLeague", JSON.stringify(League),
+            { headers: {"Content-Type":"application/json; charset=UTF-8"}});
+    }
 
+    deleteLeague(id) {
+        return axios.post(API_URL + "/deleteLeague/" + id, JSON.stringify(id), {headers: {"Content-Type":"application/json; charset=UTF-8"}});
+    }
+
+    updateLeague(League) {
+        return axios.put(API_URL + "/update", JSON.stringify(League),
+            {headers: {"Content-Type":"application/json; charset=UTF-8"}});
+    }
 }
 
 export default new LeagueService();
