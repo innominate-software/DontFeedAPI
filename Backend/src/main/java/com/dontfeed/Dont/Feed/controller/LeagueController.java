@@ -19,7 +19,6 @@ public class LeagueController {
 
 	@GetMapping
 	public ResponseEntity<?> getLeagues() {
-		System.out.println("Test");
 		if (leagueService.findAllLeagues() == null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
@@ -69,8 +68,9 @@ public class LeagueController {
 				.body(count);
 	}
 
-	@PostMapping
+	@RequestMapping("/createLeague")
 	public ResponseEntity<?> createNewLeague(@RequestBody League league) {
+		System.out.println("post test");
 		String name = league.getName();
 		if (leagueService.findLeagueByName(name) != null) {
 			return ResponseEntity
@@ -82,7 +82,7 @@ public class LeagueController {
 				.body(leagueService.saveLeague(league));
 	}
 
-	@PutMapping("/update")
+	@RequestMapping("/update")
 	public ResponseEntity<?> updateLeague(@RequestBody League league) {
 		League returnedLeague = leagueService.updateLeague(league);
 		if (returnedLeague == null) {
@@ -95,8 +95,9 @@ public class LeagueController {
 				.body(returnedLeague);
 	}
 
-	@DeleteMapping("/{id}")
+	@RequestMapping("/deleteLeague/{id}")
 	public ResponseEntity<?> deleteLeague(@PathVariable Long id) {
+		System.out.println("IN DELETE");
 		if (leagueService.findLeagueByID(id) == null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)

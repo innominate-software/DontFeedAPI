@@ -1,7 +1,7 @@
 export class League {
-    constructor(id, dateCreated, duration, endDate, format, logo, matchFrequency, maxTeams, name, description,
-                startDate, passcode, game, tournament, matches, teams){
-        this.id = id;
+    constructor(dateCreated, duration, endDate, format, logo, matchFrequency, maxTeams, name, description,
+                startDate, passcode, game, tournament, matches, teams, id){
+
         this.dateCreated = dateCreated;
         this.duration = duration;
         this.endDate = endDate;
@@ -17,5 +17,7 @@ export class League {
         this.tournament = tournament;
         this.matches = matches;
         this.teams = teams;
+        this.id = id;
     }
+
 }
