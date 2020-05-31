@@ -35,4 +35,4 @@ class team extends Component {
 
 }
 
-export {team}
+export {team};
