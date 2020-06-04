@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TeamService from "../../services/team.service";
 
-class team extends Component {
+class Team extends Component {
 
     getTeam(id){
         TeamService.getTeam(id).then(data =>{
@@ -35,4 +35,4 @@ class team extends Component {
 
 }
 
-export {team};
+export {Team};

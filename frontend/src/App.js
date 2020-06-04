@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import 'materialize-css/dist/css/materialize.min.css';
 import './App.css';
 import { HomePage } from "./components/Home/HomePage";
 import { CreateLeague } from "./components/Leagues/CreateLeague";
@@ -21,7 +22,7 @@ function App() {
                     <Route path="/leagues/create" component={CreateLeague} />
                     <Route path="/leagues" component={LeaguesList} />
                     <Route path="/league/:id" component={League}/>
-                    <Route path="/teams/create" component={CreateTeam} />
+                    <Route path="/teams/create" exact component={CreateTeam} />
                     <Route path="/teams" component={TeamsList} />
                     <Route path="/team/:id" component={Team} />
                     <Route path="/tournaments/:id" component={Tournament} />

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import LeagueService from "../../services/league.service";
 
-class league extends Component {
+class League extends Component {
 
     getLeague(id){
         LeagueService.getLeague(id).then(data =>{
@@ -35,4 +35,4 @@ class league extends Component {
 
 }
 
-export {league};
+export {League};
