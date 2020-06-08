@@ -5,9 +5,49 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #1f2833;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.app-container {
+  background: #1f2833;
+  min-height: 100vh;
+}
+
+.nav-bar-container {
+  background: #14A76B;
+}
+
+.green-background {
+  background: #14A76B !important;
+}
+
+.league-header-container {
+  width: 100%;
+}
+
+.league-header-title {
+  float: left;
+}
+
+.league-header-location {
+  float: right;
+  padding-right: 15px;
+}
+
+/* ---------------------------------------------------------------------------------------- */
+
+.collapsible-header {
+  border-bottom: 1px solid #1f2833 !important;
+}
+
+.collapsible {
+  border-top: 1px solid transparent !important;
+  border-right: 1px solid transparent !important;
+  border-left: 1px solid transparent !important;
+  margin: .5rem 0 1rem 0;
 }
