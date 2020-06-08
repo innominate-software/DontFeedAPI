@@ -22,12 +22,14 @@ function App() {
                     <Route path="/leagues/create" component={CreateLeague} />
                     <Route path="/leagues" component={LeaguesList} />
                     <Route path="/league/:id" component={League}/>
-                    <Route path="/teams/create" exact component={CreateTeam} />
+                    <Route path="/teams/create" component={CreateTeam} />
                     <Route path="/teams" component={TeamsList} />
                     <Route path="/team/:id" component={Team} />
-                    <Route path="/tournaments/:id" component={Tournament} />
-                    <Route path="/matches/:id" component={Match} />
+                    <Route path="/tournament/:id" component={Tournament} />
+                    <Route path="/match/:id" component={Match} />
                     <Route path="/register" component={Register} />
+                    {/*this is how to set a route to only be accessed through authenticated means*/}
+                    {/*<AuthenticatedRoute path={"/blahlblahba"} component={blahlbabhlbahalbhlabhab} />*/}
                 </Switch>
             </Router>
         </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import TeamService from "../../services/team.service";
-import {Team} from "../../models/Team";
+// import {Team} from "../../models/Team";
 
 class TeamsList extends React.Component{
 
