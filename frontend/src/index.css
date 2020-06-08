@@ -18,12 +18,17 @@ code {
   min-height: 100vh;
 }
 
-.nav-bar-container {
-  background: #14A76B;
+.content-container {
+  width: 85% !important;
 }
 
 .green-background {
   background: #14A76B !important;
+}
+
+.news-item-1 {
+  background-image: linear-gradient(to right,rgba(0,0,0,.42),rgba(0,0,0,.42)),url(../../frontend/src/assets/esports-pic-1.jpg);
+  background-position: center;
 }
 
 .league-header-container {
@@ -55,4 +60,29 @@ code {
   border-right: 1px solid transparent !important;
   border-left: 1px solid transparent !important;
   margin: .5rem 0 1rem 0;
+}
+
+.collapsible-body {
+  display: none;
+  border-bottom: 0px solid #ddd !important;
+  box-sizing: border-box;
+  color: #fff;
+  padding: 2rem;
+}
+
+.collection .collection-item {
+  line-height: 1.5rem;
+  padding: 10px 20px;
+  margin: 0;
+  color: #fff !important;
+  background: #1f344d !important;
+  border-bottom: 1px solid #1f2833 !important;
+}
+
+.collection {
+  margin: .5rem 0 1rem 0;
+  border: 0px solid transparent !important;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
 }

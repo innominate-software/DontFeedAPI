@@ -12,16 +12,20 @@ class HomePage extends React.Component {
     // ex. this.refreshState = this.refreshState.bind(this);
 
     componentDidMount() {
-        let collapsibles = document.querySelectorAll('.collapsible');
-        M.Collapsible.init(collapsibles, {});
+        M.AutoInit();
+        M.Carousel.init({
+            fullWidth: true,
+            indicators: true
+          });
     }
+    
 
 
     render() {
         return (
             <div class="app-container" >
                 <nav>
-                    <div className="nav-wrapper nav-bar-container">
+                    <div className="nav-wrapper nav-bar-container green-background">
                         <a href="/" className="brand-logo left black-text">Don't Feed</a>
                         <ul id="nav-mobile" className="right hide-on-med-and-down">
                             <li><i className="material-icons">search</i></li>
@@ -30,7 +34,28 @@ class HomePage extends React.Component {
                         </ul>
                     </div>
                 </nav>
-                <div className="container">
+                <div class="carousel carousel-slider center">
+                    <div class="carousel-fixed-item center">
+                        <a class="btn waves-effect white grey-text darken-text-2">Hide</a>
+                    </div>
+                    <div class="carousel-item white-text news-item-1" href="#one!">
+                        <h2>News Thing 1</h2>
+                        <p class="white-text">This is your first panel</p>
+                    </div>
+                    <div class="carousel-item white-text news-item-2" href="#two!">
+                        <h2>News Thing 2</h2>
+                        <p class="white-text">This is your second panel</p>
+                    </div>
+                    {/* <div class="carousel-item green white-text" href="#three!">
+                        <h2>Third Panel</h2>
+                        <p class="white-text">This is your third panel</p>
+                    </div>
+                    <div class="carousel-item blue white-text" href="#four!">
+                        <h2>Fourth Panel</h2>
+                        <p class="white-text">This is your fourth panel</p>
+                    </div> */}
+                </div>
+                <div className="content-container container">
                     <div className="row">
                         <div className="col s6">We have 70 players, and 0 of them are online RIGHT NOW</div>
                         <div className="col s4 offset-s2">[INSERT SOCIAL LINKS HERE I GUESS]</div>
