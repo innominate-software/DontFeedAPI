@@ -120,7 +120,28 @@ class HomePage extends React.Component {
                                     </div>
                                     <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
                                 </li>
+                                <li>
+                                    <div className="collapsible-header green-background">
+                                        <i className="material-icons">expand_more</i>
+                                        <div class="league-header-container">
+                                            <strong class="league-header-title">National Real League</strong>
+                                            <strong class="league-header-location">RU</strong>
+                                        </div>
 
+                                    </div>
+                                    <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                                </li>
+                                <li>
+                                    <div className="collapsible-header green-background">
+                                        <i className="material-icons">expand_more</i>
+                                        <div class="league-header-container">
+                                            <strong class="league-header-title">Global League</strong>
+                                            <strong class="league-header-location">International</strong>
+                                        </div>
+
+                                    </div>
+                                    <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                                </li>
                             </ul>
 
                         </div>
