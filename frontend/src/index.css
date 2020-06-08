@@ -39,6 +39,11 @@ code {
   padding-right: 15px;
 }
 
+.login-card {
+  background: #1f344d !important;
+  color: #fff !important;
+}
+
 /* ---------------------------------------------------------------------------------------- */
 
 .collapsible-header {

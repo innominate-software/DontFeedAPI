@@ -71,13 +71,17 @@ class HomePage extends React.Component {
                             </ul>
                         </div>
                         <div className="col s6">
-                            <div className="card-panel">
-                                <span className="">
+                            <div className="card-panel login-card">
+                                <span>
                                     <h5>You are not logged in!</h5>
                                     Membership is completely free
-                                    <div>
-                                        <a href="/login" className="waves-effect waves-light btn-large" style={{ margin: '1rem' }}>Log In</a>
-                                        <a href="/register" className="waves-effect waves-light btn-large" style={{ margin: '1rem' }}>Sign Up</a>
+                                    <div class="row">
+                                        <div class="col s6">
+                                            <a href="/login" className="waves-effect waves-light btn-small green-background" style={{ margin: '1rem' }}>Log In</a>
+                                        </div>
+                                        <div class="col s6">
+                                            <a href="/register" className="waves-effect waves-light btn-small green-background" style={{ margin: '1rem' }}>Sign Up</a>
+                                        </div>
                                     </div>
                                 </span>
                             </div>
@@ -116,7 +120,7 @@ class HomePage extends React.Component {
                                     </div>
                                     <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
                                 </li>
-                               
+
                             </ul>
 
                         </div>
