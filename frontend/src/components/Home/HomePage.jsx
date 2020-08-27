@@ -23,10 +23,10 @@ class HomePage extends React.Component {
 
     render() {
         return (
-            <div class="app-container" >
+            <div className="app-container" >
                 <nav>
                     <div className="nav-wrapper nav-bar-container green-background">
-                        <a href="/" className="brand-logo left black-text">Don't Feed</a>
+                        <Link to="/" className="brand-logo left black-text">Don't Feed</Link>
                         <ul id="nav-mobile" className="right hide-on-med-and-down">
                             <li><i className="material-icons">search</i></li>
                             <li><Link to="/login" className="black-text">Log In</Link></li>
@@ -36,7 +36,7 @@ class HomePage extends React.Component {
                 </nav>
                 <div class="carousel carousel-slider center">
                     <div class="carousel-fixed-item center">
-                        <a class="btn waves-effect white grey-text darken-text-2">Hide</a>
+                        <button class="btn waves-effect white grey-text darken-text-2">Hide</button>
                     </div>
                     <div class="carousel-item white-text news-item-1" href="#one!">
                         <h2>News Thing 1</h2>
@@ -67,7 +67,13 @@ class HomePage extends React.Component {
                                     <div className="collapsible-header green-background">
                                         <i className="material-icons">expand_more</i><strong>Leagues</strong>
                                     </div>
-                                    <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                                    <div className="collapsible-body">
+                                        <ul>
+                                            <li>
+                                                <Link to="/league/1">WePlay! Pushka League Season 1: Division 1</Link>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </li>
                                 <li>
                                     <div className="collapsible-header green-background">
