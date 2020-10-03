@@ -1,11 +1,16 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #1f2833;
+@font-face {
+  font-family: 'Gotham';
+  src: local('Gotham Bold'), url(../src/assets/font/Gotham-Font/Gotham-Font/GothamMedium.ttf) format('woff');
+}
+
+@font-face {
+  font-family: 'Gotham Bold';
+  src: local('Gotham Bold'), url(../src/assets/font/Gotham-Font/Gotham-Font/GothamBold.ttf) format('woff');
+}
+
+@font-face {
+  font-family: 'Gotham Thin';
+  src: local('Gotham Bold'), url(../src/assets/font/Gotham-Font/Gotham-Font/GothamLight.ttf) format('woff');
 }
 
 code {
@@ -13,22 +18,149 @@ code {
     monospace;
 }
 
+body {
+  margin: 0;
+  font-family: 'Gotham';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #1f2833;
+}
+
+h1, h2, h3, h4, h5, .brand-logo {
+  font-family: 'Gotham Bold' !important;
+  letter-spacing: 1.6px;
+}
+
+.page-title {
+  color: #95afc0;
+  border-left: 5px solid #eb4d4b;
+  text-align: left;
+  padding-left: 20px;
+  text-transform: uppercase;
+}
+
+.page-container {
+  padding: 30px 12%;
+}
+
+.text-thin {
+  font-family: 'Gotham Thin' !important;
+}
+
+.m-0 {
+  margin: 0 !important;
+}
+
+.brand-logo {
+  left: 2%;
+}
+
+.news-close {
+  height: 0 !important;
+  transition: 300ms;
+}
+.news-container {
+  padding: 0 !important;
+}
+.carousel {
+  transition: 300ms;
+}
+.row {
+  margin-bottom: 0 !important;
+}
 .app-container {
-  background: #1f2833;
   min-height: 100vh;
+}
+
+.news-button {
+  top: -27px;
+}
+
+.hidden {
+  background: transparent !important;
+  color: transparent !important;
+  border: 0px solid transparent;
+}
+
+.nav-bar-container {
+  /* border-bottom: 3px solid #eb4d4b; */
 }
 
 .content-container {
   width: 85% !important;
 }
 
-.green-background {
-  background: #14A76B !important;
+.df-dark-background {
+  background: rgb(30, 34, 42) !important;
+}
+
+.df-pink-text {
+  color: #eb4d4b !important;
+}
+.df-pink-background {
+  background: #eb4d4b !important;
+}
+.df-light-grey-background {
+  background: #95afc0 !important;
+}
+.df-light-grey-text {
+  color: #95afc0 !important;
+}
+.df-yellow-text {
+  color: #f6e58d !important;
+}
+
+.df-black-text {
+  color: #0e0e0e !important
+}
+.df-black-background {
+  background: #0e0e0e !important
+}
+
+.news-header-text {
+  font-size: 44px;
 }
 
 .news-item-1 {
-  background-image: linear-gradient(to right,rgba(0,0,0,.42),rgba(0,0,0,.42)),url(../../frontend/src/assets/esports-pic-1.jpg);
+  background-image: linear-gradient(to top,rgba(30, 34, 42,1), 60%,rgba(0,0,0,.52)),url(../../frontend/src/assets/esports-pic-1.jpg);
   background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.news-item-2 {
+  background-image: linear-gradient(to top,rgba(30, 34, 42,1), 60%,rgba(0,0,0,.52)),url(../../frontend/src/assets/img/vp.jpg);
+  background-position: center;
+  background-size: cover ;
+  background-repeat: no-repeat;
+}
+
+.news-title-container {
+  width: 50%;
+  padding-right: 22px;
+  position: absolute;
+  top: 26px;
+  right: 25px;
+  text-align: right;
+  border-right: 5px solid #eb4d4b;
+}
+
+.red-btn {
+  background-color: #eb4d4b !important;
+}
+
+.news-title-container p {
+  margin-right: 2px;
+  margin-bottom: 4px;
+}
+
+.news-title-container h1 {
+  text-transform: uppercase;
+  margin-top: 0;
+}
+
+.news-text {
+  font-size: 20px !important;
 }
 
 .league-header-container {
@@ -45,7 +177,7 @@ code {
 }
 
 .login-card {
-  background: #1f344d !important;
+  /* background: #1f344d !important; */
   color: #fff !important;
 }
 

@@ -1,11 +1,16 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, Switch } from "react-router-dom";
 import M from "materialize-css";
+import MainNav from '../MainNav';
 
 class HomePage extends React.Component {
+
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            newsToggle: true
+        };
+        this.toggleNews = this.toggleNews.bind(this)
     }
 
     // method binding here
@@ -16,56 +21,68 @@ class HomePage extends React.Component {
         M.Carousel.init({
             fullWidth: true,
             indicators: true
-          });
+        });
     }
-    
+
+    toggleNews() {
+        console.log(this.state.newsToggle);
+        this.setState(prevState => ({
+            newsToggle: !prevState.newsToggle
+        }));
+        if (this.state.newsToggle) {
+            var element = document.getElementById("newsCarousel");
+            element.classList.add("news-close");
+        } else {
+            var element = document.getElementById("newsCarousel");
+            element.classList.remove("news-close");
+        }
+
+    }
 
 
     render() {
         return (
-            <div className="app-container" >
-                <nav>
-                    <div className="nav-wrapper nav-bar-container green-background">
-                        <Link to="/" className="brand-logo left black-text">Don't Feed</Link>
-                        <ul id="nav-mobile" className="right hide-on-med-and-down">
-                            <li><i className="material-icons">search</i></li>
-                            <li><Link to="/login" className="black-text">Log In</Link></li>
-                            <li><Link to="/register" className="black-text">Sign Up</Link></li>
-                        </ul>
+            <div className="app-container container-fluid df-dark-background" >
+               <MainNav/>
+                <div className="container-fluid">
+                    <div id="newsCarousel" class="carousel carousel-slider center ">
+                        <div class="carousel-fixed-item center">
+                            <button class="hidden">Hide</button>
+                        </div>
+                        <div class="carousel-item white-text news-item-1" href="#one!">
+                            <div className="news-title-container">
+                                <h1 className="news-header-text">Gambit Esports bets on VulkanBet as title sponsor</h1>
+                                <p class="white-text text-thin news-text">Russian organisation Gambit Esports has announced Maltese esports betting platform VulkanBet as the title sponsor for three of its rosters.</p>
+                                {/* <a class="red-btn btn"><i class="material-icons right">chevron_right</i>view more</a> */}
+                            </div>
+
+                        </div>
+                        <div class="carousel-item white-text news-item-2" href="#one!">
+                            <div className="news-title-container">
+                                <h1 className="news-header-text">Virtus.pro and VP.Prodigy will play in LOOT.BET/CS Season 8</h1>
+                                <p class="white-text text-thin news-text">The Virtus Pro CS:GO rosters will play in  LOOT.BET/CS Season 8. Closed qualifier for the tournament starts October 1st, the Grand Final day is November 3rd.</p>
+                                {/* <a class="red-btn btn"><i class="material-icons right">chevron_right</i>view more</a> */}
+                            </div>
+
+                        </div>
                     </div>
-                </nav>
-                <div class="carousel carousel-slider center">
-                    <div class="carousel-fixed-item center">
-                        <button class="btn waves-effect white grey-text darken-text-2">Hide</button>
-                    </div>
-                    <div class="carousel-item white-text news-item-1" href="#one!">
-                        <h2>News Thing 1</h2>
-                        <p class="white-text">This is your first panel</p>
-                    </div>
-                    <div class="carousel-item white-text news-item-2" href="#two!">
-                        <h2>News Thing 2</h2>
-                        <p class="white-text">This is your second panel</p>
-                    </div>
-                    {/* <div class="carousel-item green white-text" href="#three!">
-                        <h2>Third Panel</h2>
-                        <p class="white-text">This is your third panel</p>
-                    </div>
-                    <div class="carousel-item blue white-text" href="#four!">
-                        <h2>Fourth Panel</h2>
-                        <p class="white-text">This is your fourth panel</p>
-                    </div> */}
+                </div>
+                <div className="row">
+                    <a onClick={this.toggleNews} class="btn-floating btn-large df-dark-background news-button df-light-grey-text">
+                        {this.state.newsToggle ? <i class="material-icons df-pink-text">expand_less</i> : <i class="material-icons df-pink-text">expand_more</i>}
+                    </a>
                 </div>
                 <div className="content-container container">
                     <div className="row">
-                        <div className="col s6">We have 70 players, and 0 of them are online RIGHT NOW</div>
-                        <div className="col s4 offset-s2">[INSERT SOCIAL LINKS HERE I GUESS]</div>
+                        {/* <div className="col s6">We have 70 players, and 0 of them are online RIGHT NOW</div>
+                        <div className="col s4 offset-s2">[INSERT SOCIAL LINKS HERE I GUESS]</div> */}
                     </div>
                     <div className="row">
                         <div className="col s3">
                             <ul className="collapsible">
                                 <li>
-                                    <div className="collapsible-header green-background">
-                                        <i className="material-icons">expand_more</i><strong>Leagues</strong>
+                                    <div className="collapsible-header df-dark-background">
+                                        <i className="material-icons df-light-grey-text">expand_more</i><strong className="df-light-grey-text">Leagues</strong>
                                     </div>
                                     <div className="collapsible-body">
                                         <ul>
@@ -76,42 +93,42 @@ class HomePage extends React.Component {
                                     </div>
                                 </li>
                                 <li>
-                                    <div className="collapsible-header green-background">
-                                        <i className="material-icons">expand_more</i><strong>Teams</strong>
+                                    <div className="collapsible-header df-dark-background">
+                                        <i className="material-icons df-light-grey-text">expand_more</i><strong className="df-light-grey-text">Teams</strong>
                                     </div>
                                     <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
                                 </li>
                                 <li>
-                                    <div className="collapsible-header green-background">
-                                        <i className="material-icons">expand_more</i><strong>Players</strong>
+                                    <div className="collapsible-header df-dark-background">
+                                        <i className="material-icons df-light-grey-text">expand_more</i><strong className="df-light-grey-text">Players</strong>
                                     </div>
                                     <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
                                 </li>
                                 <li>
-                                    <div className="collapsible-header green-background">
-                                        <i className="material-icons">expand_more</i><strong>Matches</strong>
+                                    <div className="collapsible-header df-dark-background">
+                                        <i className="material-icons df-light-grey-text">expand_more</i><strong className="df-light-grey-text">Matches</strong>
                                     </div>
                                     <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
                                 </li>
                                 <li>
-                                    <div className="collapsible-header green-background">
-                                        <i className="material-icons">expand_more</i><strong>Support</strong>
+                                    <div className="collapsible-header df-dark-background">
+                                        <i className="material-icons df-light-grey-text">expand_more</i><strong className="df-light-grey-text">Support</strong>
                                     </div>
                                     <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
                                 </li>
                             </ul>
                         </div>
                         <div className="col s6">
-                            <div className="card-panel login-card">
+                            <div className="card-panel login-card df-pink-background">
                                 <span>
                                     <h5>You are not logged in!</h5>
                                     Membership is completely free
                                     <div class="row">
                                         <div class="col s6">
-                                            <a href="/login" className="waves-effect waves-light btn-small green-background" style={{ margin: '1rem' }}>Log In</a>
+                                            <a href="/login" className="waves-effect waves-light btn-small df-dark-background" style={{ margin: '1rem' }}>Log In</a>
                                         </div>
                                         <div class="col s6">
-                                            <a href="/register" className="waves-effect waves-light btn-small green-background" style={{ margin: '1rem' }}>Sign Up</a>
+                                            <a href="/register" className="waves-effect waves-light btn-small df-dark-background" style={{ margin: '1rem' }}>Sign Up</a>
                                         </div>
                                     </div>
                                 </span>
@@ -119,8 +136,8 @@ class HomePage extends React.Component {
 
                             <ul className="collapsible">
                                 <li>
-                                    <div className="collapsible-header green-background">
-                                        <i className="material-icons">expand_more</i>
+                                    <div className="collapsible-header df-dark-background df-light-grey-text">
+                                        <i className="material-icons ">expand_more</i>
                                         <div class="league-header-container">
                                             <strong class="league-header-title">Madeup League</strong>
                                             <strong class="league-header-location">Texas | USA</strong>
@@ -130,7 +147,7 @@ class HomePage extends React.Component {
                                     <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
                                 </li>
                                 <li>
-                                    <div className="collapsible-header green-background">
+                                    <div className="collapsible-header df-dark-background df-light-grey-text">
                                         <i className="material-icons">expand_more</i>
                                         <div class="league-header-container">
                                             <strong class="league-header-title">Fake League</strong>
@@ -141,7 +158,7 @@ class HomePage extends React.Component {
                                     <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
                                 </li>
                                 <li>
-                                    <div className="collapsible-header green-background">
+                                    <div className="collapsible-header df-dark-background df-light-grey-text">
                                         <i className="material-icons">expand_more</i>
                                         <div class="league-header-container">
                                             <strong class="league-header-title">Not Real League</strong>
@@ -152,7 +169,7 @@ class HomePage extends React.Component {
                                     <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
                                 </li>
                                 <li>
-                                    <div className="collapsible-header green-background">
+                                    <div className="collapsible-header df-dark-background df-light-grey-text">
                                         <i className="material-icons">expand_more</i>
                                         <div class="league-header-container">
                                             <strong class="league-header-title">National Real League</strong>
@@ -163,7 +180,7 @@ class HomePage extends React.Component {
                                     <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
                                 </li>
                                 <li>
-                                    <div className="collapsible-header green-background">
+                                    <div className="collapsible-header df-dark-background df-light-grey-text">
                                         <i className="material-icons">expand_more</i>
                                         <div class="league-header-container">
                                             <strong class="league-header-title">Global League</strong>

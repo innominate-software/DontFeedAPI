@@ -32,7 +32,7 @@ class Team extends Component {
         return (
             <div style={{background: "#1f2833", color: "white"}}>
                 <nav>
-                    <div className="nav-wrapper nav-bar-container green-background">
+                    <div className="nav-wrapper nav-bar-container df-dark-background">
                         <Link to="/" className="brand-logo left black-text">Don't Feed</Link>
                         <ul id="nav-mobile" className="right hide-on-med-and-down">
                             <li><i className="material-icons">search</i></li>
@@ -52,7 +52,7 @@ class Team extends Component {
                             <div>maybe we can have some buttons that here like challenge to a match? or something</div>
                         </div>
                     </div>
-                    <div className="row" style={{color: "#1f2833"}}>
+                    <div className="row mb-0" style={{color: "#1f2833"}}>
                         <div className="col s8">
                             <div className="row">
                                 <div className="col s12">

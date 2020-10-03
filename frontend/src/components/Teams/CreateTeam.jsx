@@ -8,7 +8,7 @@ class CreateTeam extends Component {
             <div>
                 {/* main nav */}
                 <nav>
-                    <div className="nav-wrapper nav-bar-container green-background">
+                    <div className="nav-wrapper nav-bar-container df-dark-background">
                         <Link to="/" className="brand-logo left black-text">Don't Feed</Link>
                         <ul id="nav-mobile" className="right hide-on-med-and-down">
                             <li><i className="material-icons">search</i></li>
