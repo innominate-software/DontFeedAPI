@@ -43,7 +43,7 @@ class HomePage extends React.Component {
     render() {
         return (
             <div className="app-container container-fluid df-dark-background-2" >
-               <MainNav/>
+                <MainNav />
                 <div className="container-fluid">
                     <div id="newsCarousel" class="carousel carousel-slider center ">
                         <div class="carousel-fixed-item center">
@@ -52,7 +52,7 @@ class HomePage extends React.Component {
                         <div class="carousel-item white-text news-item-1" href="#one!">
                             <div className="news-title-container">
                                 <h1 className="news-header-text">Gambit Esports bets on VulkanBet as title sponsor</h1>
-                                <p class="white-text text-thin news-text">Russian organisation Gambit Esports has announced Maltese esports betting platform VulkanBet as the title sponsor for three of its rosters.</p>
+                                <p class="white-text text-thin news-text">Russian organization Gambit Esports has announced Maltese esports betting platform VulkanBet as the title sponsor for three of its rosters.</p>
                                 {/* <a class="red-btn btn"><i class="material-icons right">chevron_right</i>view more</a> */}
                             </div>
 
@@ -63,7 +63,6 @@ class HomePage extends React.Component {
                                 <p class="white-text text-thin news-text">The Virtus Pro CS:GO rosters will play in  LOOT.BET/CS Season 8. Closed qualifier for the tournament starts October 1st, the Grand Final day is November 3rd.</p>
                                 {/* <a class="red-btn btn"><i class="material-icons right">chevron_right</i>view more</a> */}
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -125,13 +124,47 @@ class HomePage extends React.Component {
                                     Membership is completely free
                                     <div class="row">
                                         <div class="col s6">
-                                            <a href="/login" className="waves-effect waves-light btn-small df-dark-background" style={{ margin: '1rem' }}>Log In</a>
+                                            <a href="#modal1" className="modal-trigger btn-small df-dark-background df-light-grey-text" style={{ margin: '1rem' }}>Login</a>
                                         </div>
                                         <div class="col s6">
-                                            <a href="/register" className="waves-effect waves-light btn-small df-dark-background" style={{ margin: '1rem' }}>Sign Up</a>
+                                            <a href="/register" className="btn-small df-dark-background df-light-grey-text" style={{ margin: '1rem' }}>Sign Up</a>
                                         </div>
                                     </div>
                                 </span>
+                                <div id="modal1" class="modal df-dark-background df-light-grey-text">
+                                    <div class="modal-content">
+                                        <div className="row">
+                                            <div className="col s-12">
+                                                <h4 className="login-modal-title">LOGIN</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <label className="input-label" for="password">
+                                                    Username/Email
+                                        <i class="material-icons input-valid ">check_circle</i>
+                                                </label>
+                                                <input id="password" type="text" class="validate" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <label className="input-label" for="password">
+                                                    Password
+                                        <i class="material-icons input-valid ">check_circle</i>
+                                                </label>
+                                                <input id="password" type="password" class="validate" />
+                                                <a href="!#">
+                                                    <p className="forgot-password-text">Forgot password?</p>
+                                                </a>
+                                            </div>
+                                            <a href="#!" class=" modal-close grey-btn btn right"><i class="material-icons right">chevron_right</i>LOGIN</a>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
                             </div>
 
                             <ul className="collapsible">
