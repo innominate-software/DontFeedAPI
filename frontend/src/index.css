@@ -109,7 +109,9 @@ h1, h2, h3, h4, h5, .brand-logo {
 .df-yellow-text {
   color: #f6e58d !important;
 }
-
+.df-dark-background-2 {
+  background: rgb(51, 58, 72);
+}
 .df-black-text {
   color: #0e0e0e !important
 }
@@ -122,14 +124,14 @@ h1, h2, h3, h4, h5, .brand-logo {
 }
 
 .news-item-1 {
-  background-image: linear-gradient(to top,rgba(30, 34, 42,1), 60%,rgba(0,0,0,.52)),url(../../frontend/src/assets/esports-pic-1.jpg);
+  background-image: linear-gradient(to top,rgb(51, 58, 72), 60%,rgba(0,0,0,.52)),url(../../frontend/src/assets/esports-pic-1.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
 }
 
 .news-item-2 {
-  background-image: linear-gradient(to top,rgba(30, 34, 42,1), 60%,rgba(0,0,0,.52)),url(../../frontend/src/assets/img/vp.jpg);
+  background-image: linear-gradient(to top,rgb(51, 58, 72), 60%,rgba(0,0,0,.52)),url(../../frontend/src/assets/img/vp.jpg);
   background-position: center;
   background-size: cover ;
   background-repeat: no-repeat;

@@ -5,7 +5,7 @@ class Register extends Component {
 
     render() {
         return (
-            <div className="app-container container-fluid df-dark-background">
+            <div className="app-container container-fluid df-dark-background-2">
                 <MainNav />
                 <div className="container-fluid page-container">
                     <div className="row">

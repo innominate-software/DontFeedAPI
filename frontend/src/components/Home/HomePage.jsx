@@ -42,7 +42,7 @@ class HomePage extends React.Component {
 
     render() {
         return (
-            <div className="app-container container-fluid df-dark-background" >
+            <div className="app-container container-fluid df-dark-background-2" >
                <MainNav/>
                 <div className="container-fluid">
                     <div id="newsCarousel" class="carousel carousel-slider center ">
