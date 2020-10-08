@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import LeagueService from '../../services/league.service';
 import M from "materialize-css";
+import MainNav from '../MainNav';
+
+import parallaxImg from '../../assets/img/dota-bg.jpg';
 
 /*
 * This is the Page that generates for looking at a single League
@@ -19,6 +22,10 @@ class League extends Component {
         M.AutoInit();
         window.addEventListener('load', this.handleLoad);
         console.log("DID MOUNT");
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.parallax');
+            var instances = M.Parallax.init(elems, {});
+        });
     }
 
     componentWillUnmount() {
@@ -32,41 +39,39 @@ class League extends Component {
 
     render() {
         return (
-            <div>
-                {/* main nav */}
-                <nav>
-                    <div className="nav-wrapper nav-bar-container green-background">
-                        <Link to="/" className="brand-logo left black-text">Don't Feed</Link>
-                        <ul id="nav-mobile" className="right hide-on-med-and-down">
-                            <li><i className="material-icons">search</i></li>
-                            <li><Link to="/login" className="black-text">Log In</Link></li>
-                            <li><Link to="/register" className="black-text">Sign Up</Link></li>
-                        </ul>
+            <div className="app-container container-fluid df-dark-background-2">
+                <MainNav />
+                <div class="parallax-container">
+                    <div className="parallax-overlay">
+                        <img className="parallax-league-img" src={process.env.PUBLIC_URL + '/games/dota/cover.jpg'} />
+                        <h1 className="parallax-title">WePlay! Pushka League</h1>
+                        <p className="parallax-subtitle">Season 1</p>
+                        <a class="grey-btn btn"><i class="material-icons right">group_add</i>Join League</a>
                     </div>
-                </nav>
-                {/* league info nav */}
-                <div className="container">
-                    {/*col(logo) col(3 rows(season/name/infoTabs) col(request join button)*/}
-                    <div className="row" style={{margin: "2em"}}>
+
+                    <div class="parallax">
+                        <img src={parallaxImg} />
+                    </div>
+                </div>
+                <div className="page-container">
+                    <div className="row" style={{ margin: "2em" }}>
                         <div className="col m2">
-                            <img src={process.env.PUBLIC_URL + '/games/dota/cover.jpg'} alt="Dota 2" width="100"
-                                 height="120" />
+                            {/* <img src={process.env.PUBLIC_URL + '/games/dota/cover.jpg'} alt="Dota 2" width="100"
+                                height="120" /> */}
                         </div>
-                        <div className="col m8">
-                            <div className="row">League - Season 1 - Dota 2</div>
-                            <div className="row">WePlay! Pushka League: Division 1</div>
+                        <div className="col m12">
+                            {/* <div className="row">League - Season 1 - Dota 2</div>
+                            <div className="row">WePlay! Pushka League: Division 1</div> */}
                             <div className="row">
                                 <ul className="tabs">
-                                    <li className="tab col s3"><a className="active" href="#info">Info</a></li>
-                                    <li className="tab col s3"><a className="active" href="#standings">Current
+
+                                    <li className="tab col s3 df-tab df-dark-background df-light-grey-text"><a className="active df-light-grey-text" href="#standings">Current
                                         Standings</a></li>
-                                    <li className="tab col s3"><a className="active" href="#matches">Matches</a></li>
-                                    <li className="tab col s3"><a className="active" href="#support">Support</a></li>
+                                    <li className="tab col s3 df-tab df-dark-background df-light-grey-text"><a className="active df-light-grey-text" href="#matches">Matches</a></li>
+                                    <li className="tab col s3 df-tab df-dark-background df-light-grey-text"><a className="active df-light-grey-text" href="#info">Info</a></li>
+                                    <li className="tab col s3 df-dark-background df-light-grey-text"><a className="active df-light-grey-text" href="#support">Support</a></li>
                                 </ul>
                             </div>
-                        </div>
-                        <div className="col m2">
-                            <a className="btn-large">Join</a>
                         </div>
                     </div>
                     <div className="row">
@@ -82,130 +87,130 @@ class League extends Component {
                         </div>
                         {/*Standings Tab Content*/}
                         <div id="standings" className="col s12">
-                            <table className="highlight responsive-table">
-                                <thead>
-                                <tr>
-                                    <th>Standing</th>
-                                    <th>Team</th>
-                                    <th>Wins</th>
-                                    <th>Losses</th>
-                                    <th>%</th>
-                                    <th>Streak</th>
-                                </tr>
+                            <table className="highlight responsive-table df-">
+                                <thead  className="df-table-head df-light-grey-text">
+                                    <tr>
+                                        <th>Standing</th>
+                                        <th>Team</th>
+                                        <th>Wins</th>
+                                        <th>Losses</th>
+                                        <th>%</th>
+                                        <th>Streak</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1st</td>
-                                    <td>Team Secret</td>
-                                    <td>11</td>
-                                    <td>3</td>
-                                    <td>0.785</td>
-                                    <td>4W</td>
-                                </tr>
-                                <tr>
-                                    <td>2nd</td>
-                                    <td>HellRaisers</td>
-                                    <td>11</td>
-                                    <td>4</td>
-                                    <td>0.733</td>
-                                    <td>1W</td>
-                                </tr>
-                                <tr>
-                                    <td>3rd</td>
-                                    <td>Alliance</td>
-                                    <td>10</td>
-                                    <td>5</td>
-                                    <td>0.666</td>
-                                    <td>6W</td>
-                                </tr>
-                                <tr>
-                                    <td>4th</td>
-                                    <td>Virtus.pro</td>
-                                    <td>10</td>
-                                    <td>6</td>
-                                    <td>0.625</td>
-                                    <td>1W</td>
-                                </tr>
-                                <tr>
-                                    <td>5th</td>
-                                    <td>Team Liquid</td>
-                                    <td>9</td>
-                                    <td>6</td>
-                                    <td>0.600</td>
-                                    <td>5W</td>
-                                </tr>
-                                <tr>
-                                    <td>6th</td>
-                                    <td>VP.Prodigy</td>
-                                    <td>9</td>
-                                    <td>6</td>
-                                    <td>0.600</td>
-                                    <td>0W</td>
-                                </tr>
-                                <tr>
-                                    <td>7th</td>
-                                    <td>Natus Vincere</td>
-                                    <td>9</td>
-                                    <td>7</td>
-                                    <td>0.562</td>
-                                    <td>0W</td>
-                                </tr>
-                                <tr>
-                                    <td>8th</td>
-                                    <td>FlyToMoon</td>
-                                    <td>8</td>
-                                    <td>8</td>
-                                    <td>0.500</td>
-                                    <td>3W</td>
-                                </tr>
-                                <tr>
-                                    <td>9th</td>
-                                    <td>Ninjas in Pyjamas</td>
-                                    <td>7</td>
-                                    <td>7</td>
-                                    <td>0.500</td>
-                                    <td>0W</td>
-                                </tr>
-                                <tr>
-                                    <td>10th</td>
-                                    <td>OG</td>
-                                    <td>7</td>
-                                    <td>9</td>
-                                    <td>0.437</td>
-                                    <td>2W</td>
-                                </tr>
-                                <tr>
-                                    <td>11th</td>
-                                    <td>Team Spirit</td>
-                                    <td>6</td>
-                                    <td>10</td>
-                                    <td>0.375</td>
-                                    <td>0W</td>
-                                </tr>
-                                <tr>
-                                    <td>12th</td>
-                                    <td>OG Seed</td>
-                                    <td>6</td>
-                                    <td>11</td>
-                                    <td>0.352</td>
-                                    <td>0W</td>
-                                </tr>
-                                <tr>
-                                    <td>13th</td>
-                                    <td>Team Nigma</td>
-                                    <td>4</td>
-                                    <td>11</td>
-                                    <td>0.266</td>
-                                    <td>1W</td>
-                                </tr>
-                                <tr>
-                                    <td>14th</td>
-                                    <td>B8</td>
-                                    <td>0</td>
-                                    <td>12</td>
-                                    <td>0.000</td>
-                                    <td>0W</td>
-                                </tr>
+                                    <tr className="df-light-grey-text df-table-tr">
+                                        <td>1st</td>
+                                        <td>Team Secret</td>
+                                        <td>11</td>
+                                        <td>3</td>
+                                        <td>0.785</td>
+                                        <td>4W</td>
+                                    </tr>
+                                    <tr className="df-light-grey-text df-table-tr">
+                                        <td>2nd</td>
+                                        <td>HellRaisers</td>
+                                        <td>11</td>
+                                        <td>4</td>
+                                        <td>0.733</td>
+                                        <td>1W</td>
+                                    </tr>
+                                    <tr className="df-light-grey-text df-table-tr">
+                                        <td>3rd</td>
+                                        <td>Alliance</td>
+                                        <td>10</td>
+                                        <td>5</td>
+                                        <td>0.666</td>
+                                        <td>6W</td>
+                                    </tr>
+                                    <tr className="df-light-grey-text df-table-tr">
+                                        <td>4th</td>
+                                        <td>Virtus.pro</td>
+                                        <td>10</td>
+                                        <td>6</td>
+                                        <td>0.625</td>
+                                        <td>1W</td>
+                                    </tr>
+                                    <tr className="df-light-grey-text df-table-tr">
+                                        <td>5th</td>
+                                        <td>Team Liquid</td>
+                                        <td>9</td>
+                                        <td>6</td>
+                                        <td>0.600</td>
+                                        <td>5W</td>
+                                    </tr>
+                                    <tr className="df-light-grey-text df-table-tr">
+                                        <td>6th</td>
+                                        <td>VP.Prodigy</td>
+                                        <td>9</td>
+                                        <td>6</td>
+                                        <td>0.600</td>
+                                        <td>0W</td>
+                                    </tr>
+                                    <tr className="df-light-grey-text df-table-tr">
+                                        <td>7th</td>
+                                        <td>Natus Vincere</td>
+                                        <td>9</td>
+                                        <td>7</td>
+                                        <td>0.562</td>
+                                        <td>0W</td>
+                                    </tr>
+                                    <tr className="df-light-grey-text df-table-tr">
+                                        <td>8th</td>
+                                        <td>FlyToMoon</td>
+                                        <td>8</td>
+                                        <td>8</td>
+                                        <td>0.500</td>
+                                        <td>3W</td>
+                                    </tr>
+                                    <tr className="df-light-grey-text df-table-tr">
+                                        <td>9th</td>
+                                        <td>Ninjas in Pyjamas</td>
+                                        <td>7</td>
+                                        <td>7</td>
+                                        <td>0.500</td>
+                                        <td>0W</td>
+                                    </tr>
+                                    <tr className="df-light-grey-text df-table-tr">
+                                        <td>10th</td>
+                                        <td>OG</td>
+                                        <td>7</td>
+                                        <td>9</td>
+                                        <td>0.437</td>
+                                        <td>2W</td>
+                                    </tr>
+                                    <tr className="df-light-grey-text df-table-tr">
+                                        <td>11th</td>
+                                        <td>Team Spirit</td>
+                                        <td>6</td>
+                                        <td>10</td>
+                                        <td>0.375</td>
+                                        <td>0W</td>
+                                    </tr>
+                                    <tr className="df-light-grey-text df-table-tr">
+                                        <td>12th</td>
+                                        <td>OG Seed</td>
+                                        <td>6</td>
+                                        <td>11</td>
+                                        <td>0.352</td>
+                                        <td>0W</td>
+                                    </tr>
+                                    <tr className="df-light-grey-text df-table-tr">
+                                        <td>13th</td>
+                                        <td>Team Nigma</td>
+                                        <td>4</td>
+                                        <td>11</td>
+                                        <td>0.266</td>
+                                        <td>1W</td>
+                                    </tr>
+                                    <tr className="df-light-grey-text df-table-tr">
+                                        <td>14th</td>
+                                        <td>B8</td>
+                                        <td>0</td>
+                                        <td>12</td>
+                                        <td>0.000</td>
+                                        <td>0W</td>
+                                    </tr>
                                 </tbody>
                                 {/*
                              Team Nigma
