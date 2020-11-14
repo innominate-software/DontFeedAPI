@@ -317,7 +317,7 @@ h1, h2, h3, h4, h5, .brand-logo {
 
 /* ========================================================== input =================================== */
 
-input:not(.browser-default), 
+input:not(.browser-default),
 input[type=password],
 textarea.materialize-textarea {
   background-color: transparent;
@@ -334,7 +334,6 @@ textarea.materialize-textarea {
   box-shadow: none;
   box-sizing: content-box;
   transition: box-shadow .3s, border .3s;
-  font-family: "Gotham" !important;
 }
 
 input:focus:not([readonly]),
