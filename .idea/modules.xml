@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Backend/Dont-Feed.iml" filepath="$PROJECT_DIR$/Backend/Dont-Feed.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/Dont-Feed-React.iml" filepath="$PROJECT_DIR$/.idea/Dont-Feed-React.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/dont-feed.iml" filepath="$PROJECT_DIR$/.idea/dont-feed.iml" />
     </modules>
   </component>
 </project>

@@ -35,7 +35,7 @@ public class MatchController {
 		if (match == null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("Match does not exist with that ID");
+					.body("MatchInfoPage does not exist with that ID");
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)
@@ -48,7 +48,7 @@ public class MatchController {
 		if (match == null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("Match does not exist with that match id: " + matchId);
+					.body("MatchInfoPage does not exist with that match id: " + matchId);
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)
@@ -74,7 +74,7 @@ public class MatchController {
 		if (matchService.findMatchByMatchId(matchId) != null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("Match already exists at this match id: " + matchId);
+					.body("MatchInfoPage already exists at this match id: " + matchId);
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)
@@ -87,7 +87,7 @@ public class MatchController {
 		if (returnedMatch == null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("Match does not exist. Check you facts.");
+					.body("MatchInfoPage does not exist. Check you facts.");
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)
@@ -99,13 +99,13 @@ public class MatchController {
 		if (matchService.findMatchById(id) == null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("Match does not exist at the ID");
+					.body("MatchInfoPage does not exist at the ID");
 		}
 		matchService.deleteMatch(id);
 		if (matchService.findMatchById(id) != null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("Match was not deleted successfully");
+					.body("MatchInfoPage was not deleted successfully");
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)

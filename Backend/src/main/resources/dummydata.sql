@@ -31,7 +31,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `leagues` WRITE;
 /*!40000 ALTER TABLE `leagues` DISABLE KEYS */;
-INSERT INTO `leagues` VALUES (1,'2020-05-16','Test League generated using info on Liquipedia',4,'2020-05-06','PREDETERMINED',NULL,NULL,16,'WePlay! Pushka League Season 1: Division 1','2020-04-23',1,1,1);
+INSERT INTO `leagues` VALUES (1,'2020-05-16','Test LeagueProfilePage generated using info on Liquipedia',4,'2020-05-06','PREDETERMINED',NULL,NULL,16,'WePlay! Pushka LeagueProfilePage Season 1: Division 1','2020-04-23',1,1,1);
 /*!40000 ALTER TABLE `leagues` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +61,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `teams` WRITE;
 /*!40000 ALTER TABLE `teams` DISABLE KEYS */;
-INSERT INTO `teams` VALUES (1,'2020-05-13',NULL,NULL,'Team Nigma',NULL),(2,'2020-05-13',NULL,NULL,'Team Secret',NULL),(3,'2020-05-13',NULL,NULL,'OG',NULL),(4,'2020-05-13',NULL,NULL,'Team Liquid',NULL),(5,'2020-05-13',NULL,NULL,'Alliance',NULL),(6,'2020-05-13',NULL,NULL,'Ninjas in Pyjamas',NULL),(7,'2020-05-13',NULL,NULL,'OG.Seed',NULL),(8,'2020-05-13',NULL,NULL,'Natus Vincere',NULL),(9,'2020-05-13',NULL,NULL,'Virtus.pro',NULL),(10,'2020-05-13',NULL,NULL,'B8',NULL),(11,'2020-05-13',NULL,NULL,'HellRaisers',NULL),(12,'2020-05-13',NULL,NULL,'FlyToMoon',NULL),(13,'2020-05-13',NULL,NULL,'Team Spirit',NULL),(14,'2020-05-13',NULL,NULL,'VP.Prodigy',NULL);
+INSERT INTO `teams` VALUES (1,'2020-05-13',NULL,NULL,'TeamProfilePage Nigma',NULL),(2,'2020-05-13',NULL,NULL,'TeamProfilePage Secret',NULL),(3,'2020-05-13',NULL,NULL,'OG',NULL),(4,'2020-05-13',NULL,NULL,'TeamProfilePage Liquid',NULL),(5,'2020-05-13',NULL,NULL,'Alliance',NULL),(6,'2020-05-13',NULL,NULL,'Ninjas in Pyjamas',NULL),(7,'2020-05-13',NULL,NULL,'OG.Seed',NULL),(8,'2020-05-13',NULL,NULL,'Natus Vincere',NULL),(9,'2020-05-13',NULL,NULL,'Virtus.pro',NULL),(10,'2020-05-13',NULL,NULL,'B8',NULL),(11,'2020-05-13',NULL,NULL,'HellRaisers',NULL),(12,'2020-05-13',NULL,NULL,'FlyToMoon',NULL),(13,'2020-05-13',NULL,NULL,'TeamProfilePage Spirit',NULL),(14,'2020-05-13',NULL,NULL,'VP.Prodigy',NULL);
 /*!40000 ALTER TABLE `teams` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,7 +101,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `tournaments` WRITE;
 /*!40000 ALTER TABLE `tournaments` DISABLE KEYS */;
-INSERT INTO `tournaments` VALUES (1,NULL,'2020-05-16','2020-05-13','DOUBLEELIMINATION',NULL,'WePlay! Pushka League Season 1: Division 1 - tournament','2020-05-08',1,1,NULL);
+INSERT INTO `tournaments` VALUES (1,NULL,'2020-05-16','2020-05-13','DOUBLEELIMINATION',NULL,'WePlay! Pushka LeagueProfilePage Season 1: Division 1 - tournament','2020-05-08',1,1,NULL);
 /*!40000 ALTER TABLE `tournaments` ENABLE KEYS */;
 UNLOCK TABLES;
 

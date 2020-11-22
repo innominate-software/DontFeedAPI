@@ -25,7 +25,7 @@ public class Match {
     @Column(name = "id", updatable = false, nullable = false)
     private long id;
 
-    private float duration;
+    private String duration;
 
     private LocalDate matchDate;
 
@@ -54,7 +54,7 @@ public class Match {
 
     @Override
     public String toString() {
-        return "Match{" +
+        return "MatchInfoPage{" +
                 "id=" + id +
                 ", duration=" + duration +
                 ", matchDate=" + matchDate +

@@ -70,7 +70,7 @@ public class League {
 
     @Override
     public String toString() {
-        return "League{" +
+        return "LeagueProfilePage{" +
                 "id=" + id +
                 ", dateCreated=" + dateCreated +
                 ", duration=" + duration +

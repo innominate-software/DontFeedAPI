@@ -54,7 +54,7 @@ public class Team {
 
     @Override
     public String toString() {
-        return "Team{" +
+        return "TeamProfilePage{" +
                 "id=" + id +
                 ", dateCreated=" + dateCreated +
                 ", logo='" + logo + '\'' +

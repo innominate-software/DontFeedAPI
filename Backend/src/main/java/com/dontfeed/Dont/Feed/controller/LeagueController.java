@@ -35,7 +35,7 @@ public class LeagueController {
 		if (league == null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("League does not exist with that ID");
+					.body("LeagueProfilePage does not exist with that ID");
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)
@@ -48,7 +48,7 @@ public class LeagueController {
 		if (league == null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("League does not exist with that name: " + name);
+					.body("LeagueProfilePage does not exist with that name: " + name);
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)
@@ -75,7 +75,7 @@ public class LeagueController {
 		if (leagueService.findLeagueByName(name) != null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("League already exists at this name: " + name);
+					.body("LeagueProfilePage already exists at this name: " + name);
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)
@@ -88,7 +88,7 @@ public class LeagueController {
 		if (returnedLeague == null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("League does not exist. Check you facts.");
+					.body("LeagueProfilePage does not exist. Check you facts.");
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)
@@ -101,13 +101,13 @@ public class LeagueController {
 		if (leagueService.findLeagueByID(id) == null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("League does not exist at the ID");
+					.body("LeagueProfilePage does not exist at the ID");
 		}
 		leagueService.deleteLeague(id);
 		if (leagueService.findLeagueByID(id) != null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("League was not deleted successfully");
+					.body("LeagueProfilePage was not deleted successfully");
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)

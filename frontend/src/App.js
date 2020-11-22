@@ -2,16 +2,15 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import 'materialize-css/dist/css/materialize.min.css';
 import './App.css';
-import { HomePage } from "./components/Home/HomePage";
-import { CreateLeague } from "./components/Leagues/CreateLeague";
-import { LeaguesList } from "./components/Leagues/LeaguesList";
-import { Match } from "./components/Matches/Match";
-import { Register } from "./components/Register/Register";
-import { CreateTeam } from "./components/Teams/CreateTeam";
-import { TeamsList } from "./components/Teams/TeamsList";
-import { Tournament } from "./components/Tournaments/Tournament";
-import { Team } from "./components/Teams/Team"
-import { League } from "./components/Leagues/League"
+import HomePage from "./components/HomePage/HomePage";
+import LeagueCreationPage from "./components/LeagueCreationPage/LeagueCreationPage";
+import MatchInfoPage from "./components/MatchInfoPage/MatchInfoPage";
+import { RegisterPage } from "./components/RegisterPage/RegisterPage";
+import { TeamCreationPage } from "./components/TeamCreationPage/TeamCreationPage";
+import { TeamProfilePage } from "./components/TeamProfilePage/TeamProfilePage"
+import LeagueProfilePage from "./components/LeagueProfilePage/LeagueProfilePage"
+import SupportPage from "./components/SupportPage/SupportPage";
+import UserProfilePage from "./components/UserProfilePage/UserProfilePage";
 
 function App() {
     return (
@@ -19,15 +18,14 @@ function App() {
             <Router>
                 <Switch>
                     <Route path="/" exact component={HomePage} />
-                    <Route path="/leagues/create" component={CreateLeague} />
-                    <Route path="/leagues" component={LeaguesList} />
-                    <Route path="/league/:id" component={League}/>
-                    <Route path="/teams/create" component={CreateTeam} />
-                    <Route path="/teams" component={TeamsList} />
-                    <Route path="/team/:id" component={Team} />
-                    <Route path="/tournament/:id" component={Tournament} />
-                    <Route path="/match/:id" component={Match} />
-                    <Route path="/register" component={Register} />
+                    <Route path="/leagues/create" component={LeagueCreationPage} />
+                    <Route path="/league/:id" component={LeagueProfilePage} />
+                    <Route path="/teams/create" component={TeamCreationPage} />
+                    <Route path="/team/:id" component={TeamProfilePage} />
+                    <Route path="/match/:id" component={MatchInfoPage} />
+                    <Route path="/register" component={RegisterPage} />
+                    <Route path="/user/:id" component={UserProfilePage} />
+                    <Route path="/support" component={SupportPage} />
                     {/*this is how to set a route to only be accessed through authenticated means*/}
                     {/*<AuthenticatedRoute path={"/blahlblahba"} component={blahlbabhlbahalbhlabhab} />*/}
                 </Switch>
