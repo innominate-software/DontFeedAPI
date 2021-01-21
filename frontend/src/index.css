@@ -1,39 +1,47 @@
 @font-face {
-    font-family: 'Gotham';
+    font-family: "Nexa";
     font-style: normal;
     font-weight: 400;
-    src: local('Gotham'), url(../src/assets/font/Gotham-Font/Gotham-Font/GothamMedium.ttf) format('truetype');
+    src: local("Nexa"),
+    url(../src/assets/font/Nexa/Nexa_V2_2020/TTF/NexaDemo-Bold.ttf) format("truetype");
 }
 
 @font-face {
-    font-family: 'Gotham Bold';
+    font-family: "Nexa Bold";
     font-style: normal;
-    font-weight: 400;
-    src: local('Gotham Bold'), url(../src/assets/font/Gotham-Font/Gotham-Font/GothamBold.ttf) format('truetype');
+    font-weight: 700;
+    src: local("Nexa Bold"),
+    url(../src/assets/font/Nexa/Nexa_V2_2020/TTF/NexaDemo-Bold.ttf) format("truetype");
 }
 
 @font-face {
-    font-family: 'Gotham Thin';
+    font-family: "Nexa Thin";
     font-style: normal;
-    font-weight: 400;
-    src: local('Gotham Thin'), url(../src/assets/font/Gotham-Font/Gotham-Font/GothamLight.ttf) format('truetype');
+    font-weight: 100;
+    src: local("Nexa Thin"),
+    url(../src/assets/font/Nexa/Nexa_V2_2020/TTF/NexaDemo-Light.ttf) format("truetype");
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 body {
     margin: 0;
-    font-family: 'Gotham';
+    font-family: "Nexa", serif !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #1f2833;
 }
 
-h1, h2, h3, h4, h5, .brand-logo {
-    font-family: 'Gotham Bold' !important;
+h1,
+h2,
+h3,
+h4,
+h5,
+.brand-logo {
+    font-family: "Nexa Bold", serif !important;
     letter-spacing: 1.6px;
 }
 
@@ -50,7 +58,7 @@ h1, h2, h3, h4, h5, .brand-logo {
 }
 
 .text-thin {
-    font-family: 'Gotham Thin' !important;
+    font-family: "Nexa Thin", serif !important;
 }
 
 .m-0 {
@@ -90,7 +98,7 @@ h1, h2, h3, h4, h5, .brand-logo {
 .hidden {
     background: transparent !important;
     color: transparent !important;
-    border: 0px solid transparent;
+    border: 0 solid transparent;
 }
 
 .nav-bar-container {
@@ -103,6 +111,7 @@ h1, h2, h3, h4, h5, .brand-logo {
 
 .df-dark-background {
     background: rgb(30, 34, 42) !important;
+    /*background: #cc9900 !important;*/
 }
 
 .df-pink-text {
@@ -114,7 +123,7 @@ h1, h2, h3, h4, h5, .brand-logo {
 }
 
 .df-light-grey-background {
-    background: #95afc0 !important;
+    background-color: #95afc0 !important;
 }
 
 .df-light-grey-text {
@@ -130,11 +139,11 @@ h1, h2, h3, h4, h5, .brand-logo {
 }
 
 .df-black-text {
-    color: #0e0e0e !important
+    color: #0e0e0e !important;
 }
 
 .df-black-background {
-    background: #0e0e0e !important
+    background: #0e0e0e !important;
 }
 
 .news-header-text {
@@ -142,14 +151,26 @@ h1, h2, h3, h4, h5, .brand-logo {
 }
 
 .news-item-1 {
-    background-image: linear-gradient(to top, rgb(51, 58, 72), 60%, rgba(0, 0, 0, .52)), url(assets/img/esports-pic-1.jpg);
+    background-image: linear-gradient(
+            to top,
+            rgb(51, 58, 72),
+            60%,
+            rgba(0, 0, 0, 0.52)
+    ),
+    url(assets/img/esports-pic-1.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 .news-item-2 {
-    background-image: linear-gradient(to top, rgb(51, 58, 72), 60%, rgba(0, 0, 0, .52)), url(/assets/img/games/dota/vp.jpg);
+    background-image: linear-gradient(
+            to top,
+            rgb(51, 58, 72),
+            60%,
+            rgba(0, 0, 0, 0.52)
+    ),
+    url(/assets/img/games/dota/vp.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -159,26 +180,24 @@ h1, h2, h3, h4, h5, .brand-logo {
     width: 100%;
     height: 100%;
     padding: 42px 30px;
-    background: linear-gradient(to top, rgb(51, 58, 72), 40%, rgba(51, 58, 72, .32));
+    background: linear-gradient(
+            to top,
+            rgb(51, 58, 72),
+            40%,
+            rgba(51, 58, 72, 0.32)
+    );
 }
 
 .parallax-title {
-    margin: 0;
+    margin: 0 0 1rem 0;
     text-align: center;
     color: #fff;
     text-transform: uppercase;
 }
 
-.parallax-subtitle {
-    color: #fff;
-    margin: 12px 0;
-    font-size: 30px;
-    font-family: "Gotham Bold";
-}
-
 .parallax-league-img {
-    height: 140px;
-    width: 140px;
+    height: 200px;
+    width: 200px;
     border-radius: 50%;
     margin: 20px;
     object-fit: cover;
@@ -188,7 +207,7 @@ h1, h2, h3, h4, h5, .brand-logo {
 }
 
 .parallax-container {
-    z-index: 9999;
+    z-index: 9;
 }
 
 .news-title-container {
@@ -266,8 +285,17 @@ h1, h2, h3, h4, h5, .brand-logo {
     border-bottom: 2px solid #95afc0;
 }
 
-.df-table-tr:hover {
-    background: rgba(14, 14, 14, 0.4) !important;
+.df-table-head th,
+.df-table-tr td {
+    text-align: center;
+}
+
+/*.df-table-tr:hover {*/
+/*    background: rgba(14, 14, 14, 0.4) !important;*/
+/*}*/
+
+table.striped > tbody > tr:nth-child(odd) {
+    background-color: rgb(30, 34, 42) !important;
 }
 
 .tabs {
@@ -284,12 +312,12 @@ h1, h2, h3, h4, h5, .brand-logo {
     border-top: 1px solid transparent !important;
     border-right: 1px solid transparent !important;
     border-left: 1px solid transparent !important;
-    margin: .5rem 0 1rem 0;
+    margin: 0.5rem 0 1rem 0;
 }
 
 .collapsible-body {
     display: none;
-    border-bottom: 0px solid #ddd !important;
+    border-bottom: 0 solid #ddd !important;
     box-sizing: border-box;
     color: #fff;
     padding: 2rem;
@@ -305,16 +333,244 @@ h1, h2, h3, h4, h5, .brand-logo {
 }
 
 .collection {
-    margin: .5rem 0 1rem 0;
-    border: 0px solid transparent !important;
+    margin: 0.5rem 0 1rem 0;
+    border: 0 solid transparent !important;
     border-radius: 2px;
     overflow: hidden;
     position: relative;
 }
 
+.online-players-icon {
+    margin-right: 1rem;
+}
+
+.online-players-icon-container {
+    display: flex;
+}
+
+.required {
+    color: #eb4d4b;
+}
+
+.rounded {
+    border-radius: 30px !important;
+    overflow: hidden;
+}
+
+.picture {
+    border-radius: 50%;
+    max-height: 6.25rem;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.team-players {
+    border-radius: 50%;
+    max-height: 4rem;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.player-names-info {
+    padding-bottom: 0 !important;
+    padding-top: 1.5rem !important;
+    min-height: 6.25rem !important;
+}
+
+.player-name {
+    margin-bottom: 0;
+}
+
+.team-player {
+    margin: 0;
+}
+
+.team-container div.center,
+.toggle-box-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-info,
+.team-info {
+    margin: 3rem 0 4rem !important;
+}
+
+.left-team > .user-team-info {
+    padding-top: 30px !important;
+    text-align: left;
+}
+
+.right-team > .user-team-info {
+    padding-top: 30px !important;
+    text-align: right;
+}
+
+.does-not-play {
+    filter: grayscale(100%);
+}
+
+.user-game-bubbles {
+    margin: 2rem 0 !important;
+}
+
+.active-players div.col {
+    margin-bottom: 2rem;
+}
+
+#active-roster h1 {
+    margin-top: 0;
+    margin-bottom: 4rem;
+}
+
+.join-league {
+    font-weight: bold;
+}
+
+.league-info {
+    background: rgba(30, 34, 42, 0.7);
+    margin: 120px 0;
+    border-radius: 48px;
+}
+
+.league-info p {
+    color: #fff;
+    opacity: 1;
+    font-size: 20px;
+    font-family: "Nexa Bold", serif;
+}
+
+.previous-matches {
+    margin-top: 3rem !important;
+}
+
+.previous-matches .collapsible-header {
+    display: block;
+    font-size: 2rem;
+}
+
+.support {
+    border-radius: 48px !important;
+}
+
+.contact-top-row h5 {
+    margin: 0 !important;
+}
+
+.contact-card {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contact-card-modal {
+    font-size: 1.83rem;
+    font-weight: bold;
+}
+
+.contact-card-modal div {
+    margin: 0 0 1rem;
+}
+
+.contact-card .modal {
+    max-width: 40rem;
+    z-index: 9999;
+}
+
+.search-page {
+    margin-top: 7rem;
+}
+
+.search-button {
+    margin-top: 1.2rem;
+}
+
+.search-bar {
+    padding: 2rem 6rem 1rem;
+    background: #1e222a;
+    margin: 120px 0;
+    border-radius: 48px;
+}
+
+.search-table {
+    margin-bottom: 2rem !important;
+}
+
+.search-table-title {
+    background: #1e222a;
+    border-radius: 25px;
+    margin: 0 auto 0 auto;
+    max-width: 10rem;
+}
+
+.toggle-box {
+    margin: 4rem 1rem !important;
+    padding: 3rem 0 !important;
+    background: #1e222a;
+    border-radius: 50px;
+}
+
+.toggle-box .toggle-box-title {
+    vertical-align: center !important;
+}
+
+.match-main-info {
+    margin-top: 10rem !important;
+}
+
+.match-team-name {
+    margin-top: 3rem;
+}
+
+.match-team-pic {
+    border-radius: 50%;
+    max-height: 10rem;
+}
+
+.match-players {
+    background: #1e222a;
+    border-radius: 4rem;
+    padding: 0;
+    margin: 0 1rem !important;
+}
+
+.match-league {
+    margin-bottom: 0;
+    padding: .5rem !important;
+    background: rgba(30, 34, 42, 0.7);
+    border-radius: 4rem;
+}
+
+.match-victor {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: .5rem !important;
+    background: rgba(30, 34, 42, 0.7);
+    border-bottom-left-radius: 4rem;
+    border-bottom-right-radius: 4rem;
+}
+
+.match-score {
+    margin-top: 0;
+    padding: .5rem !important;
+    background: rgba(30, 34, 42, 0.7);
+    border-bottom-left-radius: 4rem;
+    border-bottom-right-radius: 4rem;
+}
+
+.space {
+    min-height: 3rem;
+}
+
+.support-button {
+
+}
+
 /* ============================================================= tabs ========================== */
 
-.tabs .tab a:focus, .tabs .tab a:focus.active {
+.tabs .tab a:focus,
+.tabs .tab a:focus.active {
     background-color: rgba(149, 175, 192, 0.2) !important;
     outline: none;
 }
@@ -328,22 +584,34 @@ h1, h2, h3, h4, h5, .brand-logo {
 }
 
 .df-tab {
-    border-right: 1px solid rgba(14, 14, 14, .3) !important;
+    border-right: 1px solid rgba(14, 14, 14, 0.3) !important;
     /* border-left: 1px solid rgba(14, 14, 14, .3) !important; */
 }
 
-
 /* ========================================================== input =================================== */
 
+input[type="checkbox"] {
+    /* Double-sized Checkboxes */
+    -ms-transform: scale(2); /* IE */
+    -moz-transform: scale(2); /* FF */
+    -webkit-transform: scale(2); /* Safari and Chrome */
+    -o-transform: scale(2); /* Opera */
+    transform: scale(2);
+    padding: 10px;
+}
+
+textarea.materialize-textarea {
+    height: 20rem !important;
+}
+
 input:not(.browser-default),
-input[type=password],
+input[type="password"],
 textarea.materialize-textarea {
     background-color: transparent;
-    border: none;
-    border: 2px solid rgba(149, 175, 192, 0.4) !important;
+    border: 2px solid #95afc0 !important;
     color: #95afc0 !important;
     border-radius: 6px !important;
-    outline: 0px solid #fff;
+    outline: 0 solid #fff;
     height: 3rem;
     width: 100%;
     font-size: 16px;
@@ -351,34 +619,37 @@ textarea.materialize-textarea {
     padding-left: 6px !important;
     box-shadow: none;
     box-sizing: content-box;
-    transition: box-shadow .3s, border .3s;
+    transition: box-shadow 0.3s, border 0.3s;
 }
+
+/*border: 2px solid rgba(149, 175, 192, 0.4) !important;*/
 
 input:focus:not([readonly]),
 textarea.materialize-textarea {
     /* border-bottom: 0px solid transparent !important; */
     color: transparent;
     box-shadow: 0 10px 0 0 #fff;
-    border-bottom: 2px solid #95AFC0 !important;
+    border-bottom: 2px solid #95afc0 !important;
 }
 
-.input-field input:focus
+.input-field input:focus,
 .materialize-textarea:focus:not([readonly]) {
-    border: 2px solid #95AFC0 !important;
-    box-shadow: 0 0 0 0 #95AFC0 !important;
+    border: 2px solid #95afc0 !important;
+    box-shadow: 0 0 0 0 #95afc0 !important;
 }
 
 .input-field input:valid,
 .materialize-textarea:valid:not([readonly]) {
-    border: 2px solid #95AFC0 !important;
-    box-shadow: 0 0 0 0 #95AFC0 !important;
+    border: 2px solid #95afc0 !important;
+    box-shadow: 0 0 0 0 #95afc0 !important;
 }
 
 .input-field input:invalid,
-.materialize-textarea:invalid:not([readonly]) {
-    border: 2px solid #EB4D4B !important;
-    box-shadow: 0 0 0 0 #EB4D4B !important;
-    /* color: #eb4d4b !important; */
+.materialize-textarea:invalid:not([readonly]),
+.materialize-select:invalid:not([readonly]) {
+    border: 2px solid #95afc0 !important;
+    box-shadow: 0 0 0 0 #95afc0 !important;
+    /*color: #eb4d4b !important;*/
 }
 
 .input-field > label:not(.label-icon).active {
@@ -386,13 +657,13 @@ textarea.materialize-textarea {
 }
 
 .input-label {
-    font-family: "Gotham" !important;
+    font-family: "Nexa", serif !important;
     font-size: 20px !important;
     position: relative !important;
     top: -18px !important;
     float: left !important;
     left: 0 !important;
-    color: #95AFC0 !important;
+    color: #95afc0 !important;
     width: 100%;
 }
 

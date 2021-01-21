@@ -10,5 +10,8 @@
       </list>
     </option>
   </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/frontend/src/components/utils/FormPasswordInput.jsx" />
+  </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="13" project-jdk-type="JavaSDK" />
 </project>

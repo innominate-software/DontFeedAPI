@@ -5,12 +5,13 @@ import './App.css';
 import HomePage from "./components/HomePage/HomePage";
 import LeagueCreationPage from "./components/LeagueCreationPage/LeagueCreationPage";
 import MatchInfoPage from "./components/MatchInfoPage/MatchInfoPage";
-import { RegisterPage } from "./components/RegisterPage/RegisterPage";
-import { TeamCreationPage } from "./components/TeamCreationPage/TeamCreationPage";
-import { TeamProfilePage } from "./components/TeamProfilePage/TeamProfilePage"
+import RegisterPage from "./components/RegisterPage/RegisterPage";
+import TeamCreationPage from "./components/TeamCreationPage/TeamCreationPage";
+import TeamProfilePage from "./components/TeamProfilePage/TeamProfilePage"
 import LeagueProfilePage from "./components/LeagueProfilePage/LeagueProfilePage"
 import SupportPage from "./components/SupportPage/SupportPage";
 import UserProfilePage from "./components/UserProfilePage/UserProfilePage";
+import SearchPage from "./components/SearchPage/SearchPage";
 
 function App() {
     return (
@@ -26,8 +27,9 @@ function App() {
                     <Route path="/register" component={RegisterPage} />
                     <Route path="/user/:id" component={UserProfilePage} />
                     <Route path="/support" component={SupportPage} />
-                    {/*this is how to set a route to only be accessed through authenticated means*/}
-                    {/*<AuthenticatedRoute path={"/blahlblahba"} component={blahlbabhlbahalbhlabhab} />*/}
+                    <Route path="/search" component={SearchPage} />
+                        {/*this is how to set a route to only be accessed through authenticated means*/}
+                        {/*<AuthenticatedRoute path={"/blahlblahba"} component={blahlbabhlbahalbhlabhab} />*/}
                 </Switch>
             </Router>
         </div>

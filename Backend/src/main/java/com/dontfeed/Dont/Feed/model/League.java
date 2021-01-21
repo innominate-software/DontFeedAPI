@@ -49,7 +49,7 @@ public class League {
 
     private LocalDate startDate;
 
-    private String passcode;
+    private String password;
 
     // Relationships
     @OneToOne

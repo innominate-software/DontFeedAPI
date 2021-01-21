@@ -33,26 +33,30 @@ export default class HomePage extends React.Component {
     render() {
         let isLoggedIn = this.state.isLoggedIn;
         return (
-            <div className="app-container container-fluid df-dark-background-2">
-                <MainNav isLoggedIn={isLoggedIn} />
-                <GameBubbles />
-                <NewsCarousel />
-                <div className="content-container container">
-                    <div className="row">
-                        <div className="col s3">
-                            <SideNav />
-                        </div>
-                        <div className="col s6">
-                            {!isLoggedIn ? <LoginCard /> : null}
-                            <MostPopularLeagues />
-                            <LeaguesWithOpenRegistration />
-                            <LeagueCreateButton />
-                        </div>
-                        <div className="col s3">
-                            <OnlinePlayers />
+            <div>
+                <main>
+                    <div className="app-container container-fluid df-dark-background-2">
+                        <MainNav isLoggedIn={isLoggedIn} />
+                        <GameBubbles />
+                        <NewsCarousel />
+                        <div className="content-container container">
+                            <div className="row">
+                                <div className="col s3">
+                                    <SideNav />
+                                </div>
+                                <div className="col s6">
+                                    <LoginCard />
+                                    <MostPopularLeagues />
+                                    <LeaguesWithOpenRegistration />
+                                    <LeagueCreateButton />
+                                </div>
+                                <div className="col s3">
+                                    <OnlinePlayers />
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </main>
                 <Footer />
             </div>
         );
