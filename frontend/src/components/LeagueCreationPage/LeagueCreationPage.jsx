@@ -7,7 +7,7 @@ import FormTextAreaInput from "../utils/Form/FormTextAreaInput";
 import FormSubmitButton from "../utils/Form/FormSubmitButton";
 import Footer from "../utils/Footer";
 import M from "materialize-css";
-import { League } from "../../models/League";
+import leagueService from "../../services/league.service";
 
 export default class LeagueCreationPage extends Component {
 
@@ -28,7 +28,7 @@ export default class LeagueCreationPage extends Component {
             game: "DOTA2",
             startDate: "",
             endDate: "",
-            password: "",
+            leaguePassword: "",
             matchFrequency: "",
             rules: ""
         };
@@ -44,11 +44,8 @@ export default class LeagueCreationPage extends Component {
 
     handleChange(e) {
         const target = e.target;
-        console.log(target)
         const value = target.value;
-        console.log(value)
         const name = target.name;
-        console.log(name)
 
         this.setState({
             [name]: value
@@ -57,22 +54,47 @@ export default class LeagueCreationPage extends Component {
 
     handleClick(e) {
         e.preventDefault()
-        let newLeague = new League();
-        this.checkForm();
-        // if (this.checkForm()) {
-        newLeague.logo = (this.state.logo !== "") ? this.state.logo : null;
-        newLeague.name = this.state.name;
-        newLeague.format = this.state.format;
-        newLeague.game = this.state.game;
-        newLeague.startDate = this.state.startDate;
-        newLeague.endDate = this.state.endDate;
-        newLeague.password = this.state.password;
-        newLeague.matchFrequency = this.state.matchFrequency;
-        newLeague.rules = (this.state.rules !== "") ? this.state.rules : null;
-        console.log(newLeague);
-        // } else {
-        // console.log("didnt work")
-        // }
+        // check the form for problems!!!
+        let {game} = this.state;
+        console.log(game)
+        switch (game) {
+            case "DOTA2":
+                game = {id: 1, name: "DOTA2"}
+                break;
+            case "LEAGUEOFLEGENDS":
+                game = {id: 2, name: "LEAGUEOFLEGENDS"}
+                break;
+            case "OVERWATCH":
+                game = {id: 3, name: "OVERWATCH"}
+                break;
+            case "SMASHBROSULTIMATE":
+                game = {id: 4, name: "SMASHBROSULTIMATE"}
+                break;
+            case "MADDEN21":
+                game = {id: 5, name: "MADDEN21"}
+                break;
+            default:
+                //throw error or something
+        }
+        let newLeague = {
+            logo: this.state.logo,
+            name: this.state.name,
+            format: this.state.format,
+            game: game,
+            season: 1,
+            stage: "CREATED",
+            startDate: this.state.startDate,
+            endDate: this.state.endDate,
+            password: this.state.leaguePassword,
+            matchFrequency: this.state.matchFrequency,
+            rules: this.state.rules,
+        }
+        leagueService.create(newLeague)
+            .then(response => {
+                return response.data;
+            }).then(league => {
+            this.props.history.push(`/league/${league.id}`)
+        })
     }
 
 
@@ -141,26 +163,26 @@ export default class LeagueCreationPage extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="input-field col s6">
-                                            <FormTextInput type="text" label="Start Date" id="start_date"
+                                            <FormTextInput type="date" label="Start Date" id="start_date"
                                                            name="startDate"
                                                            value={this.state.startDate} handleChange={this.handleChange}
                                                            required={true} />
                                         </div>
                                         <div className="input-field col s6">
-                                            <FormTextInput type="text" label="End Date" id="end_date" name="endDate"
+                                            <FormTextInput type="date" label="End Date" id="end_date" name="endDate"
                                                            value={this.state.endDate} handleChange={this.handleChange}
                                                            required={true} />
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="input-field col s6">
-                                            <FormTextInput type="password" label="Password" id="password"
-                                                           name="password"
-                                                           value={this.state.password} handleChange={this.handleChange}
+                                            <FormTextInput type="password" label="Password" id="leaguePassword"
+                                                           name="leaguePassword"
+                                                           value={this.state.leaguePassword} handleChange={this.handleChange}
                                                            required={true} />
                                         </div>
                                         <div className="input-field col s6">
-                                            <FormTextInput type="text" label="Match Frequency" id="match_frequency"
+                                            <FormTextInput type="number" label="Match Frequency" id="match_frequency"
                                                            name="matchFrequency" value={this.state.matchFrequency}
                                                            handleChange={this.handleChange} required={true} />
                                         </div>

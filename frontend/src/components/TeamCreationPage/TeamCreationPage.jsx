@@ -6,7 +6,8 @@ import FormTextInput from "../utils/Form/FormTextInput";
 import FormTextAreaInput from "../utils/Form/FormTextAreaInput";
 import FormSubmitButton from "../utils/Form/FormSubmitButton";
 import Footer from "../utils/Footer";
-import { Team } from "../../models/Team";
+
+import teamService from "../../services/team.service"
 
 export default class TeamCreationPage extends Component {
 
@@ -22,7 +23,7 @@ export default class TeamCreationPage extends Component {
             selectedFile: null,
             logo: "",
             name: "",
-            password: "",
+            teamPassword: "",
             motto: "",
         };
     }
@@ -47,19 +48,20 @@ export default class TeamCreationPage extends Component {
 
     handleClick(e) {
         e.preventDefault()
-        let newTeam = new Team();
-        this.checkForm();
-        // if (this.checkForm()) {
-        newTeam.name = this.state.name;
-        newTeam.motto = (this.state.motto !== "") ? this.state.motto : null;
-        newTeam.logo = (this.state.logo !== "") ? this.state.logo : null;
-        newTeam.password = this.state.password
-        console.log(newTeam);
-        // } else {
-        // console.log("didnt work")
-        // }
+        // check the form for problems!!!
+        let newTeam = {
+            logoFilePath: null,
+            name: this.state.name,
+            password: this.state.teamPassword,
+            teamInfo: this.state.motto
+        }
+        teamService.create(newTeam)
+            .then(response => {
+                return response.data;
+            }).then(team => {
+                this.props.history.push(`/team/${team.id}`)
+            })
     }
-
 
     render() {
         let isLoggedIn = this.state.isLoggedIn;
@@ -90,8 +92,8 @@ export default class TeamCreationPage extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="input-field col s12">
-                                            <FormTextInput type="password" label="Password" id="password"
-                                                           name="password"
+                                            <FormTextInput type="password" label="Password" id="teamPassword"
+                                                           name="teamPassword"
                                                            value={this.state.password} handleChange={this.handleChange}
                                                            required={true} />
                                         </div>

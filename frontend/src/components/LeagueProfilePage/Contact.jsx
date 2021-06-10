@@ -2,10 +2,10 @@ import React from "react";
 import ContactCard from "./ContactCard";
 
 export default function Contact({contact}) {
-    let email = contact.contact.email;
-    let phone = contact.contact.phone;
-    let facebook = contact.contact.facebook;
-    let discord = contact.contact.discord;
+    let email = contact?.contactInformation?.emailAddress;
+    let phone = contact?.contactInformation?.phoneNumber;
+    let facebook = contact?.contactInformation?.facebook;
+    let discord = contact?.contactInformation?.discord;
     let contactElement;
     let numberOfContacts = 0;
 
@@ -19,14 +19,14 @@ export default function Contact({contact}) {
         numberOfContacts++;
     }
     if (discord) {
-        numberOfContacts ++;
+        numberOfContacts++;
     }
 
     if (numberOfContacts === 1) {
-        if (email) contactElement = <a href={"mailto:" + email}><h5>{contact.contact.email}</h5></a>;
-        if (phone) contactElement = <h5>{contact.contact.phone}</h5>;
-        if (facebook) contactElement = <a href={"https://www.facebook.com" + contact.contact.facebook} target="_blank" rel="noopener noreferrer"><h5>{contact.contact.facebook}</h5></a>;
-        if (discord) contactElement = <h5>{contact.contact.phone}</h5>;
+        if (email) contactElement = <a href={"mailto:" + email}><h5>{email}</h5></a>;
+        if (phone) contactElement = <h5>{phone}</h5>;
+        if (facebook) contactElement = <a href={"https://www.facebook.com" + facebook} target="_blank" rel="noopener noreferrer"><h5>{facebook}</h5></a>;
+        if (discord) contactElement = <h5>{phone}</h5>;
     }
     return (
         <div className="row">
@@ -37,7 +37,7 @@ export default function Contact({contact}) {
                 <h5>{contact.job}</h5>
             </div>
             <div className="col s4 right-align contact-card">
-                {numberOfContacts === 1 ? contactElement : <ContactCard name={contact.name} contact={contact.contact} />}
+                {numberOfContacts === 1 ? contactElement : <ContactCard name={contact.name} contact={contact.contactInformation} />}
             </div>
         </div>
     )

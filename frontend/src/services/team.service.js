@@ -1,35 +1,91 @@
-import axios from 'axios'
+import http from "../http-common";
+import utilityService from "./util.service"
+import userService from "./user.service"
+import matchService from "./match.service"
 
-const API_URL = 'http://localhost:8080/api/teams'
+class TeamDataService {
 
-class TeamService {
+    get(id) {
+        return http.get(`teams/${id}`)
+            .then(response => {
+                return response.data;
+            }).then(team => {
+                team.leagues.forEach(teamLeague => {
+                    teamLeague.league.matches = matchService.getMatchesByLeagueId(teamLeague.league.id)
+                })
+                return team
+            }).then(team => {
+                return this.convertApiTeamToTeamPageTeam(team)
 
-    getAllTeams(){
-        return axios.get(API_URL,{
-            headers: {"Content-Type":"application/json; charset=UTF-8"}
-        });
+            })
     }
 
-    getTeam(id){
-        return axios.get(API_URL + '/' + id, {
-            headers: {"Content-Type":"application/json; charset=UTF-8"}
-        });
+    create(data) {
+        return http.post("/teams/createTeam", data);
     }
 
-    createTeam(Team) {
-        return axios.post(API_URL + "/createTeam", JSON.stringify(Team),
-            { headers: {"Content-Type":"application/json; charset=UTF-8"}});
+    getTeamsByLeagueId(leagueId) {
+        return http.get(`teams/byLeague/${leagueId}`)
+            .then(response => {
+                return response.data;
+            }).then(teams => {
+                return teams
+            })
     }
 
-    deleteTeam(id) {
-        return axios.post(API_URL + "/deleteTeam/" + id, JSON.stringify(id), {headers: {"Content-Type":"application/json; charset=UTF-8"}});
+    convertApiTeamToTeamPageTeam(team) {
+        let activeLeagues, firstPlaceTrophies;
+        let activeRoster = []
+        let playerHistory = []
+        let leagues = [];
+        return matchService.getMatchesByTeamId(team.id)
+            .then(matches => {
+                return userService.getUsersByTeamId(team.id)
+                    .then(users => {
+                        activeLeagues = utilityService.getActiveLeagues(team)
+                        firstPlaceTrophies = utilityService.getFirstPlaceTrophies(team)
+                        users.forEach(user => {
+                            user.teams.forEach(userTeam => {
+                                if (userTeam.team.id === team.id) {
+                                    if (userTeam.dateLeft === null) {
+                                        activeRoster.push(user)
+                                    }
+                                    playerHistory.push([
+                                        {className: "", text: user.username}, {className: "", text: user.dateJoined},
+                                        {className: "", text: user.dateLeft ?? "Active"}
+                                    ])
+                                }
+                            })
+                        })
+                        team.leagues.forEach(teamLeague => {
+                            let game;
+                            switch (teamLeague.league?.game?.name) {
+                                case "DOTA2":
+                                    game = "Dota 2"
+                                    break;
+                                default:
+                                    game = "ERROR"
+                            }
+                            leagues.push([
+                                {className: "", text: game}, {className: "", text: teamLeague.league.name},
+                                {className: "", text: teamLeague.league.season}, {className: "", text: `${teamLeague.league.startDate} - ${teamLeague.league.endDate}`},
+                                {className: "", text: teamLeague.league.stage}, {className: "", text: teamLeague.originalName},
+                                {className: "", text: teamLeague.placement + utilityService.getPlacementSuffix(teamLeague.placement)}, {className: "", text: teamLeague.winLoss}
+                            ])
+                        })
+                        team = {
+                            ...team,
+                            activeLeagues,
+                            activeRoster,
+                            firstPlaceTrophies,
+                            leagues,
+                            matches,
+                            playerHistory,
+                        }
+                        return team;
+                    })
+            })
     }
-
-    updateTeam(team) {
-        return axios.put(API_URL + "/update", JSON.stringify(team),
-            {headers: {"Content-Type":"application/json; charset=UTF-8"}});
-    }
-
 }
 
-export default new TeamService();
+export default new TeamDataService();

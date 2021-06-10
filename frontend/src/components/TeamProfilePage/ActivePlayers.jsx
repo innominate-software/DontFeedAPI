@@ -2,9 +2,9 @@ import React from "react";
 import ActivePlayer from "./ActivePlayer";
 
 export default function ActivePlayers({players, page}) {
-    const rowOfPlayers = players.map((player, index) => <ActivePlayer key={index} player={player} page={page} />);
+    const rowOfPlayers = players?.map((player, index) => <ActivePlayer key={index} player={player} page={page} />);
     let activePlayers;
-    switch (players.length) {
+    switch (players?.length) {
         case 1:
             activePlayers = <div>
                 <div className="col s5" />

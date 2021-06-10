@@ -2,10 +2,15 @@ import React from "react";
 import Contact from "./Contact";
 
 export default function Support({contacts, rules}) {
-    const leagueContacts = contacts.map((contact, index) => <Contact key={index} contact={contact} />);
+    let leagueContacts = <h1>Currently no contacts have been created</h1>
+    let rulesContent = "No rules have been established";
+    if (contacts) {
+        if (contacts.length !== 0) {
+            leagueContacts = contacts?.map((contact, index) => <Contact key={index} contact={contact} />);
+        }
+    }
     return (
         <div id="support" className="col s12">
-            {/*contacts*/}
             <div className="card df-dark-background df-light-grey-text support">
                 <div className="card-content">
                     <div className="row contact-top-row">
@@ -19,11 +24,10 @@ export default function Support({contacts, rules}) {
                     </div>
                 </div>
             </div>
-            {/*rules*/}
             <div className="card df-dark-background df-light-grey-text support">
                 <div className="card-content">
                     <span className="card-title"><h5>Rules</h5></span>
-                    <p>{rules}</p>
+                    <p>{rulesContent}</p>
                 </div>
             </div>
         </div>

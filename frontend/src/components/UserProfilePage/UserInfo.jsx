@@ -11,7 +11,7 @@ export default function UserInfo({dateJoined, lastOnline, numberOfActiveLeagues,
                     </div>
                     <br />
                     <div className="row">
-                        <div className="col s6"><span>Current Leagues: {numberOfActiveLeagues}</span></div>
+                        <div className="col s6"><span>Current Active Leagues: {numberOfActiveLeagues}</span></div>
                         <div className="col s6"><span>1st Place Trophies: {numberOfFirstPlaceTrophies}</span></div>
                     </div>
                 </div>

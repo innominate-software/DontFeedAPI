@@ -4,7 +4,7 @@ export default function LeagueInfo({reward, stage, season, joinLeague, platform,
     return(
         <div className="row league-info">
             <div className="col s4">
-                <p>Reward: {reward}</p>
+                <p className={reward === "UNDECIDED" ? "red-text" : ""}>Reward: {reward}</p>
                 <p>Stage: {stage}</p>
             </div>
             <div className="col s4">
@@ -14,7 +14,7 @@ export default function LeagueInfo({reward, stage, season, joinLeague, platform,
                 </button>
             </div>
             <div className="col s4">
-                <p>Platform: {platform}</p>
+                <p className={platform === "UNDECIDED" ? "red-text" : ""}>Platform: {platform}</p>
                 <p>Max Teams: {maxTeams}</p>
             </div>
         </div>

@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000")
@@ -19,14 +21,15 @@ public class TournamentController {
 
 	@GetMapping
 	public ResponseEntity<?> getTournaments() {
-		if (tournamentService.findAllTournaments() == null) {
+		List<Tournament> tournaments = tournamentService.findAllTournaments();
+		if (tournaments == null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
 					.body("No results found");
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)
-				.body(tournamentService.findAllTournaments());
+				.body(tournaments);
 	}
 
 	@GetMapping("/{id}")

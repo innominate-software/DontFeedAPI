@@ -5,16 +5,19 @@ import M from "materialize-css";
 import Tabs from "../utils/Tabs";
 import Team from "./Team";
 import TeamInfo from "./TeamInfo";
+import TeamInfoCard from "./TeamInfoCard"
 import ActiveRoster from "./ActiveRoster";
-import Matches from "../utils/Table Components/Matches";
-import Leagues from "../utils/Table Components/Leagues";
-import PlayerHistory from "../utils/Table Components/PlayerHistory";
+import Matches from "../utils/TableComponents/Matches";
+import Leagues from "../utils/TableComponents/Leagues";
+import PlayerHistory from "../utils/TableComponents/PlayerHistory";
+import teamService from "../../services/team.service";
 
 export default class TeamProfilePage extends Component {
     constructor(props) {
         super(props);
         // method binding here
         // ex. this.refreshState = this.refreshState.bind(this);
+        this.obtainTeamFromAPI = this.obtainTeamFromAPI.bind(this);
         this.state = {
             isLoggedIn: true,
             tabs: [
@@ -43,80 +46,26 @@ export default class TeamProfilePage extends Component {
     }
 
     componentDidMount() {
-        M.AutoInit();
-        window.addEventListener('load', this.handleLoad);
-        console.log("DIDMOUNT");
+        this.obtainTeamFromAPI()
+            .then(() => {
+                M.AutoInit();
+            })
     }
 
-    componentWillUnmount() {
-        console.log("UNMOUNT");
-        window.removeEventListener('load', this.handleLoad)
-    }
-
-    handleLoad() {
-        console.log("handle");
+    obtainTeamFromAPI() {
+        return teamService.get(this.props.match.params.id)
+            .then(team => {
+                if (team) {
+                    this.setState({
+                        ...this.state,
+                        team: team
+                    })
+                }
+            })
     }
 
     render() {
-        const isLoggedIn = this.state.isLoggedIn;
-        const teamLogo = null;
-        const teamName = "Team Name";
-        const dateCreated = "10/10/20";
-        const lastUpdated = "12/06/20";
-        const numberOfActiveLeagues = 0;
-        const numberOfFirstPlaceTrophies = 0;
-        const players = [
-            {profilePic: null, username: "username"}, {profilePic: null, username: "username"},
-            {profilePic: null, username: "username"}, {profilePic: null, username: "username"},
-            {profilePic: null, username: "username"}, {profilePic: null, username: "username"},
-            {profilePic: null, username: "username"}, {profilePic: null, username: "username"},
-            {profilePic: null, username: "username"}, {profilePic: null, username: "username"},
-            {profilePic: null, username: "username"}, {profilePic: null, username: "username"},
-            {profilePic: null, username: "username"}, {profilePic: null, username: "username"},
-            {profilePic: null, username: "username"},
-        ]
-        const matches = [
-            [
-                {className: "", text: "Dota 2"}, {className: "", text: "WePlay! Pushka League"},
-                {className: "", text: "Team Name"}, {className: "", text: "Team Name"},
-                {className: "", text: "-"}, {className: "green-text", text: "Win"},
-                {className: "", text: "41 - 10"}, {className: "", text: "00-00-00"}
-            ],
-            [
-                {className: "", text: "Dota 2"}, {className: "", text: "WePlay! Pushka League"},
-                {className: "", text: "Team Name"}, {className: "", text: "Team Name"},
-                {className: "", text: "-"}, {className: "green-text", text: "Win"},
-                {className: "", text: "41 - 10"}, {className: "", text: "00-00-00"}
-            ],
-            [
-                {className: "", text: "Dota 2"}, {className: "", text: "WePlay! Pushka League"},
-                {className: "", text: "Team Name"}, {className: "", text: "Team Name"},
-                {className: "", text: "-"}, {className: "red-text", text: "Loss"},
-                {className: "", text: "41 - 10"}, {className: "", text: "00-00-00"}
-            ],
-        ]
-        const leagues = [
-            [
-                {className: "", text: "Dota 2"}, {className: "", text: "WePlay! Pushka League"},
-                {className: "", text: "1"}, {className: "", text: "00-00-00 - 00-00-00"},
-                {className: "", text: "Ended"}, {className: "", text: "Team Name"},
-                {className: "", text: "nth"}, {className: "", text: "x/x/x"}
-            ]
-        ]
-        const exPlayers = [
-            [
-                {className: "", text: "username"}, {className: "", text: "00-00-00"},
-                {className: "", text: "00-00-00"}
-            ],
-            [
-                {className: "", text: "username"}, {className: "", text: "00-00-00"},
-                {className: "", text: "00-00-00"}
-            ],
-            [
-                {className: "", text: "username"}, {className: "", text: "00-00-00"},
-                {className: "", text: "00-00-00"}
-            ]
-        ]
+        let {isLoggedIn, team, tabs} = this.state;
         return (
             <div>
                 <main>
@@ -124,19 +73,20 @@ export default class TeamProfilePage extends Component {
                         <MainNav isLoggedIn={isLoggedIn} />
                         <div className="container-fluid page-container">
                             <div className="row team-info">
-                                <Team teamLogo={teamLogo} teamName={teamName} />
-                                <TeamInfo dateCreated={dateCreated} lastUpdated={lastUpdated}
-                                          numberOfActiveLeagues={numberOfActiveLeagues}
-                                          numberOfFirstPlaceTrophies={numberOfFirstPlaceTrophies} />
+                                <Team teamLogo={team?.logoFilePath} teamName={team?.name} />
+                                <TeamInfo dateCreated={team?.dateCreated} lastUpdated={team?.lastUpdated}
+                                          numberOfActiveLeagues={team?.activeLeagues}
+                                          numberOfFirstPlaceTrophies={team?.firstPlaceTrophies} />
                             </div>
+                            {team?.teamInfo ? <TeamInfoCard teamInfo={team?.teamInfo} /> : null}
                             <div className="row">
                                 <div className="col s12">
-                                    <Tabs tabs={this.state.tabs} />
+                                    <Tabs tabs={tabs} />
                                 </div>
-                                <ActiveRoster players={players} page="TeamProfilePage" />
-                                <Matches matches={matches} />
-                                <Leagues leagues={leagues} />
-                                <PlayerHistory exPlayers={exPlayers} />
+                                <ActiveRoster players={team?.activeRoster} page="TeamProfilePage" />
+                                <Matches matches={team?.matches} />
+                                <Leagues leagues={team?.leagues} />
+                                <PlayerHistory exPlayers={team?.playerHistory} />
                             </div>
                         </div>
                     </div>

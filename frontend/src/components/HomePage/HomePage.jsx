@@ -6,7 +6,7 @@ import Footer from "../utils/Footer";
 import OnlinePlayers from "./OnlinePlayers";
 import LeagueCreateButton from "./LeagueCreateButton";
 import LeaguesWithOpenRegistration from "./LeaguesWithOpenRegistration";
-import MostPopularLeagues from "./MostPopularLeagues";
+import MostRecentLeagues from "./MostRecentLeagues";
 import SideNav from "./SideNav";
 import LoginCard from "./LoginCard";
 import GameBubbles from "./GameBubbles";
@@ -17,6 +17,7 @@ export default class HomePage extends React.Component {
         super(props);
         // method binding here
         // ex. this.refreshState = this.refreshState.bind(this);
+        this.sendToLeagueCreate = this.sendToLeagueCreate.bind(this);
         this.state = {
             isLoggedIn: true
         };
@@ -30,13 +31,18 @@ export default class HomePage extends React.Component {
         });
     }
 
+    sendToLeagueCreate() {
+        this.props.history.push(`/leagues/create`)
+    }
+
     render() {
-        let isLoggedIn = this.state.isLoggedIn;
+        let {isLoggedIn} = this.state;
+        const page = "HomePage"
         return (
             <div>
                 <main>
                     <div className="app-container container-fluid df-dark-background-2">
-                        <MainNav isLoggedIn={isLoggedIn} />
+                        <MainNav page={page} isLoggedIn={isLoggedIn} logout={this.logOut} />
                         <GameBubbles />
                         <NewsCarousel />
                         <div className="content-container container">
@@ -45,10 +51,14 @@ export default class HomePage extends React.Component {
                                     <SideNav />
                                 </div>
                                 <div className="col s6">
-                                    <LoginCard />
-                                    <MostPopularLeagues />
+                                    {
+                                        !isLoggedIn
+                                            ? <LoginCard />
+                                            : null
+                                    }
+                                    <MostRecentLeagues />
                                     <LeaguesWithOpenRegistration />
-                                    <LeagueCreateButton />
+                                    <LeagueCreateButton handleClick={this.sendToLeagueCreate} />
                                 </div>
                                 <div className="col s3">
                                     <OnlinePlayers />

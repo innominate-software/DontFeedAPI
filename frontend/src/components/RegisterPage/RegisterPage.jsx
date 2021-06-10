@@ -5,7 +5,7 @@ import FormTextInput from "../utils/Form/FormTextInput";
 import FormTitle from "../utils/Form/FormTitle";
 import FormSubmitButton from "../utils/Form/FormSubmitButton";
 import M from "materialize-css";
-import { User } from "../../models/User";
+import userService from "../../services/user.service";
 
 export default class RegisterPage extends Component {
 
@@ -33,23 +33,24 @@ export default class RegisterPage extends Component {
 
     checkForm() {
         //    check password and confirm password match
-        let passMatch = this.state.password === this.state.confirmPassword;
-        console.log("Passwords match: " + passMatch);
+        // let passMatch = this.state.password === this.state.confirmPassword;
+        // console.log("Passwords match: " + passMatch);
 
         //    check password fits requirements
-        let passPattern = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm);
-        let passWorks = this.state.password.match(passPattern) !== null;
-        console.log("Password is correct format: " + passWorks)
+        // let passPattern = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm);
+        // let passWorks = this.state.password.match(passPattern) !== null;
+        // console.log("Password is correct format: " + passWorks)
 
         //    check username does not already exist
 
         //    check email
-        let emailPattern = new RegExp(/^[A-Za-z0-9_@./#&+-]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/);
-        let emailWorks = this.state.emailAddress.match(emailPattern) !== null;
-        console.log("Email is correct format: " + emailWorks);
+        // let emailPattern = new RegExp(/^[A-Za-z0-9_@./#&+-]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/);
+        // let emailWorks = this.state.emailAddress.match(emailPattern) !== null;
+        // console.log("Email is correct format: " + emailWorks);
     }
 
     handleChange(e) {
+        this.checkForm();
         const target = e.target;
         const value = target.value;
         const name = target.name;
@@ -61,18 +62,19 @@ export default class RegisterPage extends Component {
 
     handleClick(e) {
         e.preventDefault()
-        let newUser = new User();
-        this.checkForm();
-        // if (this.checkForm()) {
-        newUser.firstName = (this.state.firstName !== "") ? this.state.firstName : null;
-        newUser.lastName = (this.state.lastName !== "") ? this.state.lastName : null;
-        newUser.username = this.state.username;
-        newUser.emailAddress = this.state.emailAddress;
-        newUser.password = this.state.password
-        console.log(newUser);
-        // } else {
-        // console.log("didnt work")
-        // }
+        let newUser = {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            username: this.state.username,
+            emailAddress: this.state.emailAddress,
+            password: this.state.leaguePassword,
+        }
+        userService.create(newUser)
+            .then(response => {
+                return response.data;
+            }).then(user => {
+            this.props.history.push(`/user/${user.id}`)
+        })
     }
 
     render() {
@@ -117,7 +119,7 @@ export default class RegisterPage extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="input-field col s12">
-                                            <FormTextInput type="password" label="Password" id="password"
+                                            <FormTextInput type="password" label="Password" id="userPassword"
                                                            name="password"
                                                            value={this.state.password} handleChange={this.handleChange}
                                                            required={true} />

@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000")
@@ -55,6 +57,19 @@ public class TeamController {
 				.body(team);
 	}
 
+	@GetMapping("/byLeague/{leagueId}")
+	public ResponseEntity<?> getTeamsByLeagueId(@PathVariable Long leagueId) {
+		List<Team> teams = teamService.findTeamsByLeagueId(leagueId);
+		if (teams == null) {
+			return ResponseEntity
+					.status(HttpStatus.BAD_REQUEST)
+					.body("No teams were found with that league id");
+		}
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(teams);
+	}
+
 	@GetMapping("/count")
 	public ResponseEntity<?> getNumberOfTeams() {
 		Long count = teamService.numberOfTeams();
@@ -74,7 +89,7 @@ public class TeamController {
 		if (teamService.findTeamByName(name) != null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("TeamProfilePage already exists at this name: " + name);
+					.body("Team already exists with this name: " + name);
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)

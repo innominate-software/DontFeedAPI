@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.dontfeed.Dont.Feed.model.enumerator.TournamentFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -14,64 +15,73 @@ import java.util.List;
 
 
 @Data
-@Entity
 @NoArgsConstructor
+@Entity(name = "Tournament")
 @Table(name = "tournaments")
-@JsonIgnoreProperties(value={ "tournamentTeams", "tournamentMatches" }, allowSetters= true)
+@JsonIgnoreProperties(value = {"tournamentTeams", "tournamentMatches", "tournamentLeague", "hibernateLazyInitializer", "handler"}, allowSetters = true)
 public class Tournament {
 
-    @Id
-    @NotNull
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
-    private long id;
+	@Id
+	@NotNull
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
+	private long id;
 
-    private String bracket;
+	private String bracket;
 
-    private LocalDate endDate;
+	private LocalDate dateCreated;
 
-    @Enumerated(EnumType.STRING)
-    private TournamentFormat format;
+	private LocalDate endDate;
 
-    private String logo;
+	@Enumerated(EnumType.STRING)
+	private TournamentFormat format;
 
-    @Column(unique = true)
-    private String name;
+	private LocalDate lastUpdated;
 
-    private LocalDate startDate;
+	private String logoFilePath;
 
-    private LocalDate dateCreated;
+	@Column(unique = true)
+	private String name;
 
-    private String passcode;
+	@JsonIgnore
+	private String password;
 
-    // Relationship
-    @OneToOne
-    private League league;
+	private String reward;
 
-    @OneToOne
-    private Game game;
+	private LocalDate startDate;
 
-    @JsonIgnore
-    @JsonProperty(value = "tournamentMatches")
-    @ManyToMany
-    private List<Match> matches;
+	// Relationship
+	@JsonIgnore
+	@JsonProperty(value = "tournamentLeague")
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "league_id")
+	private League league;
 
-    @JsonIgnore
-    @JsonProperty(value = "tournamentTeams")
-    @ManyToMany(mappedBy = "tournaments")
-    private List<Team> teams;
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Game game;
 
-    @Override
-    public String toString() {
-        return "Tournament{" +
-                "id=" + id +
-                ", bracket='" + bracket + '\'' +
-                ", endDate=" + endDate +
-                ", format=" + format +
-                ", logo='" + logo + '\'' +
-                ", name='" + name + '\'' +
-                ", startDate=" + startDate +
-                '}';
-    }
+	@JsonIgnore
+	@JsonProperty(value = "tournamentMatches")
+	@OneToMany(mappedBy = "tournament",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true)
+	private List<Match> matches;
+
+	@JsonIgnore
+	@JsonProperty(value = "tournamentTeams")
+	@ManyToMany(mappedBy = "tournaments")
+	private List<Team> teams;
+
+	@Override
+	public String toString() {
+		return "Tournament{" +
+				"id=" + id +
+				", bracket='" + bracket + '\'' +
+				", endDate=" + endDate +
+				", format=" + format +
+				", name='" + name + '\'' +
+				", startDate=" + startDate +
+				'}';
+	}
 }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import defaultUser from "../../assets/img/default_profile_pic.jpeg"
+import defaultUser from "../../assets/img/logos/users/default_profile_pic.jpeg"
 
 export default function ActivePlayer({player, page}) {
     return (

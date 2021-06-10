@@ -12,19 +12,19 @@ export default function Games({username, games}) {
             <div className="row user-game-bubbles">
                 <div className="col s1" />
                 <div className="col s2">
-                    <img src={dota2logo} className={(games.includes("DOTA2")) ? "picture" : "picture does-not-play"} alt="Dota 2" />
+                    <img src={dota2logo} className={(games?.includes("DOTA2")) ? "picture" : "picture does-not-play"} alt="Dota 2" />
                 </div>
                 <div className="col s2">
-                    <img src={lollogo} className={(games.includes("LOL")) ? "picture" : "picture does-not-play"} alt="League" />
+                    <img src={lollogo} className={(games?.includes("LOL")) ? "picture" : "picture does-not-play"} alt="League" />
                 </div>
                 <div className="col s2">
-                    <img src={OWlogo} className={(games.includes("OW")) ? "picture" : "picture does-not-play"} alt="Overwatch" />
+                    <img src={OWlogo} className={(games?.includes("OW")) ? "picture" : "picture does-not-play"} alt="Overwatch" />
                 </div>
                 <div className="col s2">
-                    <img src={smashlogo} className={(games.includes("SMASH")) ? "picture" : "picture does-not-play"} alt="Smash" />
+                    <img src={smashlogo} className={(games?.includes("SMASH")) ? "picture" : "picture does-not-play"} alt="Smash" />
                 </div>
                 <div className="col s2">
-                    <img src={maddenlogo} className={(games.includes("MADDEN")) ? "picture" : "picture does-not-play"} alt="Madden" />
+                    <img src={maddenlogo} className={(games?.includes("MADDEN")) ? "picture" : "picture does-not-play"} alt="Madden" />
                 </div>
                 <div className="col s1" />
             </div>

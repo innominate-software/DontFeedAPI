@@ -2,8 +2,6 @@ import React from "react";
 import defaultTeam from "../../assets/img/default-team.png";
 
 export default function Team({index, teamLogo, teamName, startDate, endDate}) {
-    console.log(index)
-    console.log(index % 2 === 0)
     return (
         index % 2 === 0 ?
             <div className="row left-team center">

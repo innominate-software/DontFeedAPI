@@ -2,14 +2,21 @@ import React from 'react';
 import Team from "./Team";
 
 export default function Teams({teams}) {
-    const activeTeams = teams.activeTeams.map((team, index) => <Team key={index} index={index} teamLogo={team.teamLogo}
-                                                                     teamName={team.teamName}
-                                                                     startDate={team.startDate} />);
-    const previousTeams = teams.previousTeams.map((team, index) => <Team key={index} index={index}
-                                                                         teamLogo={team.teamLogo}
-                                                                         teamName={team.teamName}
-                                                                         startDate={team.startDate}
-                                                                         endDate={team.endDate} />);
+    let activeTeams = teams?.activeTeams
+        ? teams?.activeTeams.map((team, index) =>
+            <Team key={index} index={index}
+                  teamLogo={team.logo}
+                  teamName={team.name}
+                  startDate={team.dateCreated} />)
+        : <h6>Currently not on a team</h6>
+    let previousTeams = teams?.previousTeams
+        ? teams?.previousTeams.map((team, index) =>
+            <Team key={index} index={index}
+                  teamLogo={team.teamLogo}
+                  teamName={team.teamName}
+                  startDate={team.startDate}
+                  endDate={team.endDate} />)
+        : <h6>Currently no previous teams</h6>
     return (
         <div id="teams" className="col s12">
             <div className="row">

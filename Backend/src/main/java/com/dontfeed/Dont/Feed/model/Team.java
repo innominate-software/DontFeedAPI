@@ -1,10 +1,14 @@
 package com.dontfeed.Dont.Feed.model;
 
+import com.dontfeed.Dont.Feed.model.relationship.TeamLeague;
+import com.dontfeed.Dont.Feed.model.relationship.UserTeam;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,53 +17,82 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-@Entity
 @NoArgsConstructor
+@Entity(name = "Team")
 @Table(name = "teams")
-@JsonIgnoreProperties(value={ "teamMatches", "teamPlayers" }, allowSetters= true)
+@JsonIgnoreProperties(value = {"teamMatches", "teamPlayers", "hibernateLazyInitializer", "handler"}, allowSetters = true)
 public class Team {
 
-    @Id
-    @NotNull
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
-    private long id;
+	@Id
+	@NotNull
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
+	private long id;
 
-    private LocalDate dateCreated;
+	@CreationTimestamp
+	private LocalDate dateCreated;
 
-    private String logo;
+	@UpdateTimestamp
+	private LocalDate LastUpdated;
 
-    private String motto;
+	private String logoFilePath;
 
-    private String name;
+	private String teamInfo;
 
-    private String passcode;
+	private String name;
 
-    //Relationships
-    @ManyToMany
-    private List<League> leagues;
+	@JsonIgnore
+	private String password;
 
-    @JsonIgnore
-    @JsonProperty(value = "teamMatches")
-    @ManyToMany
-    private List<Match> matches;
+	//Relationships
 
-    @ManyToMany
-    private List<Tournament> tournaments;
+	@JsonIgnore
+	@JsonProperty(value = "teamPlayers")
+	@OneToMany(mappedBy = "player",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true)
+	private List<UserTeam> players;
 
-    @JsonIgnore
-    @JsonProperty(value = "teamPlayers")
-    @ManyToMany(mappedBy = "teams")
-    private List<User> players;
+	@OneToMany(cascade = {
+			CascadeType.PERSIST,
+			CascadeType.MERGE
+	})
+	@JoinTable(name = "teams_leagues",
+			joinColumns = @JoinColumn(name = "team_id"),
+			inverseJoinColumns = @JoinColumn(name = "league_id"))
+	private List<TeamLeague> leagues;
 
-    @Override
-    public String toString() {
-        return "TeamProfilePage{" +
-                "id=" + id +
-                ", dateCreated=" + dateCreated +
-                ", logo='" + logo + '\'' +
-                ", motto='" + motto + '\'' +
-                ", name='" + name + '\'' +
-                '}';
-    }
+	@ManyToMany(cascade = {
+			CascadeType.PERSIST,
+			CascadeType.MERGE
+	})
+	@JoinTable(name = "teams_tournaments",
+			joinColumns = @JoinColumn(name = "team_id"),
+			inverseJoinColumns = @JoinColumn(name = "tournament_id"))
+	private List<Tournament> tournaments;
+
+	@JsonIgnore
+	@JsonProperty(value = "teamMatches")
+	@ManyToMany(cascade = {
+			CascadeType.PERSIST,
+			CascadeType.MERGE
+	})
+	@JoinTable(name = "teams_matches",
+			joinColumns = @JoinColumn(name = "team_id"),
+			inverseJoinColumns = @JoinColumn(name = "match_id"))
+	private List<Match> matches;
+
+	@Override
+	public String toString() {
+		return "Team{" +
+				"id=" + id +
+				", dateCreated=" + dateCreated +
+				", logoFilePath='" + logoFilePath + '\'' +
+				", teamInfo='" + teamInfo + '\'' +
+				", name='" + name + '\'' +
+				", password='" + password + '\'' +
+				", leagues=" + leagues +
+				", tournaments=" + tournaments +
+				'}';
+	}
 }

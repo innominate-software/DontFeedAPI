@@ -362,6 +362,7 @@ table.striped > tbody > tr:nth-child(odd) {
     max-height: 6.25rem;
     font-size: 1.4em;
     font-weight: bold;
+    text-overflow: ellipsis;
 }
 
 .team-players {
@@ -369,6 +370,7 @@ table.striped > tbody > tr:nth-child(odd) {
     max-height: 4rem;
     font-size: 1rem;
     text-align: center;
+    text-overflow: ellipsis;
 }
 
 .player-names-info {
@@ -490,7 +492,7 @@ table.striped > tbody > tr:nth-child(odd) {
     padding: 2rem 6rem 1rem;
     background: #1e222a;
     margin: 120px 0;
-    border-radius: 48px;
+    border-radius: 6px;
 }
 
 .search-table {
@@ -508,7 +510,7 @@ table.striped > tbody > tr:nth-child(odd) {
     margin: 4rem 1rem !important;
     padding: 3rem 0 !important;
     background: #1e222a;
-    border-radius: 50px;
+    border-radius: 6px;
 }
 
 .toggle-box .toggle-box-title {
@@ -565,6 +567,21 @@ table.striped > tbody > tr:nth-child(odd) {
 
 .support-button {
 
+}
+
+.player-container {
+    margin: 0 5rem;
+}
+
+.center-players, .div {
+    /*padding: 0 3rem;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.versus {
+    margin-bottom: auto;
 }
 
 /* ============================================================= tabs ========================== */

@@ -11,10 +11,10 @@ export default function LoginModal(props) {
                 </div>
                 <div className="row">
                     <div className="input-field col s12">
-                        <label className="input-label" htmlFor="password">
+                        <label className="input-label" htmlFor="username-or-email">
                             Username or Email
                         </label>
-                        <input id="password" type="text" className="validate" />
+                        <input id="username-or-email" type="text" className="validate" />
                     </div>
                 </div>
                 <div className="row">
