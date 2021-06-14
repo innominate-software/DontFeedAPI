@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000")
@@ -35,7 +37,7 @@ public class TeamController {
 		if (team == null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("Team does not exist with that ID");
+					.body("TeamProfilePage does not exist with that ID");
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)
@@ -48,11 +50,24 @@ public class TeamController {
 		if (team == null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("Team does not exist with that name: " + name);
+					.body("TeamProfilePage does not exist with that name: " + name);
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.body(team);
+	}
+
+	@GetMapping("/byLeague/{leagueId}")
+	public ResponseEntity<?> getTeamsByLeagueId(@PathVariable Long leagueId) {
+		List<Team> teams = teamService.findTeamsByLeagueId(leagueId);
+		if (teams == null) {
+			return ResponseEntity
+					.status(HttpStatus.BAD_REQUEST)
+					.body("No teams were found with that league id");
+		}
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(teams);
 	}
 
 	@GetMapping("/count")
@@ -74,7 +89,7 @@ public class TeamController {
 		if (teamService.findTeamByName(name) != null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("Team already exists at this name: " + name);
+					.body("Team already exists with this name: " + name);
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)
@@ -87,7 +102,7 @@ public class TeamController {
 		if (returnedTeam == null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("Team does not exist. Check you facts.");
+					.body("TeamProfilePage does not exist. Check you facts.");
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)
@@ -99,13 +114,13 @@ public class TeamController {
 		if (teamService.findTeamById(id) == null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("Team does not exist at the ID");
+					.body("TeamProfilePage does not exist at the ID");
 		}
 		teamService.deleteTeam(id);
 		if (teamService.findTeamById(id) != null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("Team was not deleted successfully");
+					.body("TeamProfilePage was not deleted successfully");
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)

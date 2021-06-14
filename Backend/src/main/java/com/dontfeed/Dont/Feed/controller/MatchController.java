@@ -1,12 +1,15 @@
 package com.dontfeed.Dont.Feed.controller;
 
 import com.dontfeed.Dont.Feed.model.Match;
+import com.dontfeed.Dont.Feed.service.LeagueService;
 import com.dontfeed.Dont.Feed.service.MatchService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -16,6 +19,7 @@ public class MatchController {
 
 	static final String PATH = "/api/matches";
 	private final MatchService matchService;
+	private final LeagueService leagueService;
 
 	@GetMapping
 	public ResponseEntity<?> getMatches() {
@@ -42,17 +46,43 @@ public class MatchController {
 				.body(match);
 	}
 
-	@GetMapping("/id/{matchId}")
-	public ResponseEntity<?> getMatchByName(@PathVariable long matchId) {
-		Match match = matchService.findMatchByMatchId(matchId);
-		if (match == null) {
+	@GetMapping("/byUser/{userId}")
+	public ResponseEntity<?> getMatchesByUserID(@PathVariable Long userId) {
+		List<Match> matches = matchService.findAllMatchesByUserId(userId);
+		if (matches == null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("Match does not exist with that match id: " + matchId);
+					.body("No Matches are retrieved with that user ID");
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)
-				.body(match);
+				.body(matches);
+	}
+
+	@GetMapping("/byTeam/{teamId}")
+	public ResponseEntity<?> getMatchesByTeamID(@PathVariable Long teamId) {
+		List<Match> matches = matchService.findAllMatchesByTeamId(teamId);
+		if (matches == null) {
+			return ResponseEntity
+					.status(HttpStatus.BAD_REQUEST)
+					.body("No Matches are retrieved with that team ID");
+		}
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(matches);
+	}
+
+	@GetMapping("/byLeague/{leagueId}")
+	public ResponseEntity<?> getMatchesByLeagueID(@PathVariable Long leagueId) {
+		List<Match> matches = matchService.findAllByLeague(leagueService.findLeagueByID(leagueId));
+		if (matches == null) {
+			return ResponseEntity
+					.status(HttpStatus.BAD_REQUEST)
+					.body("No Matches are retrieved with that league ID");
+		}
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(matches);
 	}
 
 	@GetMapping("/count")
@@ -70,11 +100,11 @@ public class MatchController {
 
 	@PostMapping
 	public ResponseEntity<?> createNewMatch(@RequestBody Match match) {
-		long matchId = match.getMatchId();
-		if (matchService.findMatchByMatchId(matchId) != null) {
+		long id = match.getId();
+		if (matchService.findMatchById(id) != null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("Match already exists at this match id: " + matchId);
+					.body("Match already exists at this id: " + id);
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)
@@ -87,7 +117,7 @@ public class MatchController {
 		if (returnedMatch == null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("Match does not exist. Check you facts.");
+					.body("MatchInfoPage does not exist. Check you facts.");
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)
@@ -99,13 +129,13 @@ public class MatchController {
 		if (matchService.findMatchById(id) == null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("Match does not exist at the ID");
+					.body("MatchInfoPage does not exist at the ID");
 		}
 		matchService.deleteMatch(id);
 		if (matchService.findMatchById(id) != null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("Match was not deleted successfully");
+					.body("MatchInfoPage was not deleted successfully");
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)

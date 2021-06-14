@@ -1,5 +1,6 @@
 package com.dontfeed.Dont.Feed.service;
 
+import com.dontfeed.Dont.Feed.model.League;
 import com.dontfeed.Dont.Feed.model.Match;
 import com.dontfeed.Dont.Feed.repository.MatchRepository;
 import lombok.AllArgsConstructor;
@@ -38,7 +39,15 @@ public class MatchService {
         return matchRepository.findById(id).orElse(null);
     }
 
-    public Match findMatchByMatchId(Long id) {
-        return matchRepository.findByMatchId(id).orElse(null);
+    public List<Match> findAllMatchesByUserId(Long userId) {
+        return matchRepository.findAllMatchesByUserID(userId);
+    }
+
+    public List<Match> findAllMatchesByTeamId(Long teamId) {
+        return matchRepository.findAllMatchesByTeamID(teamId);
+    }
+
+    public List<Match> findAllByLeague(League league) {
+        return matchRepository.findAllByLeague(league);
     }
 }

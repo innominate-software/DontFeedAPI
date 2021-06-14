@@ -1,66 +1,80 @@
 package com.dontfeed.Dont.Feed.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.dontfeed.Dont.Feed.model.relationship.MatchPlayer;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-@Entity
 @NoArgsConstructor
+@Entity(name = "Match")
 @Table(name = "matches")
 public class Match {
 
-    @Id
-    @NotNull
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
-    private long id;
+	@Id
+	@NotNull
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
+	private long id;
 
-    private float duration;
+	private String duration;
 
-    private LocalDate matchDate;
+	private long gameMatchId;
 
-    private long matchId;
+	private String map;
 
-    private String score;
+	private LocalDateTime matchDateTime;
 
-    // Relationships
-    @OneToOne
-    private Team team_a;
+	private String score;
 
-    @OneToOne
-    private Team team_b;
+	// Team 'A' or 'B'
+	private char victor;
 
-    @OneToOne
-    private Team victor;
+	// Relationships
+	@OneToMany(mappedBy = "match",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true)
+	private List<MatchPlayer> players;
 
-    @OneToOne
-    private Game game;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "team_a_id")
+	private Team teamA;
 
-    @OneToOne
-    private League league;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "team_b_id")
+	private Team teamB;
 
-    @OneToOne
-    private Tournament tournament;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "game_id")
+	private Game game;
 
-    @Override
-    public String toString() {
-        return "Match{" +
-                "id=" + id +
-                ", duration=" + duration +
-                ", matchDate=" + matchDate +
-                ", matchId=" + matchId +
-                ", score='" + score + '\'' +
-                ", victor=" + victor +
-                '}';
-    }
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "league_id")
+	private League league;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "tournament_id")
+	private Tournament tournament;
+
+	@Override
+	public String toString() {
+		return "Match{" +
+				"id=" + id +
+				", duration='" + duration + '\'' +
+				", gameMatchId=" + gameMatchId +
+				", matchDateTime=" + matchDateTime +
+				", score='" + score + '\'' +
+				", victor='" + victor + '\'' +
+				", teamA=" + teamA +
+				", teamB=" + teamB +
+				", game=" + game +
+				", league=" + league +
+				", tournament=" + tournament +
+				'}';
+	}
 }
