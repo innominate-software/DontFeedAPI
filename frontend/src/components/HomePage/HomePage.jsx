@@ -11,7 +11,7 @@ import SideNav from "./SideNav";
 import LoginCard from "./LoginCard";
 import GameBubbles from "./GameBubbles";
 
-export default class HomePage extends React.Component {
+class HomePage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -19,7 +19,7 @@ export default class HomePage extends React.Component {
         // ex. this.refreshState = this.refreshState.bind(this);
         this.sendToLeagueCreate = this.sendToLeagueCreate.bind(this);
         this.state = {
-            isLoggedIn: true
+            isLoggedIn: false
         };
     }
 
@@ -72,3 +72,5 @@ export default class HomePage extends React.Component {
         );
     }
 }
+
+export default HomePage;
