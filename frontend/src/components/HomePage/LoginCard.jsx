@@ -1,6 +1,7 @@
 import React from "react";
+import connect from "react-redux/lib/connect/connect";
 
-export default function LoginCard(props) {
+function LoginCard(props) {
     return (
         <div className="card-panel login-card df-pink-background">
             <span>
@@ -20,3 +21,19 @@ export default function LoginCard(props) {
         </div>
     )
 }
+
+// const mapStateToProps = (state) => {
+//     return {
+//         user: state,
+//     };
+// };
+//
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         login: (loginState, history, setErrorHandler) => {
+//             dispatch(LoginAuthAction(loginState, history, setErrorHandler));
+//         },
+//     };
+// };
+
+export default /*connect(mapStateToProps, mapDispatchToProps)(*/LoginCard/*)*/;

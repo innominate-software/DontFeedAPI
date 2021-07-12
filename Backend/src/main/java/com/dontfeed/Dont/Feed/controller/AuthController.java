@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -45,7 +46,7 @@ public class AuthController {
 	@Autowired
 	JwtUtils jwtUtils;
 
-	@PostMapping("/signin")
+	@PostMapping("/login")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
 		Authentication authentication = authenticationManager.authenticate(
@@ -53,20 +54,24 @@ public class AuthController {
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
+		long jwtExpiration = jwtUtils.getExpirationFromJwtToken(jwt).getTime();
 
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 		List<String> roles = userDetails.getAuthorities().stream()
-				.map(item -> item.getAuthority())
+				.map(GrantedAuthority::getAuthority)
 				.collect(Collectors.toList());
 
-		return ResponseEntity.ok(new JwtResponse(jwt,
-				userDetails.getId(),
-				userDetails.getUsername(),
-				userDetails.getEmail(),
-				roles));
+		return ResponseEntity.ok(
+				new JwtResponse(
+						jwt,
+						jwtExpiration,
+						userDetails.getId(),
+						userDetails.getUsername(),
+						userDetails.getEmail(),
+						roles));
 	}
 
-	@PostMapping("/signup")
+	@PostMapping("/register")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
 			return ResponseEntity
