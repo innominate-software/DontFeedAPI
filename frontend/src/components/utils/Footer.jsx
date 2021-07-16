@@ -6,7 +6,7 @@ export default function Footer(props) {
             <div className="footer-copyright df-dark-background">
                 <div className="container">
                     © 2014 Copyright Text
-                    <a className="grey-text text-lighten-4 right" href="#!">More Links</a>
+                    <a className="grey-text text-lighten-4 " href="#!">More Links</a>
                 </div>
             </div>
         </footer>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import 'materialize-css/dist/css/materialize.min.css';
 import './App.css';
 import HomePage from "./components/HomePage/HomePage";
 import LeagueCreationPage from "./components/LeagueCreationPage/LeagueCreationPage";
@@ -12,6 +11,7 @@ import LeagueProfilePage from "./components/LeagueProfilePage/LeagueProfilePage"
 import SupportPage from "./components/SupportPage/SupportPage";
 import UserProfilePage from "./components/UserProfilePage/UserProfilePage";
 import SearchPage from "./components/SearchPage/SearchPage";
+import Test from "./components/Test";
 
 function App() {
     return (
@@ -19,6 +19,7 @@ function App() {
             <Router>
                 <Switch>
                     <Route path="/" exact component={HomePage} />
+                    <Route path="/TEST" exact component={Test} />
                     <Route path="/leagues/create" component={LeagueCreationPage} />
                     <Route path="/league/:id" component={LeagueProfilePage} />
                     <Route path="/teams/create" component={TeamCreationPage} />

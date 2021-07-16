@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import MainNav from "../utils/MainNav";
 import Footer from "../utils/Footer";
-import M from "materialize-css";
 import Results from "./Results";
 import Filters from "./Filters";
 import SearchBar from "./SearchBar";
 
-export default class UserProfilePage extends Component {
+class SearchPage extends Component {
     constructor(props) {
         super(props);
         // method binding here
@@ -24,9 +23,6 @@ export default class UserProfilePage extends Component {
         };
     }
 
-    componentDidMount() {
-        M.AutoInit();
-    }
 
     handleChange(e) {
         const target = e.target;
@@ -187,3 +183,5 @@ export default class UserProfilePage extends Component {
         );
     }
 }
+
+export default SearchPage;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import MainNav from "../utils/MainNav";
 import FormTitle from "../utils/Form/FormTitle";
 import FormTextInput from "../utils/Form/FormTextInput";
@@ -6,104 +6,14 @@ import FormSelectInput from "../utils/Form/FormSelectInput";
 import FormTextAreaInput from "../utils/Form/FormTextAreaInput";
 import FormSubmitButton from "../utils/Form/FormSubmitButton";
 import Footer from "../utils/Footer";
-import M from "materialize-css";
-import leagueService from "../../services/league.service";
 
-export default class LeagueCreationPage extends Component {
+function LeagueCreationPage(props) {
+    const {auth, league} = props;
 
-    constructor(props) {
-        super(props);
-        // method binding here
-        // ex. this.refreshState = this.refreshState.bind(this);
-        this.checkForm = this.checkForm.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
-        this.state = {
-            isLoggedIn: true,
-            selectedFile: null,
-            logo: "",
-            name: "",
-            format: "RANDOMEVERYWEEK",
-            game: "DOTA2",
-            startDate: "",
-            endDate: "",
-            leaguePassword: "",
-            matchFrequency: "",
-            rules: ""
-        };
+    const fileSelectedHandler = (event) => {
+        console.log(event.target.files[0]);
     }
 
-    componentDidMount() {
-        M.AutoInit();
-    }
-
-    checkForm() {
-        //    check team name does not already exist
-    }
-
-    handleChange(e) {
-        const target = e.target;
-        const value = target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
-    }
-
-    handleClick(e) {
-        e.preventDefault()
-        // check the form for problems!!!
-        let {game} = this.state;
-        console.log(game)
-        switch (game) {
-            case "DOTA2":
-                game = {id: 1, name: "DOTA2"}
-                break;
-            case "LEAGUEOFLEGENDS":
-                game = {id: 2, name: "LEAGUEOFLEGENDS"}
-                break;
-            case "OVERWATCH":
-                game = {id: 3, name: "OVERWATCH"}
-                break;
-            case "SMASHBROSULTIMATE":
-                game = {id: 4, name: "SMASHBROSULTIMATE"}
-                break;
-            case "MADDEN21":
-                game = {id: 5, name: "MADDEN21"}
-                break;
-            default:
-                //throw error or something
-        }
-        let newLeague = {
-            logo: this.state.logo,
-            name: this.state.name,
-            format: this.state.format,
-            game: game,
-            season: 1,
-            stage: "CREATED",
-            startDate: this.state.startDate,
-            endDate: this.state.endDate,
-            password: this.state.leaguePassword,
-            matchFrequency: this.state.matchFrequency,
-            rules: this.state.rules,
-        }
-        leagueService.create(newLeague)
-            .then(response => {
-                return response.data;
-            }).then(league => {
-            this.props.history.push(`/league/${league.id}`)
-        })
-    }
-
-
-    fileSelectedHandler(e) {
-        console.log(e.target.files[0]);
-    }
-
-    render() {
-        let isLoggedIn = this.state.isLoggedIn;
         const leagueFormat = {
             options: ["Random Every Week", "Performance Based", "Predetermined"],
             values: ["RANDOMEVERYWEEK", "PERFORMANCEBASED", "PREDETERMINED"]
@@ -116,7 +26,7 @@ export default class LeagueCreationPage extends Component {
             <div>
                 <main>
                     <div className="app-container container-fluid df-dark-background-2">
-                        <MainNav isLoggedIn={isLoggedIn} />
+                        <MainNav isLoggedIn={auth.isLoggedIn} />
                         <div className="container-fluid page-container">
                             <div className="row">
                                 <FormTitle title="CREATE A LEAGUE" />
@@ -204,4 +114,5 @@ export default class LeagueCreationPage extends Component {
             </div>
         );
     }
-}
+
+    export default LeagueCreationPage;

@@ -1,6 +1,16 @@
-import React from "react";
+import React, {useState} from "react";
+import {connect} from "react-redux";
+import {useHistory} from "react-router";
+import {LoginAuthAction} from "../../redux/actions/AuthActions";
 
 function LoginModal(props) {
+    const { login } = props;
+    const [loginState, setLoginState] = useState({});
+    const history = useHistory();
+    // const [errorHandler, setErrorHandler] = useState({
+    //     hasError: false,
+    //     message: "",
+    // })
     return (
         <div id="loginModal" className="modal df-dark-background df-light-grey-text">
             <div className="modal-content">
@@ -12,7 +22,7 @@ function LoginModal(props) {
                 <form
                     onSubmit={(event) => {
                         event.preventDefault();
-                        login(loginState, history, setErrorHandler);
+                        login(loginState, history, /*setErrorHandler*/);
                     }}
                 >
                     <div className="row">
@@ -42,4 +52,19 @@ function LoginModal(props) {
     )
 }
 
-export default LoginModal;
+const mapStateToProps = (state) => {
+    return {
+        user: state,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: (loginState, history, setErrorHandler) => {
+            dispatch(LoginAuthAction(loginState, history, setErrorHandler))
+        }
+    }
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);

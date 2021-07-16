@@ -43,6 +43,7 @@ h5,
 .brand-logo {
     font-family: "Nexa Bold", serif !important;
     letter-spacing: 1.6px;
+    left: 2%;
 }
 
 .page-title {
@@ -63,10 +64,6 @@ h5,
 
 .m-0 {
     margin: 0 !important;
-}
-
-.brand-logo {
-    left: 2%;
 }
 
 .news-close {
@@ -101,17 +98,12 @@ h5,
     border: 0 solid transparent;
 }
 
-.nav-bar-container {
-    /* border-bottom: 3px solid #eb4d4b; */
-}
-
 .content-container {
     width: 85% !important;
 }
 
 .df-dark-background {
     background: rgb(30, 34, 42) !important;
-    /*background: #cc9900 !important;*/
 }
 
 .df-pink-text {
@@ -148,32 +140,6 @@ h5,
 
 .news-header-text {
     font-size: 44px;
-}
-
-.news-item-1 {
-    background-image: linear-gradient(
-            to top,
-            rgb(51, 58, 72),
-            60%,
-            rgba(0, 0, 0, 0.52)
-    ),
-    url(assets/img/esports-pic-1.jpg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-.news-item-2 {
-    background-image: linear-gradient(
-            to top,
-            rgb(51, 58, 72),
-            60%,
-            rgba(0, 0, 0, 0.52)
-    ),
-    url(/assets/img/games/dota/vp.jpg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
 }
 
 .parallax-overlay {

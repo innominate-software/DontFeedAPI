@@ -1,145 +1,130 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import MainNav from '../utils/MainNav';
 import Footer from "../utils/Footer";
-import FormTextInput from "../utils/Form/FormTextInput";
 import FormTitle from "../utils/Form/FormTitle";
-import FormSubmitButton from "../utils/Form/FormSubmitButton";
-import M from "materialize-css";
-import userService from "../../services/user.service";
+import { RegisterAuthAction } from "../../redux/actions/AuthActions";
+import { connect } from "react-redux";
+import { useHistory } from "react-router";
 
-export default class RegisterPage extends Component {
-
-    constructor(props) {
-        super(props);
-        // method binding here
-        // ex. this.refreshState = this.refreshState.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.checkForm = this.checkForm.bind(this);
-        this.state = {
-            isLoggedIn: true,
-            firstName: "",
-            lastName: "",
-            username: "",
-            emailAddress: "",
-            password: "",
-            confirmPassword: "",
-        };
-    }
-
-    componentDidMount() {
-        M.AutoInit();
-    }
-
-    checkForm() {
-        //    check password and confirm password match
-        // let passMatch = this.state.password === this.state.confirmPassword;
-        // console.log("Passwords match: " + passMatch);
-
-        //    check password fits requirements
-        // let passPattern = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm);
-        // let passWorks = this.state.password.match(passPattern) !== null;
-        // console.log("Password is correct format: " + passWorks)
-
-        //    check username does not already exist
-
-        //    check email
-        // let emailPattern = new RegExp(/^[A-Za-z0-9_@./#&+-]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/);
-        // let emailWorks = this.state.emailAddress.match(emailPattern) !== null;
-        // console.log("Email is correct format: " + emailWorks);
-    }
-
-    handleChange(e) {
-        this.checkForm();
-        const target = e.target;
-        const value = target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
-    }
-
-    handleClick(e) {
-        e.preventDefault()
-        let newUser = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            username: this.state.username,
-            emailAddress: this.state.emailAddress,
-            password: this.state.leaguePassword,
-        }
-        userService.create(newUser)
-            .then(response => {
-                return response.data;
-            }).then(user => {
-            this.props.history.push(`/user/${user.id}`)
-        })
-    }
-
-    render() {
-        let isLoggedIn = this.state.isLoggedIn;
-        return (
-            <div>
-                <main>
-                    <div className="app-container container-fluid df-dark-background-2">
-                        <MainNav isLoggedIn={isLoggedIn} />
-                        <div className="container-fluid page-container">
-                            <div className="row">
-                                <FormTitle title="Register" />
-                            </div>
-                            <div className="row">
-                                <form className="col s12">
-                                    <div className="row">
-                                        <div className="input-field col s6">
-                                            <FormTextInput type="text" label="First Name" id="first_name"
-                                                           name="firstName"
-                                                           value={this.state.firstName} handleChange={this.handleChange}
-                                                           required={false} />
-                                        </div>
-                                        <div className="input-field col s6">
-                                            <FormTextInput type="text" label="Last Name" id="last_name" name="lastName"
-                                                           value={this.state.lastName} handleChange={this.handleChange}
-                                                           required={false} />
-                                        </div>
+function RegisterPage(props) {
+    const { register } = props;
+    const [userState, setUserState] = useState({});
+    const history = useHistory();
+    // const [errorHandler, setErrorHandler] = useState({
+    //     hasError: false,
+    //     message: "",
+    // })
+    return (
+        <div>
+            <main>
+                <div className="app-container container-fluid df-dark-background-2">
+                    <MainNav isLoggedIn={false} />
+                    <div className="container-fluid page-container">
+                        <div className="row">
+                            <FormTitle title="Register" />
+                        </div>
+                        <div className="row">
+                            <form className="col s12" onSubmit={(event) => {
+                                event.preventDefault();
+                                register(userState, history/*, setErrorHandler*/)
+                            }}>
+                                <div className="row">
+                                    <div className="input-field col s6">
+                                        <label className="input-label">First Name
+                                            <input type="text" id="first_name" name="firstName"
+                                                   onChange={(event) => {
+                                                       const firstName = event.target.value;
+                                                       setUserState({ ...userState, ...{ firstName } });
+                                                   }} />
+                                        </label>
                                     </div>
-                                    <div className="row">
-                                        <div className="input-field col s12">
-                                            <FormTextInput type="text" label="Username" id="username" name="username"
-                                                           value={this.state.username} handleChange={this.handleChange}
-                                                           required={true} />
-                                        </div>
+                                    <div className="input-field col s6">
+                                        <label className="input-label">Last Name
+                                            <input type="text" id="last_name" name="lastName"
+                                                   onChange={(event) => {
+                                                       const lastName = event.target.value;
+                                                       setUserState({ ...userState, ...{ lastName } });
+                                                   }} />
+                                        </label>
                                     </div>
-                                    <div className="row">
-                                        <div className="input-field col s12">
-                                            <FormTextInput type="email" label="Email Address" id="email_address"
-                                                           name="emailAddress" value={this.state.emailAddress}
-                                                           handleChange={this.handleChange} required={true} />
-                                        </div>
+                                </div>
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <label className="input-label">Username<span className="required">*</span>
+                                            <i className="material-icons input-valid ">check_circle</i>
+                                            <input type="text" id="username" name="username" required={true}
+                                                   onChange={(event) => {
+                                                       const username = event.target.value;
+                                                       setUserState({ ...userState, ...{ username } });
+                                                   }} />
+                                        </label>
                                     </div>
-                                    <div className="row">
-                                        <div className="input-field col s12">
-                                            <FormTextInput type="password" label="Password" id="userPassword"
-                                                           name="password"
-                                                           value={this.state.password} handleChange={this.handleChange}
-                                                           required={true} />
-                                        </div>
+                                </div>
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <label className="input-label">Email Address<span
+                                            className="required">*</span>
+                                            <i className="material-icons input-valid ">check_circle</i>
+                                            <input type="email" id="email_address" name="emailAddress"
+                                                   required={true}
+                                                   onChange={(event) => {
+                                                       const email = event.target.value;
+                                                       setUserState({ ...userState, ...{ email } });
+                                                   }} />
+                                        </label>
                                     </div>
-                                    <div className="row">
-                                        <div className="input-field col s12">
-                                            <FormTextInput type="password" label="Re-enter Password" id="confirm"
-                                                           name="confirmPassword" value={this.state.confirmPassword}
-                                                           handleChange={this.handleChange} required={true} />
-                                        </div>
+                                </div>
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <label className="input-label">Password<span
+                                            className="required">*</span>
+                                            <i className="material-icons input-valid ">check_circle</i>
+                                            <input type="password" id="password" name="password"
+                                                   required={true}
+                                                   onChange={(event) => {
+                                                       const password = event.target.value;
+                                                       setUserState({ ...userState, ...{ password } });
+                                                   }} />
+                                        </label>
                                     </div>
-                                    <FormSubmitButton handleClick={this.handleClick} />
-                                </form>
-                            </div>
+                                </div>
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <label className="input-label">Re-enter Password<span
+                                            className="required">*</span>
+                                            <i className="material-icons input-valid ">check_circle</i>
+                                            <input type="password" id="confirmPassword" name="confirmPassword"
+                                                   required={true}
+                                                // onChange={(event) => {
+                                                // const confirmPassword = event.target.value;
+                                                // TODO do confirm password logic}*/}
+                                            />
+                                        </label>
+                                    </div>
+                                </div>
+                                <button className="grey-btn btn right" ><i className="material-icons right">chevron_right</i>Register</button>
+                            </form>
                         </div>
                     </div>
-                </main>
-                <Footer />
-            </div>
-        );
+                </div>
+            </main>
+            <Footer />
+        </div>
+    );
+}
+
+const mapStateToProps = (state) => {
+    return {
+        user: state,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        register: (userState, history, setErrorHandler) => {
+            dispatch(RegisterAuthAction(userState, history, setErrorHandler))
+        }
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage);

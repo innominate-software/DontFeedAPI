@@ -1,5 +1,5 @@
 import React from "react";
-import connect from "react-redux/lib/connect/connect";
+import { Link } from "react-router-dom";
 
 function LoginCard(props) {
     return (
@@ -13,8 +13,8 @@ function LoginCard(props) {
                            className="modal-trigger btn-small df-dark-background df-light-grey-text">Login</a>
                     </div>
                     <div className="col s6">
-                        <a href="/register"
-                           className="btn-small df-dark-background df-light-grey-text">Sign Up</a>
+                        <Link to="/register"
+                           className="btn-small df-dark-background df-light-grey-text">Sign Up</Link>
                     </div>
                 </div>
             </span>
@@ -22,18 +22,4 @@ function LoginCard(props) {
     )
 }
 
-// const mapStateToProps = (state) => {
-//     return {
-//         user: state,
-//     };
-// };
-//
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         login: (loginState, history, setErrorHandler) => {
-//             dispatch(LoginAuthAction(loginState, history, setErrorHandler));
-//         },
-//     };
-// };
-
-export default /*connect(mapStateToProps, mapDispatchToProps)(*/LoginCard/*)*/;
+export default LoginCard;
