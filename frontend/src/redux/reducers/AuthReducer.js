@@ -31,7 +31,7 @@ const authReducer = (state = newAuth, action) => {
     switch (action.type) {
         case AuthActionType.REGISTER_SUCCESS:
             const newAuthState = {
-                isLoggedIn: true,
+                isLoggedIn: false,
                 user: action.payload,
             };
             axios.defaults.headers.common[
@@ -50,6 +50,9 @@ const authReducer = (state = newAuth, action) => {
             localStorage.setItem("auth", JSON.stringify(loginAuthState));
             return loginAuthState;
         case AuthActionType.LOGOUT_SUCCESS:
+            localStorage.removeItem("auth");
+            return authState;
+        case AuthActionType.LOGOUT_FAIL:
             localStorage.removeItem("auth");
             return authState;
         default:

@@ -10,8 +10,6 @@ const authErrorReducer = (state = authError, action) => {
             return { message: action.payload };
         case AuthActionType.LOGIN_FAIL:
             return { message: action.payload };
-        case AuthActionType.LOGOUT_FAIL:
-            return { message: action.payload };
         default:
             return state;
     }

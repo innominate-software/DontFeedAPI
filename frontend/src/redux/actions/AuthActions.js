@@ -9,7 +9,7 @@ const AuthActionType = {
     LOGOUT_FAIL: "LOGOUT_FAIL",
 };
 
-const RegisterAuthAction = (userState, history, setErrorHandler) => {
+const RegisterAuthAction = (userState, setErrorHandler) => {
     return async (dispatch) => {
         try {
             const response = await axios.post("auth/register", userState);
@@ -18,7 +18,6 @@ const RegisterAuthAction = (userState, history, setErrorHandler) => {
                 type: AuthActionType.REGISTER_SUCCESS,
                 payload: data,
             });
-            history.push("/login");
         } catch (error) {
             if (error.response) {
                 console.log(error);
@@ -35,7 +34,7 @@ const RegisterAuthAction = (userState, history, setErrorHandler) => {
     };
 };
 
-const LoginAuthAction = (loginState, history, setErrorHandler) => {
+const LoginAuthAction = (loginState, setErrorHandler) => {
     return async (dispatch) => {
         try {
             const response = await axios.post("auth/login", loginState);
@@ -44,7 +43,6 @@ const LoginAuthAction = (loginState, history, setErrorHandler) => {
                 type: AuthActionType.LOGIN_SUCCESS,
                 payload: data,
             });
-            history.push("/");
         } catch (error) {
             if (error.response) {
                 console.log(error);
@@ -61,7 +59,7 @@ const LoginAuthAction = (loginState, history, setErrorHandler) => {
     };
 };
 
-const LogOutAuthAction = (userState, history) => {
+const LogOutAuthAction = (userState) => {
     return async (dispatch) => {
         try {
             const response = await axios.post("auth/logout", userState);
@@ -70,7 +68,6 @@ const LogOutAuthAction = (userState, history) => {
                 type: AuthActionType.LOGOUT_SUCCESS,
                 payload: data.message,
             });
-            history.push("/");
         } catch (error) {
             if (error.response) {
                 console.log(error);

@@ -48,7 +48,7 @@ function SupportPage(props) {
         <div>
             <main>
                 <div className="app-container container-fluid df-dark-background-2">
-                    <MainNav isLoggedIn={auth.isLoggedIn} />
+                    {/*<MainNav isLoggedIn={auth.isLoggedIn} />*/}
                     <div className="container-fluid page-container">
                         <HelpButtons />
                         <FAQs questions={questions} />

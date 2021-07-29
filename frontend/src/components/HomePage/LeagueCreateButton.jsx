@@ -1,14 +1,20 @@
 import React from "react";
-import CreateLeagueImage from "../../assets/img/REPLACETHISIMAGE.jpg"
+import createLeagueImage from "../../assets/img/REPLACETHISIMAGE.jpg";
+import { useHistory } from "react-router-dom";
 
-export default function LeagueCreateButton({handleClick}) {
-    return (
-        <div className="card" onClick={handleClick}>
-            <div className="card-image">
-                <img src={CreateLeagueImage} alt="Click here to create a new league" />
-                <span className="card-title">Click Here to Create Your Own League</span>
-            </div>
-        </div>
-    )
+function LeagueCreateButton(props) {
+	const history = useHistory();
+	return (
+		<a href="" className="card bg-dark text-white my-3" onClick={() => {
+			history.push("/leagues/create")
+		}}>
+			<img src={createLeagueImage} className="card-img" alt="..." />
+			<div className="card-img-overlay">
+				<h2 className="card-title my-5 py-5" style={{ top: "45%" }}>
+					Click Here To Create Your Own League</h2>
+			</div>
+		</a>
+	)
 }
 
+export default LeagueCreateButton;
