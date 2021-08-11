@@ -19,9 +19,17 @@ class UserDataService {
     findByEmail(email) {
         return http.get(`/users?email=${email}`);
     }
+    
+    existsByEmail(email) {
+        return http.get(`/users/existsByEmail/${email}`);
+    }
 
     findByUsername(username) {
-        return http.get(`/users?username=${username}`);
+        return http.get(`/users/existsByUsername/${username}`);
+    }
+    
+    existsByUsername(username) {
+        return http.get(`/users/existsByUsername/${username}`);
     }
 
     getUsersByTeamId(teamId) {

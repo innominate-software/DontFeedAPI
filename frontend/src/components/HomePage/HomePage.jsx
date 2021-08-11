@@ -7,17 +7,20 @@ import MostRecentLeagues from "./MostRecentLeagues";
 import LoginCard from "./LoginCard";
 import GameBubbles from "./GameBubbles";
 import { connect } from "react-redux";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 function HomePage(props) {
 	const { auth } = props;
 	return (
-		<div className="app-container df-dark-background-2">
-			<div className="row">
+		<Container fluid className="app-container df-dark-background-2 px-0">
+			<Row>
 				<GameBubbles />
 				<NewsCarousel />
-				<div className="row p-3">
-					<div className="col col-2" />
-					<div className="col col-7 m-3">
+				<Row className="p-3">
+					<Col xs={0} lg={2} />
+					<Col xs={true} lg={7} className="m-3">
 						{!auth.isLoggedIn
 							? <LoginCard />
 							: null
@@ -25,13 +28,13 @@ function HomePage(props) {
 						<MostRecentLeagues />
 						<LeaguesWithOpenRegistration />
 						<LeagueCreateButton />
-					</div>
-					<div className="col d-none d-md-block info m-3">
+					</Col>
+					<Col xs={0} lg={2} className="info m-3">
 						<OnlinePlayers />
-					</div>
-				</div>
-			</div>
-		</div>
+					</Col>
+				</Row>
+			</Row>
+		</Container>
 	);
 }
 
