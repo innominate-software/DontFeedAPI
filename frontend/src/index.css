@@ -147,7 +147,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .app-container {
-    min-height: 100vh;
+    min-height: 90vh;
 }
 
 .valid {

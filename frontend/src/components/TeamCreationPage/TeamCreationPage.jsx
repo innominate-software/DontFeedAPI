@@ -17,7 +17,7 @@ function TeamCreationPage(props) {
         <div>
             <main>
                 <div className="app-container container-fluid df-dark-background-2">
-                    <MainNav isLoggedIn={auth.isLoggedIn} />
+                    <MainNav />
                     <div className="container-fluid page-container">
                         <div className="row">
                             <div className="col s12">
