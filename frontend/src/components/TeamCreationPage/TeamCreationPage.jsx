@@ -1,118 +1,102 @@
-import React, { Component } from 'react';
-import M from "materialize-css";
-import MainNav from "../utils/MainNav";
-import FormTitle from "../utils/Form/FormTitle";
-import FormTextInput from "../utils/Form/FormTextInput";
-import FormTextAreaInput from "../utils/Form/FormTextAreaInput";
-import FormSubmitButton from "../utils/Form/FormSubmitButton";
-import Footer from "../utils/Footer";
+import React, { useState } from 'react';
+import { useHistory } from "react-router";
+import { connect } from "react-redux";
+import { TeamCreateAction } from "../../redux/actions/TeamActions";
 
-import teamService from "../../services/team.service"
-
-export default class TeamCreationPage extends Component {
-
-    constructor(props) {
-        super(props);
-        // method binding here
-        // ex. this.refreshState = this.refreshState.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.checkForm = this.checkForm.bind(this);
-        this.state = {
-            isLoggedIn: true,
-            selectedFile: null,
-            logo: "",
-            name: "",
-            teamPassword: "",
-            motto: "",
-        };
-    }
-
-    componentDidMount() {
-        M.AutoInit();
-    }
-
-    checkForm() {
-        //    check team name does not already exist
-    }
-
-    handleChange(e) {
-        const target = e.target;
-        const value = target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
-    }
-
-    handleClick(e) {
-        e.preventDefault()
-        // check the form for problems!!!
-        let newTeam = {
-            logoFilePath: null,
-            name: this.state.name,
-            password: this.state.teamPassword,
-            teamInfo: this.state.motto
-        }
-        teamService.create(newTeam)
-            .then(response => {
-                return response.data;
-            }).then(team => {
-                this.props.history.push(`/team/${team.id}`)
-            })
-    }
-
-    render() {
-        let isLoggedIn = this.state.isLoggedIn;
-        return (
-            <div>
-                <main>
-                    <div className="app-container container-fluid df-dark-background-2">
-                        <MainNav isLoggedIn={isLoggedIn} />
-                        <div className="container-fluid page-container">
-                            <div className="row">
-                                <FormTitle title="Create a Team" />
-                            </div>
-                            <div className="row">
-                                <form className="col s12">
-                                    <div className="row">
-                                        <div className="input-field col s6">
-                                            <FormTextInput type="text" label="Logo" id="logo" name="logo"
-                                                           value={this.state.logo} handleChange={this.handleChange}
-                                                           required={false} disabled={true} />
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="input-field col s12">
-                                            <FormTextInput type="text" label="Team Name" id="name" name="name"
-                                                           value={this.state.name} handleChange={this.handleChange}
-                                                           required={true} />
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="input-field col s12">
-                                            <FormTextInput type="password" label="Password" id="teamPassword"
-                                                           name="teamPassword"
-                                                           value={this.state.password} handleChange={this.handleChange}
-                                                           required={true} />
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="input-field col s12">
-                                            <FormTextAreaInput label="Team Info" id="motto"
-                                                               name="motto" value={this.state.motto}
-                                                               handleChange={this.handleChange} required={false} />
-                                        </div>
-                                    </div>
-                                    <FormSubmitButton handleClick={this.handleClick} />
-                                </form>
+function TeamCreationPage(props) {
+    const { teamCreate } = props;
+    const [teamState, setTeamState] = useState({});
+    const history = useHistory();
+    // const [errorHandler, setErrorHandler] = useState({
+    //     hasError: false,
+    //     message: "",
+    // });
+    return (
+        <div>
+            <main>
+                <div className="app-container container-fluid df-dark-background-2">
+                    <div className="container-fluid page-container">
+                        <div className="row">
+                            <div className="col s12">
+                                <h1 className="page-title">Create A Team</h1>
                             </div>
                         </div>
+                        <div className="row">
+                            <form className="col s12" onSubmit={(event) => {
+                                event.preventDefault();
+                                teamCreate(teamState, history)
+                            }}>
+                                <div className="row">
+                                    <div className="input-field col s6">
+                                        <label className="input-label">Logo<span className="required">*</span><i
+                                            className="material-icons input-valid ">check_circle</i>
+                                            <input type="text" id="logo" name="logo" required={true} disabled={true}
+                                                   onChange={(event) => {
+                                                       const logo = event.target.value;
+                                                       setTeamState({ ...teamState, ...{ logo } })
+                                                   }} />
+                                        </label>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <label className="input-label">Team Name<span className="required">*</span><i
+                                            className="material-icons input-valid ">check_circle</i>
+                                            <input type="text" id="name" name="name" required={true}
+                                                   onChange={(event) => {
+                                                       const name = event.target.value;
+                                                       setTeamState({ ...teamState, ...{ name } })
+                                                   }} />
+                                        </label>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <label className="input-label">Password<span className="required">*</span><i
+                                            className="material-icons input-valid ">check_circle</i>
+                                            <input type="password" id="teamPassword" name="teamPassword" required={true}
+                                                   onChange={(event) => {
+                                                       const password = event.target.value;
+                                                       setTeamState({ ...teamState, ...{ password } })
+                                                   }} />
+                                        </label>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="input-field col s12">
+                                        <label className="input-label">Team Info
+                                            <textarea id="motto" name="motto" className="materialize-textarea"
+                                                      onChange={(event) => {
+                                                          const motto = event.target.value;
+                                                          setTeamState({ ...teamState, ...{ motto } })
+                                                      }} />
+                                        </label>
+                                    </div>
+                                </div>
+                                <button type="submit" className="grey-btn btn right"><i
+                                    className="material-icons right">chevron_right</i>Create Team
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                </main>
-                <Footer />
-            </div>
-        );
-    }
+                </div>
+            </main>
+        </div>
+    );
 }
+
+const mapStateToProps = (state) => {
+    return {
+        team: state
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        teamCreate: (teamState, history, setErrorHandler) => {
+            dispatch(TeamCreateAction(teamState, history, setErrorHandler));
+        },
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TeamCreationPage);

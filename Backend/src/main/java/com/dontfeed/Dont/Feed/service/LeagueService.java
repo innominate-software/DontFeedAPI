@@ -41,4 +41,6 @@ public class LeagueService {
     public League findLeagueByName(String name) {
         return leagueRepository.findByName(name).orElse(null);
     }
+    
+    public Boolean existsByName(String name) { return leagueRepository.existsByName(name);}
 }

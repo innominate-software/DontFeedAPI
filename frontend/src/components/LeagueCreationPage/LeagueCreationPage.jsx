@@ -1,207 +1,212 @@
-import React, { Component } from 'react';
-import MainNav from "../utils/MainNav";
-import FormTitle from "../utils/Form/FormTitle";
-import FormTextInput from "../utils/Form/FormTextInput";
-import FormSelectInput from "../utils/Form/FormSelectInput";
-import FormTextAreaInput from "../utils/Form/FormTextAreaInput";
-import FormSubmitButton from "../utils/Form/FormSubmitButton";
-import Footer from "../utils/Footer";
-import M from "materialize-css";
-import leagueService from "../../services/league.service";
+import React, { useState } from 'react';
+import Row from "react-bootstrap/Row"
+import { connect } from "react-redux";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import { LeagueCreateAction } from "../../redux/actions/LeagueActions";
+import defaultLogo from "../../assets/img/default-league.png"
+import leagueDataService from "../../services/league.service";
 
-export default class LeagueCreationPage extends Component {
-
-    constructor(props) {
-        super(props);
-        // method binding here
-        // ex. this.refreshState = this.refreshState.bind(this);
-        this.checkForm = this.checkForm.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
-        this.state = {
-            isLoggedIn: true,
-            selectedFile: null,
-            logo: "",
-            name: "",
-            format: "RANDOMEVERYWEEK",
-            game: "DOTA2",
-            startDate: "",
-            endDate: "",
-            leaguePassword: "",
-            matchFrequency: "",
-            rules: ""
-        };
-    }
-
-    componentDidMount() {
-        M.AutoInit();
-    }
-
-    checkForm() {
-        //    check team name does not already exist
-    }
-
-    handleChange(e) {
-        const target = e.target;
-        const value = target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
-    }
-
-    handleClick(e) {
-        e.preventDefault()
-        // check the form for problems!!!
-        let {game} = this.state;
-        console.log(game)
-        switch (game) {
-            case "DOTA2":
-                game = {id: 1, name: "DOTA2"}
-                break;
-            case "LEAGUEOFLEGENDS":
-                game = {id: 2, name: "LEAGUEOFLEGENDS"}
-                break;
-            case "OVERWATCH":
-                game = {id: 3, name: "OVERWATCH"}
-                break;
-            case "SMASHBROSULTIMATE":
-                game = {id: 4, name: "SMASHBROSULTIMATE"}
-                break;
-            case "MADDEN21":
-                game = {id: 5, name: "MADDEN21"}
-                break;
-            default:
-                //throw error or something
-        }
-        let newLeague = {
-            logo: this.state.logo,
-            name: this.state.name,
-            format: this.state.format,
-            game: game,
-            season: 1,
-            stage: "CREATED",
-            startDate: this.state.startDate,
-            endDate: this.state.endDate,
-            password: this.state.leaguePassword,
-            matchFrequency: this.state.matchFrequency,
-            rules: this.state.rules,
-        }
-        leagueService.create(newLeague)
-            .then(response => {
-                return response.data;
-            }).then(league => {
-            this.props.history.push(`/league/${league.id}`)
-        })
-    }
-
-
-    fileSelectedHandler(e) {
-        console.log(e.target.files[0]);
-    }
-
-    render() {
-        let isLoggedIn = this.state.isLoggedIn;
-        const leagueFormat = {
-            options: ["Random Every Week", "Performance Based", "Predetermined"],
-            values: ["RANDOMEVERYWEEK", "PERFORMANCEBASED", "PREDETERMINED"]
-        }
-        const games = {
-            options: ["Dota 2", "League of Legends", "Super Smash Bros. Ultimate", "Overwatch", "Madden 21"],
-            values: ["DOTA2", "LEAGUEOFLEGENDS", "SMASHBROSULTIMATE", "OVERWATCH", "MADDEN21"]
-        }
-        return (
-            <div>
-                <main>
-                    <div className="app-container container-fluid df-dark-background-2">
-                        <MainNav isLoggedIn={isLoggedIn} />
-                        <div className="container-fluid page-container">
-                            <div className="row">
-                                <FormTitle title="CREATE A LEAGUE" />
-                            </div>
-                            <div className="row">
-                                <form className="col s12">
-                                    <div className="row">
-                                        <div className="input-field col s6">
-                                            <FormTextInput type="text" label="Logo" id="logo" name="logo"
-                                                           value={this.state.logo} handleChange={this.handleChange}
-                                                           required={false} disabled={true} />
-                                        </div>
-                                        <div className="col s2" />
-                                        <div className="col s1">
-                                            <input style={{display: "none"}} type="file"
-                                                   onChange={this.fileSelectedHandler}
-                                                   ref={fileInput => this.fileInput = fileInput} />
-                                            <button className="grey-btn btn right" onClick={(e) => {
-                                                e.preventDefault();
-                                                this.fileInput.click();
-                                            }}>Browse
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="input-field col s12">
-                                            <FormTextInput type="text" label="League Name" id="name" name="name"
-                                                           value={this.state.name} handleChange={this.handleChange}
-                                                           required={true} disabled={false} />
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="input-field col s6">
-                                            <FormSelectInput label="League Format" id="league_format" name="format"
-                                                             value={this.state.format} handleChange={this.handleChange}
-                                                             options={leagueFormat.options} values={leagueFormat.values}
-                                                             required={true} />
-                                        </div>
-                                        <div className="input-field col s6">
-                                            <FormSelectInput label="Game" id="game" name="game" value={this.state.game}
-                                                             handleChange={this.handleChange} options={games.options}
-                                                             values={games.values} required={true} />
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="input-field col s6">
-                                            <FormTextInput type="date" label="Start Date" id="start_date"
-                                                           name="startDate"
-                                                           value={this.state.startDate} handleChange={this.handleChange}
-                                                           required={true} />
-                                        </div>
-                                        <div className="input-field col s6">
-                                            <FormTextInput type="date" label="End Date" id="end_date" name="endDate"
-                                                           value={this.state.endDate} handleChange={this.handleChange}
-                                                           required={true} />
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="input-field col s6">
-                                            <FormTextInput type="password" label="Password" id="leaguePassword"
-                                                           name="leaguePassword"
-                                                           value={this.state.leaguePassword} handleChange={this.handleChange}
-                                                           required={true} />
-                                        </div>
-                                        <div className="input-field col s6">
-                                            <FormTextInput type="number" label="Match Frequency" id="match_frequency"
-                                                           name="matchFrequency" value={this.state.matchFrequency}
-                                                           handleChange={this.handleChange} required={true} />
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="input-field col s12">
-                                            <FormTextAreaInput label="Rules" id="rules" name="rules"
-                                                               value={this.state.rules} handleChange={this.handleChange}
-                                                               required={false} />
-                                        </div>
-                                    </div>
-                                    <FormSubmitButton handleClick={this.handleClick} />
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-                <Footer />
-            </div>
-        );
-    }
+function LeagueCreationPage(props) {
+	const { create, setErrorHandler } = props;
+	const [leagueState, setLeagueState] = useState({});
+	const [formValidation, setFormValidation] = useState({})
+	const [logo, setLogo] = useState({});
+	
+	console.log(formValidation)
+	console.log(leagueState)
+	return (
+		<Container fluid className="app-container df-dark-background-2">
+			<Row>
+				<Col className="my-5">
+					<h1 className="page-title">CREATE A LEAGUE</h1>
+				</Col>
+				<img src={logo?.previewImage ?? defaultLogo} className="logo-preview" alt="" />
+			</Row>
+			<Row className="px-5">
+				<Form onSubmit={event => {
+					event.preventDefault();
+					console.log(leagueState);
+					create(leagueState, setErrorHandler);
+				}}>
+					<Row>
+						<Form.Group as={Col} className="mb-3" controlId="leagueCreateName">
+							<Form.Label className="ms-3">League Name</Form.Label>
+							<Form.Control required type="text" placeholder="League Name" onBlur={(event) => {
+								const name = event.target.value;
+								setLeagueState({ ...leagueState, ...{ name } });
+								leagueDataService.existsByName(name)
+									.then(response => {
+										setFormValidation({ ...formValidation, validName: !response.data })
+									})
+							}} />
+							<Form.Text
+								className={leagueState.name ? formValidation.validName ? "valid" : "invalid" : "text-muted"}>
+								Must be unique
+							</Form.Text>
+						</Form.Group>
+						<Form.Group as={Col} className="mb-3" controlId="leagueCreateLogo">
+							<Form.Label className="ms-3">Logo</Form.Label>
+							<Form.Control type="file" accepts="image/png, image/jpeg" onChange={(event) => {
+								setLogo({
+									currentFile: event.target.files[0],
+									previewImage: event.target.files[0] ? URL.createObjectURL(event.target.files[0]) : null
+								});
+								setLeagueState({ ...leagueState, logo: event.target.files[0] })
+							}} />
+						</Form.Group>
+					</Row>
+					<Row>
+						<Form.Group as={Col} className="mb-3" controlId="leagueCreateGame">
+							<Form.Label>Game</Form.Label>
+							<Form.Select required onChange={(event) => {
+								const game = event.target.value;
+								setLeagueState({ ...leagueState, ...{ game } })
+								setFormValidation({ ...formValidation, validGame: game !== "Choose Game" })
+							}}>
+								<option>Choose Game</option>
+								<option value={"DOTA2"}>Dota 2</option>
+								<option value={"LEAGUEOFLEGENDS"}>League of Legends</option>
+								<option value={"SMASHBROSULTIMATE"}>Smash Bros. Ultimate</option>
+								<option value={"OVERWATCH"}>Overwatch</option>
+								<option value={"MADDEN21"}>Madden 21</option>
+							</Form.Select>
+						</Form.Group>
+						<Form.Group as={Col} className="mb-3" controlId="leagueCreateFormat">
+							<Form.Label>League Format</Form.Label>
+							<Form.Select onChange={(event) => {
+								const format = event.target.value;
+								setLeagueState({ ...leagueState, ...{ format } })
+								setFormValidation({ ...formValidation, validFormat: format !== "Choose Format", validNumberOfMatches: !!leagueState?.matchFrequencyNumber, validNumberOfMatchesPer: !!leagueState?.matchFrequencyLetter })
+								if (leagueState.matchFrequencyNumber === "Choose Match Frequency") {
+									setFormValidation({
+										...formValidation,
+										validNumberOfMatches: false,
+									})
+								}
+								if (format === "PREDETERMINED") {
+									setFormValidation({
+										...formValidation,
+										validNumberOfMatches: true,
+										validNumberOfMatchesPer: true
+									})
+								}
+							}}>
+								<option>Choose Format</option>
+								<option value={"RANDOMEVERYWEEK"}>Random Every Week</option>
+								<option value={"PERFORMANCEBASED"}>Performance Based</option>
+								<option value={"PREDETERMINED"}>Predetermined</option>
+							</Form.Select>
+						</Form.Group>
+						<Form.Group as={Col} className="mb-3" controlId="leagueCreateMatchFrequencyMatches">
+							<Form.Label>Number of matches</Form.Label>
+							<Form.Select required={true} onChange={(event) => {
+								const number = event.target.value;
+								setLeagueState({ ...leagueState, matchFrequencyNumber: number })
+								setFormValidation({
+									...formValidation,
+									validNumberOfMatches: number !== "Choose Match Frequency" && leagueState.format !== "PREDETERMINED"
+								})
+							}} disabled={leagueState.format === "PREDETERMINED"}>
+								<option>Choose Match Frequency</option>
+								<option value={1}>1</option>
+								<option value={2}>2</option>
+								<option value={3}>3</option>
+								<option value={4}>4</option>
+								<option value={5}>5</option>
+								<option value={6}>6</option>
+							</Form.Select>
+						</Form.Group>
+						<Form.Group as={Col} className="mb-3" controlId="leagueCreateMatchFrequencyMatchesPer"
+									onChange={(event) => {
+										const letter = event.target.value;
+										setLeagueState({ ...leagueState, matchFrequencyLetter: letter });
+										setFormValidation({
+											...formValidation,
+											validNumberOfMatchesPer: letter === "d" || letter === "w"
+										})
+							
+									}}>
+							<Form.Label as="legend" column sm={2}>per</Form.Label>
+							<Form.Check inline type="radio" label="Day" name="leagueCreateMatchFrequencyPerRadios"
+										id="leagueCreateMatchFrequencyPerDay" value="d"
+										disabled={leagueState.format === "PREDETERMINED"} />
+							<Form.Check inline type="radio" label="Week" name="leagueCreateMatchFrequencyPerRadios"
+										id="leagueCreateMatchFrequencyPerWeek" value="w"
+										disabled={leagueState.format === "PREDETERMINED"} />
+						</Form.Group>
+					</Row>
+					<Row>
+						<Form.Group as={Col} className="mb-3" controlId="leagueCreateStartDate">
+							<Form.Label className="ms-3">Start Date</Form.Label>
+							<Form.Control type="date" min={new Date()} placeholder="Start Date" onChange={(event) => {
+								const startDate = event.target.value;
+								console.log(startDate)
+								const validStartDate = new Date(startDate) > new Date();
+								setLeagueState({ ...leagueState, ...{ startDate } });
+								setFormValidation({ ...formValidation, ...{ validStartDate } })
+							}} />
+						</Form.Group>
+						<Form.Group as={Col} className="mb-3" controlId="leagueCreateEndDate">
+							<Form.Label className="ms-3">End Date</Form.Label>
+							<Form.Control type="date" placeholder="End Date" onChange={(event) => {
+								const endDate = event.target.value;
+								const validEndDate = endDate > leagueState.startDate;
+								setLeagueState({ ...leagueState, ...{ endDate } });
+								setFormValidation({ ...formValidation, ...{ validEndDate } })
+							}} />
+						</Form.Group>
+						<Form.Group as={Col} className="mb-3" controlId="leagueCreatePassword">
+							<Form.Label className="ms-3">Password</Form.Label>
+							<Form.Control type="password" placeholder="Password" onChange={(event) => {
+								const password = event.target.value;
+								setLeagueState({ ...leagueState, ...{ password } });
+							}} />
+						</Form.Group>
+					</Row>
+					<Row>
+						<Form.Group className="mb-3" controlId="leagueCreateRules">
+							<Form.Label>Rules</Form.Label>
+							<Form.Control as="textarea" rows={5} onChange={(event) => {
+								const rules = event.target.value;
+								setLeagueState({ ...leagueState, ...{ rules } });
+							}} />
+						</Form.Group>
+					</Row>
+					{(formValidation.validName && formValidation.validGame && formValidation.validFormat && formValidation.validNumberOfMatches && formValidation.validNumberOfMatchesPer && formValidation.validStartDate && formValidation.validEndDate) ?
+						<div className="d-grid gap-2">
+							<Button size="lg" variant="primary" type="submit">
+								Create League
+							</Button>
+						</div>
+						:
+						<div className="d-grid gap-2">
+							<Button size="lg" variant="secondary" className="df-light-grey-text">
+								Finish Registration Form
+							</Button>
+						</div>
+					}
+				</Form>
+			</Row>
+		</Container>
+	);
 }
+
+const mapStateToProps = (state) => {
+	return {
+		league: state,
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		create: (leagueState, setErrorHandler) => {
+			dispatch(LeagueCreateAction(leagueState, setErrorHandler))
+		}
+	}
+	
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LeagueCreationPage);

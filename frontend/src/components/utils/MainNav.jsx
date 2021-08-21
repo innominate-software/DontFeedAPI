@@ -1,78 +1,111 @@
-import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, useHistory } from "react-router-dom";
 import LoginModal from "./LoginModal";
-import ExtraNav from "./ExtraNav";
+import { connect } from "react-redux";
+import { LogOutAuthAction } from "../../redux/actions/AuthActions";
+import RegisterModal from "./RegisterModal";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
+import Button from "react-bootstrap/Button";
 
-export default class MainNav extends Component {
+function MainNav(props) {
+	const { auth, logout } = props;
+	const history = useHistory();
+	const [loginModalShow, setLoginModalShow] = useState(false);
+	const [registerModalShow, setRegisterModalShow] = useState(false);
+	// const [searchModalShow, setSearchModalShow] = useState(false);
 
-    constructor(props) {
-        super(props);
-        // method binding here
-        // ex. this.refreshState = this.refreshState.bind(this);
-        this.logOut = this.logout.bind(this);
-        this.state = {
-            isLoggedIn: true
-        };
-    }
-
-    logout() {
-        this.setState({
-            ...this.state,
-            isLoggedIn: false
-        });
-    }
-
-    // Leagues
-    // expand_more
-    // Teams
-    // expand_more
-    // Players
-    // expand_more
-    // Matches
-    // expand_more
-    // Support
-
-    render() {
-        let {page, isLoggedIn, logout} = this.props;
-        let navLinks = [];
-        let links = [
-            ["Leagues", "leaguesDropdown"],
-            ["Teams", "teamsDropdown"],
-            ["Players", "playersDropdown"],
-            ["Matches", "matchesDropdown"],
-            ["Support", "supportDropdown"]
-        ]
-        if (page !== "HomePage") {
-            navLinks = links.map((link, index) => <li key={index}><a className="dropdown-trigger" href="#!" data-target={link[1]}>{link[0]}<i
-                className="material-icons right">arrow_drop_down</i></a></li>)
-        }
-        return (
-            <div>
-                <nav>
-                    <div className="nav-wrapper nav-bar-container df-dark-background">
-                        <Link to="/" className="brand-logo left df-light-grey-text left">DON'T FEED</Link>
-                        <ul id="nav-mobile" className="right hide-on-med-and-down">
-                            {navLinks}
-                            <li><i className="material-icons df-light-grey-text">search</i></li>
-                            {!isLoggedIn
-                                ? <li><a href="#loginModal" className="modal-trigger">
-                                    <div className="df-light-grey-text">Login</div>
-                                </a></li>
-                                :
-                                <li>
-                                    <div className="df-light-grey-text" onClick={logout}>Logout</div>
-                                </li>
-                            }
-                            {!isLoggedIn
-                                ? <li><Link to="/register" className="df-light-grey-text">Sign Up</Link></li>
-                                : null
-                            }
-                        </ul>
-                    </div>
-                </nav>
-                <LoginModal />
-                <ExtraNav />
-            </div>
-        );
-    }
+	// todo: create cleanForms functionality!!!
+	return (
+		<React.Fragment>
+			<Navbar sticky="top" expand="lg" className="df-dark-background">
+				<div className="container-fluid">
+					<Navbar.Brand href="/" className="df-light-grey-text">DON'T FEED</Navbar.Brand>
+					<Navbar.Toggle aria-controls="navbarScroll" className="custom-toggler" />
+					<Navbar.Collapse id="navbarScroll">
+						<Nav className="" style={{ maxHeight: '100px' }} navbarScroll>
+							<NavDropdown title="Teams" id="navbarScrollingDropdown"
+										 className="df-light-grey-text mx-0 mx-xl-3">
+								<NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+								<NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
+								<NavDropdown.Divider />
+								<NavDropdown.Item href="#action5">Something else here</NavDropdown.Item>
+							</NavDropdown>
+							<NavDropdown title="Leagues" id="navbarScrollingDropdown"
+										 className="df-light-grey-text mx-0 mx-xl-3">
+								<NavDropdown.Item href="#action3">poop</NavDropdown.Item>
+								<NavDropdown.Item href="#action4">Another poop</NavDropdown.Item>
+								<NavDropdown.Divider />
+								<NavDropdown.Item href="#action5">Something poop here</NavDropdown.Item>
+							</NavDropdown>
+							<NavDropdown title="Players" id="navbarScrollingDropdown"
+										 className="df-light-grey-text mx-0 mx-xl-3">
+								<NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+								<NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
+								<NavDropdown.Divider />
+								<NavDropdown.Item href="#action5">Something else here</NavDropdown.Item>
+							</NavDropdown>
+							<NavDropdown title="Matches" id="navbarScrollingDropdown"
+										 className="df-light-grey-text mx-0 mx-xl-3">
+								<NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+								<NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
+								<NavDropdown.Divider />
+								<NavDropdown.Item href="#action5">Something else here</NavDropdown.Item>
+							</NavDropdown>
+							<NavDropdown title="Support" id="navbarScrollingDropdown"
+										 className="df-light-grey-text mx-0 mx-xl-3">
+								<NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+								<NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
+								<NavDropdown.Divider />
+								<NavDropdown.Item href="#action5">Something else here</NavDropdown.Item>
+							</NavDropdown>
+						</Nav>
+						<Form className="d-flex w-100">
+							<FormControl type="search" placeholder="Search" aria-label="Search" />
+							{auth.isLoggedIn ?
+								<h5 className="mx-3 my-auto df-pink-text"><Link to={`/user/${auth.user.id}`}
+																		  className="df-pink-text text-decoration-none">{auth.user.username}</Link>
+								</h5>
+								:
+								<Button className="btn btn-primary mx-2"
+										onClick={() => setLoginModalShow(true)}>Login</Button>
+							}
+							{auth.isLoggedIn ?
+								<Button className="btn btn-primary" onClick={() => {
+									logout(auth, history)
+								}}>Logout</Button>
+								:
+								<Button className="btn btn-primary"
+										onClick={() => setRegisterModalShow(true)}>Signup</Button>
+							}
+						</Form>
+					</Navbar.Collapse>
+				</div>
+			</Navbar>
+			<LoginModal show={loginModalShow} setShow={setLoginModalShow} setRegisterShow={setRegisterModalShow} />
+			<RegisterModal show={registerModalShow} setShow={setRegisterModalShow} setLoginShow={setLoginModalShow} />
+		{/*	TODO create Error Modal plus error functionality*/}
+		</React.Fragment>
+	);
 }
+
+const mapStateToProps = (state) => {
+	return {
+		auth: state.authState,
+		user: state.user,
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		logout: (userState, history) => {
+			dispatch(LogOutAuthAction(userState, history));
+		},
+		
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainNav);

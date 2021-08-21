@@ -1,76 +1,47 @@
 import React from 'react';
-import M from "materialize-css";
-import MainNav from '../utils/MainNav';
 import NewsCarousel from "./NewsCarousel";
-import Footer from "../utils/Footer";
 import OnlinePlayers from "./OnlinePlayers";
 import LeagueCreateButton from "./LeagueCreateButton";
 import LeaguesWithOpenRegistration from "./LeaguesWithOpenRegistration";
 import MostRecentLeagues from "./MostRecentLeagues";
-import SideNav from "./SideNav";
 import LoginCard from "./LoginCard";
 import GameBubbles from "./GameBubbles";
+import { connect } from "react-redux";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
-class HomePage extends React.Component {
-
-    constructor(props) {
-        super(props);
-        // method binding here
-        // ex. this.refreshState = this.refreshState.bind(this);
-        this.sendToLeagueCreate = this.sendToLeagueCreate.bind(this);
-        this.state = {
-            isLoggedIn: false
-        };
-    }
-
-    componentDidMount() {
-        M.AutoInit();
-        M.Carousel.init({
-            fullWidth: true,
-            indicators: true
-        });
-    }
-
-    sendToLeagueCreate() {
-        this.props.history.push(`/leagues/create`)
-    }
-
-    render() {
-        let {isLoggedIn} = this.state;
-        const page = "HomePage"
-        return (
-            <div>
-                <main>
-                    <div className="app-container container-fluid df-dark-background-2">
-                        <MainNav page={page} isLoggedIn={isLoggedIn} logout={this.logOut} />
-                        <GameBubbles />
-                        <NewsCarousel />
-                        <div className="content-container container">
-                            <div className="row">
-                                <div className="col s3">
-                                    <SideNav />
-                                </div>
-                                <div className="col s6">
-                                    {
-                                        !isLoggedIn
-                                            ? <LoginCard />
-                                            : null
-                                    }
-                                    <MostRecentLeagues />
-                                    <LeaguesWithOpenRegistration />
-                                    <LeagueCreateButton handleClick={this.sendToLeagueCreate} />
-                                </div>
-                                <div className="col s3">
-                                    <OnlinePlayers />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-                <Footer />
-            </div>
-        );
-    }
+function HomePage(props) {
+	const { auth } = props;
+	return (
+		<Container fluid className="app-container df-dark-background-2 px-0">
+			<Row>
+				<GameBubbles />
+				<NewsCarousel />
+				<Row className="p-3">
+					<Col xs={0} lg={2} />
+					<Col xs={true} lg={7} className="m-3">
+						{!auth.isLoggedIn
+							? <LoginCard />
+							: null
+						}
+						<MostRecentLeagues />
+						<LeaguesWithOpenRegistration />
+						<LeagueCreateButton />
+					</Col>
+					<Col xs={0} lg={2} className="info m-3">
+						<OnlinePlayers />
+					</Col>
+				</Row>
+			</Row>
+		</Container>
+	);
 }
 
-export default HomePage;
+const mapStateToProps = (state) => {
+	return {
+		auth: state.authState,
+	}
+}
+
+export default connect(mapStateToProps)(HomePage);

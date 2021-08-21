@@ -97,6 +97,16 @@ public class UserController {
 				.status(HttpStatus.OK)
 				.body(count);
 	}
+	
+	@GetMapping("/existsByUsername/{username}")
+	public Boolean checkIfUsernameExists(@PathVariable String username) {
+		return userService.existsByUsername(username);
+	}
+	
+	@GetMapping("/existsByEmail/{email}")
+	public Boolean checkIfEmailExists(@PathVariable String email) {
+		return userService.existsByEmail(email);
+	}
 
 	@PutMapping("/update")
 	public ResponseEntity<?> updateUser(@RequestBody User user) {

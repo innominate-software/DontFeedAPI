@@ -22,6 +22,10 @@ class LeagueDataService {
                     })
             })
     }
+    
+    existsByName(name) {
+        return http.get(`/leagues/existsByName/${name}`);
+    }
 
     create(data) {
         return http.post("/leagues/createLeague", data);
