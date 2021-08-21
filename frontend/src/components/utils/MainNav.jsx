@@ -16,11 +16,8 @@ function MainNav(props) {
 	const history = useHistory();
 	const [loginModalShow, setLoginModalShow] = useState(false);
 	const [registerModalShow, setRegisterModalShow] = useState(false);
-	const [searchModalShow, setSearchModalShow] = useState(false);
-	const [errorHandler, setErrorHandler] = useState({
-		hasError: false,
-		message: "",
-	});
+	// const [searchModalShow, setSearchModalShow] = useState(false);
+
 	// todo: create cleanForms functionality!!!
 	return (
 		<React.Fragment>

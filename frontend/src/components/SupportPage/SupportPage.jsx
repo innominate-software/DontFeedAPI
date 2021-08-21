@@ -1,11 +1,9 @@
 import React from "react";
-import MainNav from "../utils/MainNav";
 import Footer from "../utils/Footer";
 import HelpButtons from "./HelpButtons";
 import FAQs from "./FAQs";
 
 function SupportPage(props) {
-    const { auth } = props;
     const questions = [
         {
             question: "Question 1",
@@ -48,7 +46,6 @@ function SupportPage(props) {
         <div>
             <main>
                 <div className="app-container container-fluid df-dark-background-2">
-                    {/*<MainNav isLoggedIn={auth.isLoggedIn} />*/}
                     <div className="container-fluid page-container">
                         <HelpButtons />
                         <FAQs questions={questions} />

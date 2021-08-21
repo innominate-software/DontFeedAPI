@@ -158,6 +158,11 @@ h1, h2, h3, h4, h5 {
     color: var(--df-form-red)
 }
 
+.logo-preview {
+    border: 1rem solid black;
+    max-width: 20rem;
+}
+
 /* making new classes anything in here stays anything outside is gone*/
 
 .news-button {

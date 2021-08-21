@@ -1,6 +1,4 @@
 import React from "react";
-import MainNav from "../utils/MainNav";
-import Footer from "../utils/Footer";
 import User from "./User";
 import UserInfo from "./UserInfo";
 import Tabs from "../utils/Tabs";
@@ -11,7 +9,7 @@ import Leagues from "../utils/TableComponents/Leagues";
 import { connect } from "react-redux";
 
 function UserProfilePage(props) {
-    const { auth, user } = props;
+    const { user } = props;
     const tabs = [
         {
             href: "#games",

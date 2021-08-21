@@ -1,5 +1,4 @@
 import React from "react";
-import LoginModal from "../utils/LoginModal";
 
 function LoginCard(props) {
 	return (

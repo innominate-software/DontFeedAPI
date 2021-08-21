@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
-import MainNav from "../utils/MainNav";
-import Footer from "../utils/Footer";
 import { useHistory } from "react-router";
 import { connect } from "react-redux";
 import { TeamCreateAction } from "../../redux/actions/TeamActions";
 
 function TeamCreationPage(props) {
-    const { auth, teamCreate } = props;
+    const { teamCreate } = props;
     const [teamState, setTeamState] = useState({});
     const history = useHistory();
-    const [errorHandler, setErrorHandler] = useState({
-        hasError: false,
-        message: "",
-    });
+    // const [errorHandler, setErrorHandler] = useState({
+    //     hasError: false,
+    //     message: "",
+    // });
     return (
         <div>
             <main>
                 <div className="app-container container-fluid df-dark-background-2">
-                    <MainNav />
                     <div className="container-fluid page-container">
                         <div className="row">
                             <div className="col s12">
@@ -27,7 +24,7 @@ function TeamCreationPage(props) {
                         <div className="row">
                             <form className="col s12" onSubmit={(event) => {
                                 event.preventDefault();
-                                teamCreate(teamState, history, setErrorHandler)
+                                teamCreate(teamState, history)
                             }}>
                                 <div className="row">
                                     <div className="input-field col s6">
@@ -84,7 +81,6 @@ function TeamCreationPage(props) {
                     </div>
                 </div>
             </main>
-            <Footer />
         </div>
     );
 }

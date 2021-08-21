@@ -15,7 +15,7 @@ function RegisterModal(props) {
 	}
 	const [userState, setUserState] = useState({});
 	const [formValidation, setFormValidation] = useState({})
-	const emailValidationRegex = new RegExp(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/);
+	// const emailValidationRegex = new RegExp(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/);
 	const passwordValidationRegex = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/);
 	let confirmPass = "";
 	return (
@@ -42,7 +42,6 @@ function RegisterModal(props) {
 							setUserState({ ...userState, ...{ username } });
 							userDataService.existsByUsername(username)
 								.then( response => {
-									console.log(response.data)
 									setFormValidation({ ...formValidation, ...{ validUsername: !response.data } })
 								})
 						}} />
@@ -62,6 +61,7 @@ function RegisterModal(props) {
 									setFormValidation({ ...formValidation, ...{ validEmail: !response.data } })
 								})
 						}} />
+						{/* todo doesnt check for valid email correctly*/}
 						<Form.Text
 							className={userState.email ? formValidation.validEmail ? "valid" : "invalid" : "text-muted"}>
 							Must be validated to login

@@ -14,6 +14,10 @@ import MainNav from "./components/utils/MainNav";
 import Footer from "./components/utils/Footer";
 
 function App() {
+	// const [errorHandler, setErrorHandler] = useState({
+	// 	hasError: false,
+	// 	message: "",
+	// });
 	return (
 		<div className="App app-container df-dark-background-2">
 			<Router>

@@ -54,6 +54,11 @@ public class LeagueController {
 				.status(HttpStatus.OK)
 				.body(league);
 	}
+	
+	@GetMapping("/existsByName/{name}")
+	public Boolean checkIfNameExists(@PathVariable String name) {
+		return leagueService.existsByName(name);
+	}
 
 	@GetMapping("/count")
 	public ResponseEntity<?> getNumberOfLeagues() {
