@@ -75,7 +75,6 @@ public class LeagueController {
 
 	@RequestMapping("/createLeague")
 	public ResponseEntity<?> createNewLeague(@RequestBody League league) {
-		System.out.println("post test");
 		String name = league.getName();
 		if (leagueService.findLeagueByName(name) != null) {
 			return ResponseEntity
@@ -93,7 +92,7 @@ public class LeagueController {
 		if (returnedLeague == null) {
 			return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
-					.body("LeagueProfilePage does not exist. Check you facts.");
+					.body("LeagueProfilePage does not exist. Check your facts.");
 		}
 		return ResponseEntity
 				.status(HttpStatus.OK)

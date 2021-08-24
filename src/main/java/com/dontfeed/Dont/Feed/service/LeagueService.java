@@ -1,6 +1,7 @@
 package com.dontfeed.Dont.Feed.service;
 
 import com.dontfeed.Dont.Feed.model.League;
+import com.dontfeed.Dont.Feed.model.enumerator.LeagueStage;
 import com.dontfeed.Dont.Feed.repository.LeagueRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,9 @@ public class LeagueService {
     private final LeagueRepository leagueRepository;
     
     public League saveLeague(final League league){
+        // TODO: 8/24/2021 : make this  ui agnostic
+        league.setSeason(1);
+        league.setStage(LeagueStage.CREATED);
         leagueRepository.save(league);
         return league;
     }
